@@ -8,20 +8,38 @@
 
 /* Begin PBXBuildFile section */
 		447A172C228C688A003AB41E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447A172B228C688A003AB41E /* AppDelegate.swift */; };
-		447A172E228C688A003AB41E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447A172D228C688A003AB41E /* ViewController.swift */; };
+		447A172E228C688A003AB41E /* EditInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447A172D228C688A003AB41E /* EditInfoViewController.swift */; };
 		447A1731228C688A003AB41E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 447A172F228C688A003AB41E /* Main.storyboard */; };
 		447A1733228C688B003AB41E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 447A1732228C688B003AB41E /* Assets.xcassets */; };
 		447A1736228C688B003AB41E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 447A1734228C688B003AB41E /* LaunchScreen.storyboard */; };
+		447A1742228C6916003AB41E /* EditInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 447A1741228C6916003AB41E /* EditInfo.storyboard */; };
+		447A1744228C698B003AB41E /* ApplyForAD.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 447A1743228C698B003AB41E /* ApplyForAD.storyboard */; };
+		447A1746228C69F1003AB41E /* TableManage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 447A1745228C69F1003AB41E /* TableManage.storyboard */; };
+		447A1748228C6A11003AB41E /* CheckReservation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 447A1747228C6A11003AB41E /* CheckReservation.storyboard */; };
+		447A174A228C6A48003AB41E /* RestaurantInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 447A1749228C6A48003AB41E /* RestaurantInfo.storyboard */; };
+		447A1751228C6BE7003AB41E /* ApplyForADViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447A1750228C6BE7003AB41E /* ApplyForADViewController.swift */; };
+		447A1753228C6BF3003AB41E /* TableManageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447A1752228C6BF3003AB41E /* TableManageViewController.swift */; };
+		447A1755228C6C02003AB41E /* CheckReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447A1754228C6C02003AB41E /* CheckReservationViewController.swift */; };
+		447A1757228C6C14003AB41E /* RestaurantInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447A1756228C6C14003AB41E /* RestaurantInfoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		447A1728228C688A003AB41E /* EzOrder(Res).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EzOrder(Res).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		447A172B228C688A003AB41E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		447A172D228C688A003AB41E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		447A172D228C688A003AB41E /* EditInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditInfoViewController.swift; sourceTree = "<group>"; };
 		447A1730228C688A003AB41E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		447A1732228C688B003AB41E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		447A1735228C688B003AB41E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		447A1737228C688B003AB41E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		447A1741228C6916003AB41E /* EditInfo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditInfo.storyboard; sourceTree = "<group>"; };
+		447A1743228C698B003AB41E /* ApplyForAD.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ApplyForAD.storyboard; sourceTree = "<group>"; };
+		447A1745228C69F1003AB41E /* TableManage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TableManage.storyboard; sourceTree = "<group>"; };
+		447A1747228C6A11003AB41E /* CheckReservation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CheckReservation.storyboard; sourceTree = "<group>"; };
+		447A1749228C6A48003AB41E /* RestaurantInfo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RestaurantInfo.storyboard; sourceTree = "<group>"; };
+		447A1750228C6BE7003AB41E /* ApplyForADViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyForADViewController.swift; sourceTree = "<group>"; };
+		447A1752228C6BF3003AB41E /* TableManageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableManageViewController.swift; sourceTree = "<group>"; };
+		447A1754228C6C02003AB41E /* CheckReservationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckReservationViewController.swift; sourceTree = "<group>"; };
+		447A1756228C6C14003AB41E /* RestaurantInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantInfoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,13 +73,94 @@
 			isa = PBXGroup;
 			children = (
 				447A172B228C688A003AB41E /* AppDelegate.swift */,
-				447A172D228C688A003AB41E /* ViewController.swift */,
-				447A172F228C688A003AB41E /* Main.storyboard */,
-				447A1732228C688B003AB41E /* Assets.xcassets */,
-				447A1734228C688B003AB41E /* LaunchScreen.storyboard */,
+				447A1740228C68B2003AB41E /* Model */,
+				447A173F228C689E003AB41E /* View */,
+				447A173E228C689C003AB41E /* Controller */,
+				447A173D228C6898003AB41E /* Supporting File */,
 				447A1737228C688B003AB41E /* Info.plist */,
 			);
 			path = "EzOrder(Res)";
+			sourceTree = "<group>";
+		};
+		447A173D228C6898003AB41E /* Supporting File */ = {
+			isa = PBXGroup;
+			children = (
+				447A1734228C688B003AB41E /* LaunchScreen.storyboard */,
+				447A1732228C688B003AB41E /* Assets.xcassets */,
+			);
+			path = "Supporting File";
+			sourceTree = "<group>";
+		};
+		447A173E228C689C003AB41E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				447A174F228C6B90003AB41E /* EditInfo */,
+				447A174E228C6B8E003AB41E /* ApplyForAD */,
+				447A174D228C6B8C003AB41E /* TableManage */,
+				447A174C228C6B8B003AB41E /* CheckReservation */,
+				447A174B228C6B89003AB41E /* RestaurantInfo */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		447A173F228C689E003AB41E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				447A172F228C688A003AB41E /* Main.storyboard */,
+				447A1741228C6916003AB41E /* EditInfo.storyboard */,
+				447A1743228C698B003AB41E /* ApplyForAD.storyboard */,
+				447A1745228C69F1003AB41E /* TableManage.storyboard */,
+				447A1747228C6A11003AB41E /* CheckReservation.storyboard */,
+				447A1749228C6A48003AB41E /* RestaurantInfo.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		447A1740228C68B2003AB41E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		447A174B228C6B89003AB41E /* RestaurantInfo */ = {
+			isa = PBXGroup;
+			children = (
+				447A1756228C6C14003AB41E /* RestaurantInfoViewController.swift */,
+			);
+			path = RestaurantInfo;
+			sourceTree = "<group>";
+		};
+		447A174C228C6B8B003AB41E /* CheckReservation */ = {
+			isa = PBXGroup;
+			children = (
+				447A1754228C6C02003AB41E /* CheckReservationViewController.swift */,
+			);
+			path = CheckReservation;
+			sourceTree = "<group>";
+		};
+		447A174D228C6B8C003AB41E /* TableManage */ = {
+			isa = PBXGroup;
+			children = (
+				447A1752228C6BF3003AB41E /* TableManageViewController.swift */,
+			);
+			path = TableManage;
+			sourceTree = "<group>";
+		};
+		447A174E228C6B8E003AB41E /* ApplyForAD */ = {
+			isa = PBXGroup;
+			children = (
+				447A1750228C6BE7003AB41E /* ApplyForADViewController.swift */,
+			);
+			path = ApplyForAD;
+			sourceTree = "<group>";
+		};
+		447A174F228C6B90003AB41E /* EditInfo */ = {
+			isa = PBXGroup;
+			children = (
+				447A172D228C688A003AB41E /* EditInfoViewController.swift */,
+			);
+			path = EditInfo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -122,7 +221,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				447A1748228C6A11003AB41E /* CheckReservation.storyboard in Resources */,
+				447A1746228C69F1003AB41E /* TableManage.storyboard in Resources */,
+				447A1744228C698B003AB41E /* ApplyForAD.storyboard in Resources */,
+				447A1742228C6916003AB41E /* EditInfo.storyboard in Resources */,
 				447A1736228C688B003AB41E /* LaunchScreen.storyboard in Resources */,
+				447A174A228C6A48003AB41E /* RestaurantInfo.storyboard in Resources */,
 				447A1733228C688B003AB41E /* Assets.xcassets in Resources */,
 				447A1731228C688A003AB41E /* Main.storyboard in Resources */,
 			);
@@ -135,7 +239,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				447A172E228C688A003AB41E /* ViewController.swift in Sources */,
+				447A1751228C6BE7003AB41E /* ApplyForADViewController.swift in Sources */,
+				447A1757228C6C14003AB41E /* RestaurantInfoViewController.swift in Sources */,
+				447A1755228C6C02003AB41E /* CheckReservationViewController.swift in Sources */,
+				447A172E228C688A003AB41E /* EditInfoViewController.swift in Sources */,
+				447A1753228C6BF3003AB41E /* TableManageViewController.swift in Sources */,
 				447A172C228C688A003AB41E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
