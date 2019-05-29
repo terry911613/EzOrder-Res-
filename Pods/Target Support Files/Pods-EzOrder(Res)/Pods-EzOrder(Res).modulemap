@@ -1,0 +1,6 @@
+framework module Pods_EzOrder_Res_ {
+  umbrella header "Pods-EzOrder(Res)-umbrella.h"
+
+  export *
+  module * { export * }
+}
