@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Apply ForAD View Controller-->
+        <!--廣告申請-->
         <scene sceneID="g5a-DB-WjV">
             <objects>
                 <viewController id="zjz-2f-Aqt" customClass="ApplyForADViewController" customModule="EzOrder_Res_" sceneMemberID="viewController">
@@ -29,7 +29,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Feb-z3-mgU"/>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="history" id="v6z-l6-QuH"/>
+                    <tabBarItem key="tabBarItem" title="廣告申請" image="廣告申請" id="v6z-l6-QuH"/>
                     <navigationItem key="navigationItem" id="lJV-3R-0EG"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
@@ -56,4 +56,7 @@
             <point key="canvasLocation" x="-23.188405797101453" y="193.20652173913044"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="廣告申請" width="36" height="36"/>
+    </resources>
 </document>

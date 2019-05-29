@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Check Reservation View Controller-->
+        <!--訂位紀錄-->
         <scene sceneID="rja-Ij-DAL">
             <objects>
                 <viewController id="8JG-cB-VqZ" customClass="CheckReservationViewController" customModule="EzOrder_Res_" sceneMemberID="viewController">
@@ -29,7 +29,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="WCF-r7-LXY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="favorites" id="u98-Dy-0ec"/>
+                    <tabBarItem key="tabBarItem" title="訂位紀錄" image="訂位紀錄" id="u98-Dy-0ec"/>
                     <navigationItem key="navigationItem" id="dlN-fC-Vt5"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
@@ -56,4 +56,7 @@
             <point key="canvasLocation" x="-23.188405797101453" y="193.20652173913044"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="訂位紀錄" width="36" height="36"/>
+    </resources>
 </document>

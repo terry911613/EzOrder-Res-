@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Table Manage View Controller-->
+        <!--桌位管理-->
         <scene sceneID="czp-9I-UAX">
             <objects>
                 <viewController id="8Fo-4m-WQj" customClass="TableManageViewController" customModule="EzOrder_Res_" sceneMemberID="viewController">
@@ -29,7 +29,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="d09-Lb-xsa"/>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="favorites" id="60H-jd-cQd"/>
+                    <tabBarItem key="tabBarItem" title="桌位管理" image="桌位" id="60H-jd-cQd"/>
                     <navigationItem key="navigationItem" id="Evt-8g-7cx"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
@@ -56,4 +56,7 @@
             <point key="canvasLocation" x="-23.188405797101453" y="193.20652173913044"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="桌位" width="36" height="36"/>
+    </resources>
 </document>

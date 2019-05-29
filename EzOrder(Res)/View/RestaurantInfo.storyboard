@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Restaurant Info View Controller-->
+        <!--商家資訊-->
         <scene sceneID="qif-FE-AXU">
             <objects>
                 <viewController id="FwP-5F-eKI" customClass="RestaurantInfoViewController" customModule="EzOrder_Res_" sceneMemberID="viewController">
@@ -29,7 +29,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="9e0-Ld-hgM"/>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="favorites" id="uso-2o-zMJ"/>
+                    <tabBarItem key="tabBarItem" title="商家資訊" image="商家資料" id="uso-2o-zMJ"/>
                     <navigationItem key="navigationItem" id="gUR-jZ-6UV"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
@@ -56,4 +56,7 @@
             <point key="canvasLocation" x="-23.188405797101453" y="193.20652173913044"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="商家資料" width="36" height="36"/>
+    </resources>
 </document>
