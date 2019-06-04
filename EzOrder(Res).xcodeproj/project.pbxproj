@@ -9,7 +9,13 @@
 /* Begin PBXBuildFile section */
 		2C3A6099229CEB5F00D3C477 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C3A6098229CEB5F00D3C477 /* Assets.xcassets */; };
 		2C3A60B9229D533900D3C477 /* AddCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3A60B8229D533900D3C477 /* AddCollectionViewCell.swift */; };
-		2C3A60BB229D56C800D3C477 /* foodEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3A60BA229D56C800D3C477 /* foodEntity.swift */; };
+		2C6FAD8422A2E05D0060840A /* muneAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6FAD8322A2E05D0060840A /* muneAddViewController.swift */; };
+		2CA55D0822A3782A00D1E1A0 /* muneCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA55D0722A3782A00D1E1A0 /* muneCollectionViewCell.swift */; };
+		2CA55D0A22A3DE9C00D1E1A0 /* foodDetailssViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA55D0922A3DE9C00D1E1A0 /* foodDetailssViewController.swift */; };
+		2CAF0BA7229E5CD100E8B4F3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CAF0BA6229E5CD100E8B4F3 /* GoogleService-Info.plist */; };
+		2CEEEF5322A5305B0045D81E /* muneAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEEEF5222A5305B0045D81E /* muneAddViewController.swift */; };
+		2CF7DABA229ED79F00CB0493 /* addClassificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7DAB8229ED79F00CB0493 /* addClassificationViewController.swift */; };
+		2CF7DABD229FFE9A00CB0493 /* muneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7DABC229FFE9A00CB0493 /* muneViewController.swift */; };
 		447A172C228C688A003AB41E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447A172B228C688A003AB41E /* AppDelegate.swift */; };
 		447A172E228C688A003AB41E /* EditInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447A172D228C688A003AB41E /* EditInfoViewController.swift */; };
 		447A1731228C688A003AB41E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 447A172F228C688A003AB41E /* Main.storyboard */; };
@@ -29,7 +35,13 @@
 /* Begin PBXFileReference section */
 		2C3A6098229CEB5F00D3C477 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C3A60B8229D533900D3C477 /* AddCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCollectionViewCell.swift; sourceTree = "<group>"; };
-		2C3A60BA229D56C800D3C477 /* foodEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = foodEntity.swift; sourceTree = "<group>"; };
+		2C6FAD8322A2E05D0060840A /* muneAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = muneAddViewController.swift; path = "/Users/liutianhe/Desktop/ezorder商家端/EzOrder-Res-/EzOrder(Res)/Controller/EditInfo/muneAddViewController.swift"; sourceTree = "<absolute>"; };
+		2CA55D0722A3782A00D1E1A0 /* muneCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = muneCollectionViewCell.swift; sourceTree = "<group>"; };
+		2CA55D0922A3DE9C00D1E1A0 /* foodDetailssViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = foodDetailssViewController.swift; sourceTree = "<group>"; };
+		2CAF0BA6229E5CD100E8B4F3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		2CEEEF5222A5305B0045D81E /* muneAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = muneAddViewController.swift; path = "/Users/liutianhe/Desktop/ezorder商家端/EzOrder-Res-/EzOrder(Res)/Controller/EditInfo/muneAddViewController.swift"; sourceTree = "<absolute>"; };
+		2CF7DAB8229ED79F00CB0493 /* addClassificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addClassificationViewController.swift; sourceTree = "<group>"; };
+		2CF7DABC229FFE9A00CB0493 /* muneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = muneViewController.swift; sourceTree = "<group>"; };
 		447A1728228C688A003AB41E /* EzOrder(Res).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EzOrder(Res).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		447A172B228C688A003AB41E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		447A172D228C688A003AB41E /* EditInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditInfoViewController.swift; sourceTree = "<group>"; };
@@ -89,6 +101,7 @@
 				447A173E228C689C003AB41E /* Controller */,
 				447A173D228C6898003AB41E /* Supporting File */,
 				447A1737228C688B003AB41E /* Info.plist */,
+				2CAF0BA6229E5CD100E8B4F3 /* GoogleService-Info.plist */,
 			);
 			path = "EzOrder(Res)";
 			sourceTree = "<group>";
@@ -169,9 +182,14 @@
 		447A174F228C6B90003AB41E /* EditInfo */ = {
 			isa = PBXGroup;
 			children = (
+				2CEEEF5222A5305B0045D81E /* muneAddViewController.swift */,
+				2CA55D0722A3782A00D1E1A0 /* muneCollectionViewCell.swift */,
+				2CF7DAB8229ED79F00CB0493 /* addClassificationViewController.swift */,
 				2C3A60B8229D533900D3C477 /* AddCollectionViewCell.swift */,
+				2CF7DABC229FFE9A00CB0493 /* muneViewController.swift */,
+				2CA55D0922A3DE9C00D1E1A0 /* foodDetailssViewController.swift */,
+				2C6FAD8322A2E05D0060840A /* muneAddViewController.swift */,
 				447A172D228C688A003AB41E /* EditInfoViewController.swift */,
-				2C3A60BA229D56C800D3C477 /* foodEntity.swift */,
 			);
 			path = EditInfo;
 			sourceTree = "<group>";
@@ -182,7 +200,6 @@
 				6A7AFE9E5777504BD28CF2A0 /* Pods-EzOrder(Res).debug.xcconfig */,
 				597CF6BDC1FEDA0BE862026C /* Pods-EzOrder(Res).release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -256,6 +273,7 @@
 			files = (
 				447A1748228C6A11003AB41E /* CheckReservation.storyboard in Resources */,
 				447A1746228C69F1003AB41E /* TableManage.storyboard in Resources */,
+				2CAF0BA7229E5CD100E8B4F3 /* GoogleService-Info.plist in Resources */,
 				447A1744228C698B003AB41E /* ApplyForAD.storyboard in Resources */,
 				447A1742228C6916003AB41E /* EditInfo.storyboard in Resources */,
 				447A1736228C688B003AB41E /* LaunchScreen.storyboard in Resources */,
@@ -335,12 +353,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C3A60BB229D56C800D3C477 /* foodEntity.swift in Sources */,
 				2C3A60B9229D533900D3C477 /* AddCollectionViewCell.swift in Sources */,
 				447A1751228C6BE7003AB41E /* ApplyForADViewController.swift in Sources */,
+				2CA55D0A22A3DE9C00D1E1A0 /* foodDetailssViewController.swift in Sources */,
+				2CEEEF5322A5305B0045D81E /* muneAddViewController.swift in Sources */,
 				447A1757228C6C14003AB41E /* RestaurantInfoViewController.swift in Sources */,
 				447A1755228C6C02003AB41E /* CheckReservationViewController.swift in Sources */,
+				2CF7DABD229FFE9A00CB0493 /* muneViewController.swift in Sources */,
+				2C6FAD8422A2E05D0060840A /* muneAddViewController.swift in Sources */,
+				2CF7DABA229ED79F00CB0493 /* addClassificationViewController.swift in Sources */,
 				447A172E228C688A003AB41E /* EditInfoViewController.swift in Sources */,
+				2CA55D0822A3782A00D1E1A0 /* muneCollectionViewCell.swift in Sources */,
 				447A1753228C6BF3003AB41E /* TableManageViewController.swift in Sources */,
 				447A172C228C688A003AB41E /* AppDelegate.swift in Sources */,
 			);
@@ -490,7 +513,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = XVB2JZ6L9X;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "EzOrder(Res)/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -509,7 +532,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = XVB2JZ6L9X;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "EzOrder(Res)/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
