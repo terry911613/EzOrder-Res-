@@ -14,6 +14,7 @@
 		2CA55D0A22A3DE9C00D1E1A0 /* foodDetailssViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA55D0922A3DE9C00D1E1A0 /* foodDetailssViewController.swift */; };
 		2CAF0BA7229E5CD100E8B4F3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CAF0BA6229E5CD100E8B4F3 /* GoogleService-Info.plist */; };
 		2CEEEF5322A5305B0045D81E /* muneAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEEEF5222A5305B0045D81E /* muneAddViewController.swift */; };
+		2CF6246A22A68D8E00B8972E /* editMuneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF6246922A68D8E00B8972E /* editMuneViewController.swift */; };
 		2CF7DABA229ED79F00CB0493 /* addClassificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7DAB8229ED79F00CB0493 /* addClassificationViewController.swift */; };
 		2CF7DABD229FFE9A00CB0493 /* muneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7DABC229FFE9A00CB0493 /* muneViewController.swift */; };
 		447A172C228C688A003AB41E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447A172B228C688A003AB41E /* AppDelegate.swift */; };
@@ -40,6 +41,7 @@
 		2CA55D0922A3DE9C00D1E1A0 /* foodDetailssViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = foodDetailssViewController.swift; sourceTree = "<group>"; };
 		2CAF0BA6229E5CD100E8B4F3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		2CEEEF5222A5305B0045D81E /* muneAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = muneAddViewController.swift; path = "/Users/liutianhe/Desktop/ezorder商家端/EzOrder-Res-/EzOrder(Res)/Controller/EditInfo/muneAddViewController.swift"; sourceTree = "<absolute>"; };
+		2CF6246922A68D8E00B8972E /* editMuneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = editMuneViewController.swift; sourceTree = "<group>"; };
 		2CF7DAB8229ED79F00CB0493 /* addClassificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addClassificationViewController.swift; sourceTree = "<group>"; };
 		2CF7DABC229FFE9A00CB0493 /* muneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = muneViewController.swift; sourceTree = "<group>"; };
 		447A1728228C688A003AB41E /* EzOrder(Res).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EzOrder(Res).app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -190,6 +192,7 @@
 				2CA55D0922A3DE9C00D1E1A0 /* foodDetailssViewController.swift */,
 				2C6FAD8322A2E05D0060840A /* muneAddViewController.swift */,
 				447A172D228C688A003AB41E /* EditInfoViewController.swift */,
+				2CF6246922A68D8E00B8972E /* editMuneViewController.swift */,
 			);
 			path = EditInfo;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 				2CF7DABD229FFE9A00CB0493 /* muneViewController.swift in Sources */,
 				2C6FAD8422A2E05D0060840A /* muneAddViewController.swift in Sources */,
 				2CF7DABA229ED79F00CB0493 /* addClassificationViewController.swift in Sources */,
+				2CF6246A22A68D8E00B8972E /* editMuneViewController.swift in Sources */,
 				447A172E228C688A003AB41E /* EditInfoViewController.swift in Sources */,
 				2CA55D0822A3782A00D1E1A0 /* muneCollectionViewCell.swift in Sources */,
 				447A1753228C6BF3003AB41E /* TableManageViewController.swift in Sources */,

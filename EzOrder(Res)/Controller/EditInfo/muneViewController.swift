@@ -37,13 +37,15 @@ class muneViewController: UIViewController,UICollectionViewDelegate,UICollection
     var photos = [QueryDocumentSnapshot]()
     override func viewDidLoad() {
         let db = Firestore.firestore()
-        db.collection("photo").document(an).collection("Munes").addSnapshotListener{ (querySnapshot, error) in
+db.collection("photo").document(an).collection("Munes").addSnapshotListener{ (querySnapshot, error) in
             if let querySnapshot = querySnapshot {
+                print("dd")
                 if self.isFirstGetPhotos {
-                    self.isFirstGetPhotos = false
                     self.photos = querySnapshot.documents
                     self.muneCollectionView.reloadData()
+                    print("add")
                 }else {
+                    print("UPd")
                     let documentChange = querySnapshot.documentChanges[0]
                     if documentChange.type == .modified
                         ,documentChange.document.data()["photoUrl"] != nil
@@ -66,11 +68,6 @@ class muneViewController: UIViewController,UICollectionViewDelegate,UICollection
                 self.view.layoutIfNeeded()
                 
             })
-            //            UIView.animate(withDuration: 2,delay: 0,
-            //                           usingSpringWithDamping: 0.1,
-            //                           initialSpringVelocity: 1.8, animations: {
-            //                            optinasss.isHidden = false
-            //            })
             
         }
         
@@ -114,8 +111,18 @@ class muneViewController: UIViewController,UICollectionViewDelegate,UICollection
     }
     
     @IBAction func UPload(_ sender: Any) {
-        upda()
-        
+//        let db = Firestore.firestore()
+//        db.collection("photo").document(an).collection("Munes").addSnapshotListener{ (querySnapshot, error) in
+//            if let querySnapshot = querySnapshot {
+//                print(1)
+//                   self.photos = querySnapshot.documents
+//                    self.muneCollectionView.reloadData()
+//                    print("add")
+//
+//            }
+//
+//
+//        }
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return photos.count
@@ -131,6 +138,10 @@ class muneViewController: UIViewController,UICollectionViewDelegate,UICollection
                 cell.editNameText.isHidden = false
                 cell.editMoney.isHidden = false
                 cell.statusSwich.isHidden = false
+              
+                
+                
+                
                 
             }else {
                 foodMoney = cell.editMoney.text ?? ""
@@ -163,7 +174,20 @@ class muneViewController: UIViewController,UICollectionViewDelegate,UICollection
             DocumentID.an = an
             
         }
-        
+        if segue.identifier == "editMunes" {
+             if let indexPath =   muneCollectionView.indexPath(for: sender as! muneCollectionViewCell){
+                let phot = photos[indexPath.row]
+                let mune = segue.destination as! editMuneViewController
+                mune.photos  = [phot]
+                let DocuntI = segue.destination as!
+                editMuneViewController
+                DocuntI.DID = phot.documentID
+              let  Docuntid = segue.destination as!
+                editMuneViewController
+                Docuntid.Dids = an
+            }
+        }
+            
         
     }
     func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
@@ -214,52 +238,6 @@ class muneViewController: UIViewController,UICollectionViewDelegate,UICollection
         if let p = p, muneCollectionView?.indexPathForItem(at: p) == nil {
             longPressed = false
         }
-    }
-    
-    
-    
-    func upda()  {
-        
-                        imageViews.startAnimating()
-                        let db = Firestore.firestore()
-                        let dats: [String:Any] = ["Name" : foodName,"Money":foodMoney]
-                        var photoReference : DocumentReference?
-         db.collection("photo").document(an).collection("Munes")
-            .document("tL5MFf03WwjFRGJzhpkY").updateData(dats){
-                            (error) in
-                            guard error == nil  else {
-                                self.imageViews.startAnimating()
-                                return
-                            }
-                            let storageReference = Storage.storage().reference()
-                            let fileReference = storageReference.child(UUID().uuidString + ".jpg")
-                let image =  self.imageViews.image
-                            let size = CGSize(width: 640, height:
-                                (image?.size.height)! * 640 / (image?.size.width)!)
-                            UIGraphicsBeginImageContext(size)
-                            image?.draw(in: CGRect(origin: .zero, size: size))
-                            let resizeImage = UIGraphicsGetImageFromCurrentImageContext()
-                            UIGraphicsEndImageContext()
-                            if let data = resizeImage?.jpegData(compressionQuality: 0.8)
-                            { fileReference.putData(data,metadata: nil) {(metadate , error) in
-                                guard let _ = metadate, error == nil else {
-                                    self.imageViews.stopAnimating()
-                                    return
-                                }
-                                fileReference.downloadURL(completion: { (url, error) in
-                                    guard let downloadURL = url else {
-                                        self.imageViews.stopAnimating()
-                                        return
-                                    }
-                                    photoReference?.updateData(["photoUrl": downloadURL.absoluteString])
-                                }
-                                )}
-                            }
-                        }
-        
-        
-        
-        
     }
     
 }
