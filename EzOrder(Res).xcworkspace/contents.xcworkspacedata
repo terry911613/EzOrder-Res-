@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/liutianhe/Desktop/ezorder&#x5546;&#x5bb6;&#x7aef;/EzOrder-Res-/EzOrder(Res)/Controller/EditInfo/muneAddViewController.swift">
-   </FileRef>
-   <FileRef
       location = "group:EzOrder(Res).xcodeproj">
    </FileRef>
    <FileRef
