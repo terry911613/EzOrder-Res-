@@ -9,6 +9,8 @@ target 'EzOrder(Res)' do
   pod 'Firebase/Core'
   pod 'Firebase/Firestore'
   pod 'Firebase/Storage'
+  pod "Firebase/Auth"
   pod 'Kingfisher'
-
+  pod 'SVProgressHUD'
+  pod 'JTAppleCalendar', '~> 7.0'
 end

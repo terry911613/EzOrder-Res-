@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import Kingfisher
+
 class EditInfoViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     
     @IBOutlet weak var cellCollectionView: AddCollectionViewCell!

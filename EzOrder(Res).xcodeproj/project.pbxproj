@@ -11,11 +11,17 @@
 		2C3A60B9229D533900D3C477 /* AddCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3A60B8229D533900D3C477 /* AddCollectionViewCell.swift */; };
 		2CA55D0822A3782A00D1E1A0 /* muneCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA55D0722A3782A00D1E1A0 /* muneCollectionViewCell.swift */; };
 		2CA55D0A22A3DE9C00D1E1A0 /* foodDetailssViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA55D0922A3DE9C00D1E1A0 /* foodDetailssViewController.swift */; };
-		2CAF0BA7229E5CD100E8B4F3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CAF0BA6229E5CD100E8B4F3 /* GoogleService-Info.plist */; };
 		2CEB985B22A7E4530098181C /* muneAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEB985A22A7E4530098181C /* muneAddViewController.swift */; };
 		2CF6246A22A68D8E00B8972E /* editMuneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF6246922A68D8E00B8972E /* editMuneViewController.swift */; };
 		2CF7DABA229ED79F00CB0493 /* addClassificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7DAB8229ED79F00CB0493 /* addClassificationViewController.swift */; };
 		2CF7DABD229FFE9A00CB0493 /* muneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7DABC229FFE9A00CB0493 /* muneViewController.swift */; };
+		4429B28222A7E79700649E0E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4429B28122A7E79700649E0E /* GoogleService-Info.plist */; };
+		4429B28922A7EA7C00649E0E /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4429B28822A7EA7C00649E0E /* RegisterViewController.swift */; };
+		4429B28B22A7EA8800649E0E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4429B28A22A7EA8800649E0E /* LoginViewController.swift */; };
+		4429B28D22A810A500649E0E /* TableManageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4429B28C22A810A500649E0E /* TableManageTableViewCell.swift */; };
+		4429B28F22A8173A00649E0E /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4429B28E22A8173A00649E0E /* DateCell.swift */; };
+		4429B29122A8176E00649E0E /* ReservationDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4429B29022A8176E00649E0E /* ReservationDetailTableViewCell.swift */; };
+		4429B29322A8178000649E0E /* ReservationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4429B29222A8178000649E0E /* ReservationDetailViewController.swift */; };
 		447A172C228C688A003AB41E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447A172B228C688A003AB41E /* AppDelegate.swift */; };
 		447A172E228C688A003AB41E /* EditInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447A172D228C688A003AB41E /* EditInfoViewController.swift */; };
 		447A1731228C688A003AB41E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 447A172F228C688A003AB41E /* Main.storyboard */; };
@@ -37,11 +43,17 @@
 		2C3A60B8229D533900D3C477 /* AddCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCollectionViewCell.swift; sourceTree = "<group>"; };
 		2CA55D0722A3782A00D1E1A0 /* muneCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = muneCollectionViewCell.swift; sourceTree = "<group>"; };
 		2CA55D0922A3DE9C00D1E1A0 /* foodDetailssViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = foodDetailssViewController.swift; sourceTree = "<group>"; };
-		2CAF0BA6229E5CD100E8B4F3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		2CEB985A22A7E4530098181C /* muneAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = muneAddViewController.swift; sourceTree = "<group>"; };
 		2CF6246922A68D8E00B8972E /* editMuneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = editMuneViewController.swift; sourceTree = "<group>"; };
 		2CF7DAB8229ED79F00CB0493 /* addClassificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addClassificationViewController.swift; sourceTree = "<group>"; };
 		2CF7DABC229FFE9A00CB0493 /* muneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = muneViewController.swift; sourceTree = "<group>"; };
+		4429B28122A7E79700649E0E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4429B28822A7EA7C00649E0E /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		4429B28A22A7EA8800649E0E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		4429B28C22A810A500649E0E /* TableManageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableManageTableViewCell.swift; sourceTree = "<group>"; };
+		4429B28E22A8173A00649E0E /* DateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCell.swift; sourceTree = "<group>"; };
+		4429B29022A8176E00649E0E /* ReservationDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationDetailTableViewCell.swift; sourceTree = "<group>"; };
+		4429B29222A8178000649E0E /* ReservationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationDetailViewController.swift; sourceTree = "<group>"; };
 		447A1728228C688A003AB41E /* EzOrder(Res).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EzOrder(Res).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		447A172B228C688A003AB41E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		447A172D228C688A003AB41E /* EditInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditInfoViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +86,51 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4429B28322A7E8E000649E0E /* EditInfo */ = {
+			isa = PBXGroup;
+			children = (
+				447A1741228C6916003AB41E /* EditInfo.storyboard */,
+				2CA55D0722A3782A00D1E1A0 /* muneCollectionViewCell.swift */,
+				2C3A60B8229D533900D3C477 /* AddCollectionViewCell.swift */,
+			);
+			path = EditInfo;
+			sourceTree = "<group>";
+		};
+		4429B28422A7E93600649E0E /* ApplyForAD */ = {
+			isa = PBXGroup;
+			children = (
+				447A1743228C698B003AB41E /* ApplyForAD.storyboard */,
+			);
+			path = ApplyForAD;
+			sourceTree = "<group>";
+		};
+		4429B28522A7E97200649E0E /* TableManage */ = {
+			isa = PBXGroup;
+			children = (
+				447A1745228C69F1003AB41E /* TableManage.storyboard */,
+				4429B28C22A810A500649E0E /* TableManageTableViewCell.swift */,
+			);
+			path = TableManage;
+			sourceTree = "<group>";
+		};
+		4429B28622A7E99800649E0E /* CheckReservation */ = {
+			isa = PBXGroup;
+			children = (
+				447A1747228C6A11003AB41E /* CheckReservation.storyboard */,
+				4429B28E22A8173A00649E0E /* DateCell.swift */,
+				4429B29022A8176E00649E0E /* ReservationDetailTableViewCell.swift */,
+			);
+			path = CheckReservation;
+			sourceTree = "<group>";
+		};
+		4429B28722A7E9CF00649E0E /* RestaurantInfo */ = {
+			isa = PBXGroup;
+			children = (
+				447A1749228C6A48003AB41E /* RestaurantInfo.storyboard */,
+			);
+			path = RestaurantInfo;
+			sourceTree = "<group>";
+		};
 		447A171F228C688A003AB41E = {
 			isa = PBXGroup;
 			children = (
@@ -101,7 +158,7 @@
 				447A173E228C689C003AB41E /* Controller */,
 				447A173D228C6898003AB41E /* Supporting File */,
 				447A1737228C688B003AB41E /* Info.plist */,
-				2CAF0BA6229E5CD100E8B4F3 /* GoogleService-Info.plist */,
+				4429B28122A7E79700649E0E /* GoogleService-Info.plist */,
 			);
 			path = "EzOrder(Res)";
 			sourceTree = "<group>";
@@ -117,6 +174,8 @@
 		447A173E228C689C003AB41E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				4429B28822A7EA7C00649E0E /* RegisterViewController.swift */,
+				4429B28A22A7EA8800649E0E /* LoginViewController.swift */,
 				447A174F228C6B90003AB41E /* EditInfo */,
 				447A174E228C6B8E003AB41E /* ApplyForAD */,
 				447A174D228C6B8C003AB41E /* TableManage */,
@@ -130,11 +189,11 @@
 			isa = PBXGroup;
 			children = (
 				447A172F228C688A003AB41E /* Main.storyboard */,
-				447A1741228C6916003AB41E /* EditInfo.storyboard */,
-				447A1743228C698B003AB41E /* ApplyForAD.storyboard */,
-				447A1745228C69F1003AB41E /* TableManage.storyboard */,
-				447A1747228C6A11003AB41E /* CheckReservation.storyboard */,
-				447A1749228C6A48003AB41E /* RestaurantInfo.storyboard */,
+				4429B28322A7E8E000649E0E /* EditInfo */,
+				4429B28422A7E93600649E0E /* ApplyForAD */,
+				4429B28522A7E97200649E0E /* TableManage */,
+				4429B28622A7E99800649E0E /* CheckReservation */,
+				4429B28722A7E9CF00649E0E /* RestaurantInfo */,
 				2C3A6098229CEB5F00D3C477 /* Assets.xcassets */,
 			);
 			path = View;
@@ -159,6 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				447A1754228C6C02003AB41E /* CheckReservationViewController.swift */,
+				4429B29222A8178000649E0E /* ReservationDetailViewController.swift */,
 			);
 			path = CheckReservation;
 			sourceTree = "<group>";
@@ -182,9 +242,7 @@
 		447A174F228C6B90003AB41E /* EditInfo */ = {
 			isa = PBXGroup;
 			children = (
-				2CA55D0722A3782A00D1E1A0 /* muneCollectionViewCell.swift */,
 				2CF7DAB8229ED79F00CB0493 /* addClassificationViewController.swift */,
-				2C3A60B8229D533900D3C477 /* AddCollectionViewCell.swift */,
 				2CF7DABC229FFE9A00CB0493 /* muneViewController.swift */,
 				2CEB985A22A7E4530098181C /* muneAddViewController.swift */,
 				2CA55D0922A3DE9C00D1E1A0 /* foodDetailssViewController.swift */,
@@ -273,7 +331,7 @@
 			files = (
 				447A1748228C6A11003AB41E /* CheckReservation.storyboard in Resources */,
 				447A1746228C69F1003AB41E /* TableManage.storyboard in Resources */,
-				2CAF0BA7229E5CD100E8B4F3 /* GoogleService-Info.plist in Resources */,
+				4429B28222A7E79700649E0E /* GoogleService-Info.plist in Resources */,
 				447A1744228C698B003AB41E /* ApplyForAD.storyboard in Resources */,
 				447A1742228C6916003AB41E /* EditInfo.storyboard in Resources */,
 				447A1736228C688B003AB41E /* LaunchScreen.storyboard in Resources */,
@@ -298,8 +356,10 @@
 				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/JTAppleCalendar/JTAppleCalendar.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
@@ -312,8 +372,10 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JTAppleCalendar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
@@ -356,14 +418,20 @@
 				2C3A60B9229D533900D3C477 /* AddCollectionViewCell.swift in Sources */,
 				447A1751228C6BE7003AB41E /* ApplyForADViewController.swift in Sources */,
 				2CA55D0A22A3DE9C00D1E1A0 /* foodDetailssViewController.swift in Sources */,
+				4429B28B22A7EA8800649E0E /* LoginViewController.swift in Sources */,
 				2CEB985B22A7E4530098181C /* muneAddViewController.swift in Sources */,
 				447A1757228C6C14003AB41E /* RestaurantInfoViewController.swift in Sources */,
 				447A1755228C6C02003AB41E /* CheckReservationViewController.swift in Sources */,
+				4429B28F22A8173A00649E0E /* DateCell.swift in Sources */,
 				2CF7DABD229FFE9A00CB0493 /* muneViewController.swift in Sources */,
 				2CF7DABA229ED79F00CB0493 /* addClassificationViewController.swift in Sources */,
 				2CF6246A22A68D8E00B8972E /* editMuneViewController.swift in Sources */,
+				4429B28922A7EA7C00649E0E /* RegisterViewController.swift in Sources */,
 				447A172E228C688A003AB41E /* EditInfoViewController.swift in Sources */,
 				2CA55D0822A3782A00D1E1A0 /* muneCollectionViewCell.swift in Sources */,
+				4429B28D22A810A500649E0E /* TableManageTableViewCell.swift in Sources */,
+				4429B29122A8176E00649E0E /* ReservationDetailTableViewCell.swift in Sources */,
+				4429B29322A8178000649E0E /* ReservationDetailViewController.swift in Sources */,
 				447A1753228C6BF3003AB41E /* TableManageViewController.swift in Sources */,
 				447A172C228C688A003AB41E /* AppDelegate.swift in Sources */,
 			);
@@ -519,7 +587,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.TerryLee.EzOrderRes;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.TerryLee.EzOrder-Res-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -538,7 +606,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.TerryLee.EzOrderRes;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.TerryLee.EzOrder-Res-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -7,24 +7,43 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class RestaurantInfoViewController: UIViewController {
 
+    @IBOutlet weak var restaurantImageView: UIImageView!
+    @IBOutlet weak var restaurantNameLabel: UILabel!
+    @IBOutlet weak var restaurantReservationPeopleLimitLabel: UILabel!
+    @IBOutlet weak var restaurantTableView: UITableView!
+    
+    var restaurant = ["QRCode生成", "編輯店家資訊", "查看廣告審核", "申請關店"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func logOut(_ sender: UIBarButtonItem) {
+        do{
+            try Auth.auth().signOut()
+            performSegue(withIdentifier: "goLogin", sender: self)
+        }
+        catch{
+            print("error, there was a problem logging out")
+        }
     }
-    */
+}
 
+extension RestaurantInfoViewController: UITableViewDelegate, UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return restaurant.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "restaurantCell", for: indexPath)
+        cell.textLabel?.text = restaurant[indexPath.row]
+        return cell
+    }
+    
+    
 }

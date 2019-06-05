@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="g8a-it-SYm">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--廣告申請-->
+        <scene sceneID="g5a-DB-WjV">
+            <objects>
+                <viewController id="zjz-2f-Aqt" customClass="ApplyForADViewController" customModule="EzOrder_Res_" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0Oc-RG-5so">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="新增圖案" translatesAutoresizingMaskIntoConstraints="NO" id="alE-hl-vqU">
+                                <rect key="frame" x="0.0" y="64" width="375" height="300"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="alE-hl-vqU" secondAttribute="height" multiplier="5:4" id="Xyc-vb-LoT"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="s68-gI-xqk" appends="YES" id="rQN-VB-yJz"/>
+                                </connections>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a0I-D4-mK1">
+                                <rect key="frame" x="16" y="384" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T1E-pP-Kos">
+                                <rect key="frame" x="16" y="442" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uxC-au-hBQ">
+                                <rect key="frame" x="74" y="389" width="285" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.63421845460000004" blue="0.76385437680000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="請選擇開始時間">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="datePickerButton:" destination="zjz-2f-Aqt" eventType="touchUpInside" id="02J-zN-0Pn"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CTh-GO-Gr0">
+                                <rect key="frame" x="0.0" y="578" width="375" height="40"/>
+                                <color key="backgroundColor" red="1" green="0.63421845460000004" blue="0.76385437680000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="送出審核">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="applyButton:" destination="zjz-2f-Aqt" eventType="touchUpInside" id="1E9-4K-YhY"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rgu-Gh-BXE">
+                                <rect key="frame" x="74" y="447" width="285" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.63421845460000004" blue="0.76385437680000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="請選擇結束時間">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="datePickerButton:" destination="zjz-2f-Aqt" eventType="touchUpInside" id="PPz-W3-PUC"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="CTh-GO-Gr0" firstAttribute="bottom" secondItem="Feb-z3-mgU" secondAttribute="bottom" id="HkK-uN-of3"/>
+                            <constraint firstItem="CTh-GO-Gr0" firstAttribute="leading" secondItem="Feb-z3-mgU" secondAttribute="leading" id="SbW-gR-TY2"/>
+                            <constraint firstItem="alE-hl-vqU" firstAttribute="leading" secondItem="Feb-z3-mgU" secondAttribute="leading" id="VfW-xv-c5A"/>
+                            <constraint firstItem="Feb-z3-mgU" firstAttribute="trailing" secondItem="CTh-GO-Gr0" secondAttribute="trailing" id="Y86-aV-aN5"/>
+                            <constraint firstItem="CTh-GO-Gr0" firstAttribute="height" secondItem="Feb-z3-mgU" secondAttribute="height" multiplier="40/554" id="YyN-dN-PaY"/>
+                            <constraint firstItem="alE-hl-vqU" firstAttribute="trailing" secondItem="Feb-z3-mgU" secondAttribute="trailing" id="bnS-pb-Ctc"/>
+                            <constraint firstItem="alE-hl-vqU" firstAttribute="top" secondItem="Feb-z3-mgU" secondAttribute="top" id="gzu-fP-YpC"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Feb-z3-mgU"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="廣告申請" image="廣告申請" id="v6z-l6-QuH"/>
+                    <navigationItem key="navigationItem" title="廣告申請" id="lJV-3R-0EG"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="ADImageView" destination="alE-hl-vqU" id="amP-jT-hlg"/>
+                        <outlet property="endDatePickerButton" destination="rgu-Gh-BXE" id="kMB-B2-rGa"/>
+                        <outlet property="startDatePickerButton" destination="uxC-au-hBQ" id="WPx-CU-Uik"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xM0-19-wHk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="s68-gI-xqk">
+                    <connections>
+                        <action selector="chooseADImage:" destination="zjz-2f-Aqt" id="JYC-aY-rPn"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="884" y="192.05397301349328"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="k1S-r9-Q7q">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="g8a-it-SYm" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="4X0-Um-Yjv">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="1" green="0.63421845460000004" blue="0.76385437680000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="zjz-2f-Aqt" kind="relationship" relationship="rootViewController" id="Kod-wk-L54"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="911-w7-gg1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-23.188405797101453" y="193.20652173913044"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="廣告申請" width="36" height="36"/>
+        <image name="新增圖案" width="107" height="93"/>
+    </resources>
+</document>

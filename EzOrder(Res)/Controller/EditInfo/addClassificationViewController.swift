@@ -8,34 +8,30 @@
 
 import UIKit
 import Firebase
+
 class addClassificationViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+    
     @IBOutlet weak var foodName: UITextField!
+    @IBOutlet weak var imageView: UIImageView!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
     
-        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let selece = info[.originalImage] as? UIImage {
-        imageView.image = selece
+            imageView.image = selece
         }
-    picker.dismiss(animated: true, completion: nil)
-            
+        picker.dismiss(animated: true, completion: nil)
+        
     }
     @IBAction func TabUPImageView(_ sender: UITapGestureRecognizer) {
-      let imagePickerContorller = UIImagePickerController()
+        let imagePickerContorller = UIImagePickerController()
         imagePickerContorller.sourceType = .photoLibrary
         imagePickerContorller.delegate = self
         //imagePickerContorller.allowsEditing = true
         present(imagePickerContorller,animated: true)
-    }
-    
-    @IBOutlet weak var imageView: UIImageView!
-    
-    
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func addImageVIews(_ sender: Any) {
@@ -94,8 +90,5 @@ class addClassificationViewController: UIViewController,UIImagePickerControllerD
         }
         
     }
-
     
-    
-
 }
