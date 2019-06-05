@@ -1,6 +1,6 @@
 //
 //  muneAddViewController.swift
-//  
+//
 //
 //  Created by 劉十六 on 2019/6/2.
 //
@@ -12,7 +12,7 @@ class muneAddViewController: UIViewController,UIImagePickerControllerDelegate,UI
     @IBOutlet weak var foodMuneName: UITextField!
     @IBOutlet weak var foodMuneMoney: UITextField!
     var an = ""
-        override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
     }
     
@@ -25,7 +25,7 @@ class muneAddViewController: UIViewController,UIImagePickerControllerDelegate,UI
         dismiss(animated: true, completion: nil)
         
     }
-        
+    
     @IBAction func tapMunefoodImage(_ sender: UITapGestureRecognizer) {
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = .photoLibrary
@@ -95,3 +95,4 @@ class muneAddViewController: UIViewController,UIImagePickerControllerDelegate,UI
     }
     
 }
+
