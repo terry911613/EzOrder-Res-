@@ -22,6 +22,10 @@
 		4429B28F22A8173A00649E0E /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4429B28E22A8173A00649E0E /* DateCell.swift */; };
 		4429B29122A8176E00649E0E /* ReservationDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4429B29022A8176E00649E0E /* ReservationDetailTableViewCell.swift */; };
 		4429B29322A8178000649E0E /* ReservationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4429B29222A8178000649E0E /* ReservationDetailViewController.swift */; };
+		44369ED322A8C9D300BF7369 /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44369ED222A8C9D300BF7369 /* QRCodeViewController.swift */; };
+		44369ED922A8CA1C00BF7369 /* CheckADViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44369ED822A8CA1C00BF7369 /* CheckADViewController.swift */; };
+		44369EDB22A8CA2700BF7369 /* CloseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44369EDA22A8CA2700BF7369 /* CloseViewController.swift */; };
+		44369EDD22A8DBC900BF7369 /* CheckADDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44369EDC22A8DBC900BF7369 /* CheckADDetailViewController.swift */; };
 		447A172C228C688A003AB41E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447A172B228C688A003AB41E /* AppDelegate.swift */; };
 		447A172E228C688A003AB41E /* EditInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447A172D228C688A003AB41E /* EditInfoViewController.swift */; };
 		447A1731228C688A003AB41E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 447A172F228C688A003AB41E /* Main.storyboard */; };
@@ -54,6 +58,10 @@
 		4429B28E22A8173A00649E0E /* DateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCell.swift; sourceTree = "<group>"; };
 		4429B29022A8176E00649E0E /* ReservationDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationDetailTableViewCell.swift; sourceTree = "<group>"; };
 		4429B29222A8178000649E0E /* ReservationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationDetailViewController.swift; sourceTree = "<group>"; };
+		44369ED222A8C9D300BF7369 /* QRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
+		44369ED822A8CA1C00BF7369 /* CheckADViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckADViewController.swift; sourceTree = "<group>"; };
+		44369EDA22A8CA2700BF7369 /* CloseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseViewController.swift; sourceTree = "<group>"; };
+		44369EDC22A8DBC900BF7369 /* CheckADDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckADDetailViewController.swift; sourceTree = "<group>"; };
 		447A1728228C688A003AB41E /* EzOrder(Res).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EzOrder(Res).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		447A172B228C688A003AB41E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		447A172D228C688A003AB41E /* EditInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditInfoViewController.swift; sourceTree = "<group>"; };
@@ -210,6 +218,10 @@
 			isa = PBXGroup;
 			children = (
 				447A1756228C6C14003AB41E /* RestaurantInfoViewController.swift */,
+				44369ED222A8C9D300BF7369 /* QRCodeViewController.swift */,
+				44369ED822A8CA1C00BF7369 /* CheckADViewController.swift */,
+				44369EDC22A8DBC900BF7369 /* CheckADDetailViewController.swift */,
+				44369EDA22A8CA2700BF7369 /* CloseViewController.swift */,
 			);
 			path = RestaurantInfo;
 			sourceTree = "<group>";
@@ -416,6 +428,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C3A60B9229D533900D3C477 /* AddCollectionViewCell.swift in Sources */,
+				44369EDB22A8CA2700BF7369 /* CloseViewController.swift in Sources */,
 				447A1751228C6BE7003AB41E /* ApplyForADViewController.swift in Sources */,
 				2CA55D0A22A3DE9C00D1E1A0 /* foodDetailssViewController.swift in Sources */,
 				4429B28B22A7EA8800649E0E /* LoginViewController.swift in Sources */,
@@ -423,6 +436,7 @@
 				447A1757228C6C14003AB41E /* RestaurantInfoViewController.swift in Sources */,
 				447A1755228C6C02003AB41E /* CheckReservationViewController.swift in Sources */,
 				4429B28F22A8173A00649E0E /* DateCell.swift in Sources */,
+				44369ED322A8C9D300BF7369 /* QRCodeViewController.swift in Sources */,
 				2CF7DABD229FFE9A00CB0493 /* muneViewController.swift in Sources */,
 				2CF7DABA229ED79F00CB0493 /* addClassificationViewController.swift in Sources */,
 				2CF6246A22A68D8E00B8972E /* editMuneViewController.swift in Sources */,
@@ -433,6 +447,8 @@
 				4429B29122A8176E00649E0E /* ReservationDetailTableViewCell.swift in Sources */,
 				4429B29322A8178000649E0E /* ReservationDetailViewController.swift in Sources */,
 				447A1753228C6BF3003AB41E /* TableManageViewController.swift in Sources */,
+				44369EDD22A8DBC900BF7369 /* CheckADDetailViewController.swift in Sources */,
+				44369ED922A8CA1C00BF7369 /* CheckADViewController.swift in Sources */,
 				447A172C228C688A003AB41E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

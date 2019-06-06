@@ -13,10 +13,9 @@ class RestaurantInfoViewController: UIViewController {
 
     @IBOutlet weak var restaurantImageView: UIImageView!
     @IBOutlet weak var restaurantNameLabel: UILabel!
-    @IBOutlet weak var restaurantReservationPeopleLimitLabel: UILabel!
     @IBOutlet weak var restaurantTableView: UITableView!
     
-    var restaurant = ["QRCode生成", "編輯店家資訊", "查看廣告審核", "申請關店"]
+    var restaurant = ["QRCode生成", "查看廣告審核", "申請關店"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,5 +44,18 @@ extension RestaurantInfoViewController: UITableViewDelegate, UITableViewDataSour
         return cell
     }
     
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0{
+            let QRCodeVC = storyboard?.instantiateViewController(withIdentifier: "QRCodeVC") as! QRCodeViewController
+            navigationController?.pushViewController(QRCodeVC, animated: true)
+        }
+        else if indexPath.row == 1{
+            let checkADVC = storyboard?.instantiateViewController(withIdentifier: "checkADVC") as! CheckADViewController
+            navigationController?.pushViewController(checkADVC, animated: true)
+        }
+        else if indexPath.row == 2{
+            let closeVC = storyboard?.instantiateViewController(withIdentifier: "closeVC") as! CloseViewController
+            present(closeVC, animated: true, completion: nil)
+        }
+    }
 }
