@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TypeCollectionViewCell: UICollectionViewCell {
+class EditTypeCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var typeImage: UIImageView!
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var backView: UIView!

@@ -8,8 +8,7 @@
 
 import UIKit
 
-class AddCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var foodImageView: UIImageView!
-    @IBOutlet weak var foofLabel: UILabel!
-    
+class MainTypeCollectionViewCell: UICollectionViewCell {
+    @IBOutlet weak var typeImageView: UIImageView!
+    @IBOutlet weak var typeLabel: UILabel!
 }

@@ -13,4 +13,5 @@ target 'EzOrder(Res)' do
   pod 'Kingfisher'
   pod 'SVProgressHUD'
   pod 'JTAppleCalendar', '~> 7.0'
+  pod "ViewAnimator"
 end
