@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		2C3A6099229CEB5F00D3C477 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C3A6098229CEB5F00D3C477 /* Assets.xcassets */; };
 		2C3A60B9229D533900D3C477 /* AddCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3A60B8229D533900D3C477 /* AddCollectionViewCell.swift */; };
-		2CA55D0822A3782A00D1E1A0 /* muneCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA55D0722A3782A00D1E1A0 /* muneCollectionViewCell.swift */; };
-		2CA55D0A22A3DE9C00D1E1A0 /* foodDetailssViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA55D0922A3DE9C00D1E1A0 /* foodDetailssViewController.swift */; };
-		2CEB985B22A7E4530098181C /* muneAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEB985A22A7E4530098181C /* muneAddViewController.swift */; };
+		2CA55D0822A3782A00D1E1A0 /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA55D0722A3782A00D1E1A0 /* MenuCollectionViewCell.swift */; };
+		2CA55D0A22A3DE9C00D1E1A0 /* FoodDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA55D0922A3DE9C00D1E1A0 /* FoodDetailViewController.swift */; };
+		2CEB985B22A7E4530098181C /* AddMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEB985A22A7E4530098181C /* AddMenuViewController.swift */; };
 		2CF6246A22A68D8E00B8972E /* editMuneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF6246922A68D8E00B8972E /* editMuneViewController.swift */; };
-		2CF7DABA229ED79F00CB0493 /* addClassificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7DAB8229ED79F00CB0493 /* addClassificationViewController.swift */; };
-		2CF7DABD229FFE9A00CB0493 /* muneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7DABC229FFE9A00CB0493 /* muneViewController.swift */; };
+		2CF7DABA229ED79F00CB0493 /* AddTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7DAB8229ED79F00CB0493 /* AddTypeViewController.swift */; };
+		2CF7DABD229FFE9A00CB0493 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7DABC229FFE9A00CB0493 /* MenuViewController.swift */; };
 		4429B28222A7E79700649E0E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4429B28122A7E79700649E0E /* GoogleService-Info.plist */; };
 		4429B28922A7EA7C00649E0E /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4429B28822A7EA7C00649E0E /* RegisterViewController.swift */; };
 		4429B28B22A7EA8800649E0E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4429B28A22A7EA8800649E0E /* LoginViewController.swift */; };
@@ -26,6 +26,8 @@
 		44369ED922A8CA1C00BF7369 /* CheckADViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44369ED822A8CA1C00BF7369 /* CheckADViewController.swift */; };
 		44369EDB22A8CA2700BF7369 /* CloseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44369EDA22A8CA2700BF7369 /* CloseViewController.swift */; };
 		44369EDD22A8DBC900BF7369 /* CheckADDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44369EDC22A8DBC900BF7369 /* CheckADDetailViewController.swift */; };
+		44369EDF22A8F6EF00BF7369 /* ReservationNotifyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44369EDE22A8F6EF00BF7369 /* ReservationNotifyTableViewCell.swift */; };
+		44369EE122A9691D00BF7369 /* TypeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44369EE022A9691D00BF7369 /* TypeCollectionViewCell.swift */; };
 		447A172C228C688A003AB41E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447A172B228C688A003AB41E /* AppDelegate.swift */; };
 		447A172E228C688A003AB41E /* EditInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447A172D228C688A003AB41E /* EditInfoViewController.swift */; };
 		447A1731228C688A003AB41E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 447A172F228C688A003AB41E /* Main.storyboard */; };
@@ -45,12 +47,12 @@
 /* Begin PBXFileReference section */
 		2C3A6098229CEB5F00D3C477 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C3A60B8229D533900D3C477 /* AddCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCollectionViewCell.swift; sourceTree = "<group>"; };
-		2CA55D0722A3782A00D1E1A0 /* muneCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = muneCollectionViewCell.swift; sourceTree = "<group>"; };
-		2CA55D0922A3DE9C00D1E1A0 /* foodDetailssViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = foodDetailssViewController.swift; sourceTree = "<group>"; };
-		2CEB985A22A7E4530098181C /* muneAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = muneAddViewController.swift; sourceTree = "<group>"; };
+		2CA55D0722A3782A00D1E1A0 /* MenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewCell.swift; sourceTree = "<group>"; };
+		2CA55D0922A3DE9C00D1E1A0 /* FoodDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetailViewController.swift; sourceTree = "<group>"; };
+		2CEB985A22A7E4530098181C /* AddMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMenuViewController.swift; sourceTree = "<group>"; };
 		2CF6246922A68D8E00B8972E /* editMuneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = editMuneViewController.swift; sourceTree = "<group>"; };
-		2CF7DAB8229ED79F00CB0493 /* addClassificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addClassificationViewController.swift; sourceTree = "<group>"; };
-		2CF7DABC229FFE9A00CB0493 /* muneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = muneViewController.swift; sourceTree = "<group>"; };
+		2CF7DAB8229ED79F00CB0493 /* AddTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTypeViewController.swift; sourceTree = "<group>"; };
+		2CF7DABC229FFE9A00CB0493 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		4429B28122A7E79700649E0E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4429B28822A7EA7C00649E0E /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		4429B28A22A7EA8800649E0E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -62,6 +64,8 @@
 		44369ED822A8CA1C00BF7369 /* CheckADViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckADViewController.swift; sourceTree = "<group>"; };
 		44369EDA22A8CA2700BF7369 /* CloseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseViewController.swift; sourceTree = "<group>"; };
 		44369EDC22A8DBC900BF7369 /* CheckADDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckADDetailViewController.swift; sourceTree = "<group>"; };
+		44369EDE22A8F6EF00BF7369 /* ReservationNotifyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationNotifyTableViewCell.swift; sourceTree = "<group>"; };
+		44369EE022A9691D00BF7369 /* TypeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeCollectionViewCell.swift; sourceTree = "<group>"; };
 		447A1728228C688A003AB41E /* EzOrder(Res).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EzOrder(Res).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		447A172B228C688A003AB41E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		447A172D228C688A003AB41E /* EditInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditInfoViewController.swift; sourceTree = "<group>"; };
@@ -98,8 +102,9 @@
 			isa = PBXGroup;
 			children = (
 				447A1741228C6916003AB41E /* EditInfo.storyboard */,
-				2CA55D0722A3782A00D1E1A0 /* muneCollectionViewCell.swift */,
+				2CA55D0722A3782A00D1E1A0 /* MenuCollectionViewCell.swift */,
 				2C3A60B8229D533900D3C477 /* AddCollectionViewCell.swift */,
+				44369EE022A9691D00BF7369 /* TypeCollectionViewCell.swift */,
 			);
 			path = EditInfo;
 			sourceTree = "<group>";
@@ -127,6 +132,7 @@
 				447A1747228C6A11003AB41E /* CheckReservation.storyboard */,
 				4429B28E22A8173A00649E0E /* DateCell.swift */,
 				4429B29022A8176E00649E0E /* ReservationDetailTableViewCell.swift */,
+				44369EDE22A8F6EF00BF7369 /* ReservationNotifyTableViewCell.swift */,
 			);
 			path = CheckReservation;
 			sourceTree = "<group>";
@@ -254,12 +260,12 @@
 		447A174F228C6B90003AB41E /* EditInfo */ = {
 			isa = PBXGroup;
 			children = (
-				2CF7DAB8229ED79F00CB0493 /* addClassificationViewController.swift */,
-				2CF7DABC229FFE9A00CB0493 /* muneViewController.swift */,
-				2CEB985A22A7E4530098181C /* muneAddViewController.swift */,
-				2CA55D0922A3DE9C00D1E1A0 /* foodDetailssViewController.swift */,
 				447A172D228C688A003AB41E /* EditInfoViewController.swift */,
+				2CF7DAB8229ED79F00CB0493 /* AddTypeViewController.swift */,
+				2CF7DABC229FFE9A00CB0493 /* MenuViewController.swift */,
+				2CEB985A22A7E4530098181C /* AddMenuViewController.swift */,
 				2CF6246922A68D8E00B8972E /* editMuneViewController.swift */,
+				2CA55D0922A3DE9C00D1E1A0 /* FoodDetailViewController.swift */,
 			);
 			path = EditInfo;
 			sourceTree = "<group>";
@@ -430,19 +436,21 @@
 				2C3A60B9229D533900D3C477 /* AddCollectionViewCell.swift in Sources */,
 				44369EDB22A8CA2700BF7369 /* CloseViewController.swift in Sources */,
 				447A1751228C6BE7003AB41E /* ApplyForADViewController.swift in Sources */,
-				2CA55D0A22A3DE9C00D1E1A0 /* foodDetailssViewController.swift in Sources */,
+				2CA55D0A22A3DE9C00D1E1A0 /* FoodDetailViewController.swift in Sources */,
 				4429B28B22A7EA8800649E0E /* LoginViewController.swift in Sources */,
-				2CEB985B22A7E4530098181C /* muneAddViewController.swift in Sources */,
+				44369EE122A9691D00BF7369 /* TypeCollectionViewCell.swift in Sources */,
+				2CEB985B22A7E4530098181C /* AddMenuViewController.swift in Sources */,
 				447A1757228C6C14003AB41E /* RestaurantInfoViewController.swift in Sources */,
 				447A1755228C6C02003AB41E /* CheckReservationViewController.swift in Sources */,
 				4429B28F22A8173A00649E0E /* DateCell.swift in Sources */,
 				44369ED322A8C9D300BF7369 /* QRCodeViewController.swift in Sources */,
-				2CF7DABD229FFE9A00CB0493 /* muneViewController.swift in Sources */,
-				2CF7DABA229ED79F00CB0493 /* addClassificationViewController.swift in Sources */,
+				2CF7DABD229FFE9A00CB0493 /* MenuViewController.swift in Sources */,
+				2CF7DABA229ED79F00CB0493 /* AddTypeViewController.swift in Sources */,
 				2CF6246A22A68D8E00B8972E /* editMuneViewController.swift in Sources */,
+				44369EDF22A8F6EF00BF7369 /* ReservationNotifyTableViewCell.swift in Sources */,
 				4429B28922A7EA7C00649E0E /* RegisterViewController.swift in Sources */,
 				447A172E228C688A003AB41E /* EditInfoViewController.swift in Sources */,
-				2CA55D0822A3782A00D1E1A0 /* muneCollectionViewCell.swift in Sources */,
+				2CA55D0822A3782A00D1E1A0 /* MenuCollectionViewCell.swift in Sources */,
 				4429B28D22A810A500649E0E /* TableManageTableViewCell.swift in Sources */,
 				4429B29122A8176E00649E0E /* ReservationDetailTableViewCell.swift in Sources */,
 				4429B29322A8178000649E0E /* ReservationDetailViewController.swift in Sources */,

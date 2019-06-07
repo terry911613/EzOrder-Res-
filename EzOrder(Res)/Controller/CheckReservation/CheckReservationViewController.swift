@@ -14,7 +14,7 @@ class CheckReservationViewController: UIViewController {
     @IBOutlet weak var reservationSegment: UISegmentedControl!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var calendarView: JTAppleCalendarView!
-    
+    @IBOutlet weak var notifyTableView: UITableView!
    
     let dateFormatter: DateFormatter = DateFormatter()
     var selectDateText = ""
@@ -46,6 +46,17 @@ class CheckReservationViewController: UIViewController {
                     "2019-01-15" : [["小明", "5人", "11:00"], ["小明", "3人", "13:00"]]]
     }
     @IBAction func reservationSegment(_ sender: UISegmentedControl) {
+        
+        if sender.selectedSegmentIndex == 0{
+            calendarView.isHidden = false
+            notifyTableView.isHidden = true
+            calendarView.reloadData()
+        }
+        else{
+            calendarView.isHidden = true
+            notifyTableView.isHidden = false
+            notifyTableView.reloadData()
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -156,4 +167,18 @@ extension CheckReservationViewController: JTAppleCalendarViewDataSource, JTApple
         }
     }
     
+}
+
+extension CheckReservationViewController: UITableViewDelegate, UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reservationNotifyCell", for: indexPath) as! ReservationNotifyTableViewCell
+        cell.reservationNameLabel.text = "小明"
+        cell.reservationPeopleLabel.text = "12"
+        cell.timeLabel.text = "2019年10月10號 7點30分"
+        return cell
+    }
 }

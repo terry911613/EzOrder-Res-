@@ -21,8 +21,6 @@ class editMuneViewController: UIViewController {
     @IBAction func add(_ sender: Any) {
         updaPhoto()
         upda()
-        
-        
     }
     
     @IBAction func backMune(_ sender: Any) {
@@ -31,8 +29,6 @@ class editMuneViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
     }
     
     

@@ -9,7 +9,8 @@
 import UIKit
 import Firebase
 import Kingfisher
-class muneViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
+
+class MenuViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
     @IBOutlet weak var imageViews: UIImageView!
     
     @IBOutlet var muneCollection: [UICollectionView]!
@@ -128,7 +129,7 @@ db.collection("photo").document(an).collection("Munes").addSnapshotListener{ (qu
         return photos.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "muneCell", for: indexPath) as! muneCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "menuCell", for: indexPath) as! 
         let photo = photos[indexPath.row]
         cell.muneFoodName.text = photo.data()["Name"] as? String
         cell.muneFoodMoney.text = photo.data()["Money"] as? String
