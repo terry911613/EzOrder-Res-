@@ -7,31 +7,36 @@
 //
 
 import UIKit
+import Firebase
 
 class QRCodeViewController: UIViewController {
     
     @IBOutlet weak var tableTextfield: UITextField!
     @IBOutlet weak var imageView: UIImageView!
+    
+    let resID = Auth.auth().currentUser?.email
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     @IBAction func generateButton(_ sender: UIButton) {
         
         if let table = Int(tableTextfield.text!){
-            let text = String(table)
-            let data = text.data(using: .utf8)
+            
+            var qrCodeInfo = [String: String]()
+            qrCodeInfo["resID"] = resID
+            qrCodeInfo["table"] = String(table)
+            let jsonData = try! JSONEncoder().encode(qrCodeInfo)
+            
             guard let ciFilter = CIFilter(name: "CIQRCodeGenerator") else { return }
-            ciFilter.setValue(data, forKey: "inputMessage")
+            ciFilter.setValue(jsonData, forKey: "inputMessage")
             guard let ciImage_smallQR = ciFilter.outputImage else { return }
             let transform = CGAffineTransform(scaleX: 10, y: 10)
             let ciImage_largeQR = ciImage_smallQR.transformed(by: transform)
             let uiImage = UIImage(ciImage: ciImage_largeQR)
             imageView.image = uiImage
+            tableTextfield.resignFirstResponder()
         }
-        tableTextfield.resignFirstResponder()
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)

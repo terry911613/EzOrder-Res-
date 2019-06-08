@@ -7,31 +7,97 @@
 //
 
 import UIKit
+import Firebase
+import ViewAnimator
 
 class TableManageViewController: UIViewController {
 
     @IBOutlet weak var tableStatusTableView: UITableView!
     
     var table = [String]()
+    var allOrder = [QueryDocumentSnapshot]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let db = Firestore.firestore()
+        let resID = Auth.auth().currentUser?.email
+        if let resID = resID{
+            db.collection("res").document(resID).collection("order").whereField("payStatus", isEqualTo: 0).addSnapshotListener { (order, error) in
+                if let order = order{
+                    if order.documents.isEmpty{
+                        self.allOrder.removeAll()
+                        self.tableStatusTableView.reloadData()
+                    }
+                    else{
+                        self.allOrder = order.documents
+                        self.animateTableStatusTableView()
+                    }
+                }
+            }
+        }
+    }
+    func animateTableStatusTableView(){
+        let animations = [AnimationType.from(direction: .top, offset: 30.0)]
+        tableStatusTableView.reloadData()
+        UIView.animate(views: tableStatusTableView.visibleCells, animations: animations, completion: nil)
     }
     
 }
 
 extension TableManageViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return table.count
+        return allOrder.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableStatusCell", for: indexPath) as! TableManageTableViewCell
         
+        let order = allOrder[indexPath.row]
+        if let serviceBell = order.data()["serviceBell"] as? Int,
+            let orderCompleteStatus = order.data()["orderCompleteStatus"] as? Int,
+            let payStatus = order.data()["payStatus"] as? Int,
+            let tableNo = order.data()["tableNo"] as? Int{
+            
+            cell.tableNoLabel.text = "\(tableNo)桌"
+            
+            cell.callBackService = { isServiceOn in
+                if isServiceOn{
+                    cell.serviceBellButton.setImage(UIImage(named: "服務鈴亮燈"), for: .normal)
+                }
+                else{
+                    cell.serviceBellButton.setImage(UIImage(named: "服務鈴"), for: .normal)
+                }
+            }
+            cell.callBackOrderComplete = { isOrderComplete in
+                if isOrderComplete{
+                    cell.orderCompleteButton.setImage(UIImage(named: "餐點完成亮燈"), for: .normal)
+                }
+                else{
+                    cell.orderCompleteButton.setImage(UIImage(named: "餐點完成"), for: .normal)
+                }
+            }
+//            if serviceBell == 0{
+//                cell.serviceBellButton.setImage(UIImage(named: "服務鈴"), for: .normal)
+//            }
+//            else{
+//                cell.serviceBellButton.setImage(UIImage(named: "服務鈴亮燈"), for: .normal)
+//            }
+//            if orderCompleteStatus == 0{
+//                cell.foodCompleteButton.setImage(UIImage(named: "餐點完成"), for: .normal)
+//            }
+//            else{
+//                cell.foodCompleteButton.setImage(UIImage(named: "餐點完成亮燈"), for: .normal)
+//            }
+            if payStatus == 0{
+                cell.payImageView.image = UIImage(named: "付款")
+            }
+            else{
+                cell.payImageView.image = UIImage(named: "付款亮燈")
+            }
+            
+        }
+        
         return cell
     }
-    
-    
-    
 }

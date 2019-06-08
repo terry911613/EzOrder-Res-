@@ -67,7 +67,7 @@ class TypeViewController: UIViewController{
                         let data: [String: Any] = ["typeName": typeName,
                                                    "typeImage": downloadURL.absoluteString,
                                                    "index": index]
-                        self.db.collection(resID).document("food").collection("type").document(typeName).setData(data, completion: { (error) in
+                        self.db.collection("res").document(resID).collection("foodType").document(typeName).setData(data, completion: { (error) in
                             guard error == nil else {
                                 SVProgressHUD.dismiss()
                                 return

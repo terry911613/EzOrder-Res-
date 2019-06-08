@@ -33,8 +33,8 @@ class EditMenuViewController: UIViewController {
     let resID = Auth.auth().currentUser?.email
     var typeArray = [QueryDocumentSnapshot]()
     var foodArray = [QueryDocumentSnapshot]()
-    var typeIndex = 0
-    var foodIndex = 0
+    var typeIndex: Int?
+    var foodIndex: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,8 +50,10 @@ class EditMenuViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         getType()
-        if typeArray.isEmpty == false{
+        print(typeIndex)
+        if typeArray.isEmpty == false, let typeIndex = typeIndex{
             if let type = typeArray[typeIndex].data()["typeName"] as? String{
+                print(type)
                 getFood(typeName: type)
                 print(22222)
             }
@@ -60,7 +62,7 @@ class EditMenuViewController: UIViewController {
     
     func getType(){
         if let resID = resID{
-            db.collection(resID).document("food").collection("type").addSnapshotListener { (type, error) in
+            db.collection("res").document(resID).collection("foodType").addSnapshotListener { (type, error) in
                 if let type = type{
                     if type.documentChanges.isEmpty{
                         self.typeArray.removeAll()
@@ -71,6 +73,7 @@ class EditMenuViewController: UIViewController {
                         if documentChange.type == .added {
                             self.typeArray = type.documents
                             self.typeAnimateCollectionView()
+                            print("getType")
                         }
                     }
                 }
@@ -81,7 +84,7 @@ class EditMenuViewController: UIViewController {
         print("-------------")
         print(typeName)
         if let resID = resID{
-            db.collection(resID).document("food").collection("type").document(typeName).collection("menu").addSnapshotListener { (food, error) in
+            db.collection("res").document(resID).collection("foodType").document(typeName).collection("menu").addSnapshotListener { (food, error) in
                 if let food = food{
                     if food.documents.isEmpty{
                         self.foodArray.removeAll()
@@ -148,10 +151,18 @@ class EditMenuViewController: UIViewController {
     
     @IBAction func addMenu(_ sender: Any) {
         let menuVC = storyboard?.instantiateViewController(withIdentifier: "menuVC") as! FoodViewController
-        menuVC.typeIndex = typeIndex
-        menuVC.typeArray = typeArray
-        menuVC.foodIndex = foodArray.count
-        present(menuVC, animated: true, completion: nil)
+        if let typeIndex = typeIndex{
+            menuVC.typeIndex = typeIndex
+            menuVC.typeArray = typeArray
+            menuVC.foodIndex = foodArray.count
+            present(menuVC, animated: true, completion: nil)
+        }
+        else{
+            let alert = UIAlertController(title: "請先選擇要新增菜色的分類", message: nil, preferredStyle: .alert)
+            let ok = UIAlertAction(title: "確定", style: .default, handler: nil)
+            alert.addAction(ok)
+            present(alert, animated: true, completion: nil)
+        }
 //        for optina in optinss {
 //            UIView.animate(withDuration: 0.5, animations:{ optina.isHidden = !optina.isHidden
 ////                self.view.layoutIfNeeded()
@@ -249,16 +260,18 @@ class EditMenuViewController: UIViewController {
         
         if segue.identifier == "foodDetailSegue"{
             let foodDetailVC = segue.destination as! FoodDetailViewController
-            let food = foodArray[foodIndex]
-            if let foodName = food.data()["foodName"] as? String,
-                let foodImage = food.data()["foodImage"] as? String,
-                let foodPrice = food.data()["foodMoney"] as? Int,
-                let foodDetail = food.data()["foodDetail"] as? String{
-                
-                foodDetailVC.foodName = foodName
-                foodDetailVC.foodImage = foodImage
-                foodDetailVC.foodPrice = foodPrice
-                foodDetailVC.foodDetail = foodDetail
+            if let foodIndex = foodIndex{
+                let food = foodArray[foodIndex]
+                if let foodName = food.data()["foodName"] as? String,
+                    let foodImage = food.data()["foodImage"] as? String,
+                    let foodPrice = food.data()["foodPrice"] as? Int,
+                    let foodDetail = food.data()["foodDetail"] as? String{
+                    
+                    foodDetailVC.foodName = foodName
+                    foodDetailVC.foodImage = foodImage
+                    foodDetailVC.foodPrice = foodPrice
+                    foodDetailVC.foodDetail = foodDetail
+                }
             }
         }
     }
@@ -290,7 +303,7 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
             let food = foodArray[indexPath.row]
             if let foodName = food.data()["foodName"] as? String,
                 let foodImage = food.data()["foodImage"] as? String,
-                let foodMoney = food.data()["foodMoney"] as? Int{
+                let foodMoney = food.data()["foodPrice"] as? Int{
                 
                 cell.foodNameLabel.text = foodName
                 cell.foodImageView.kf.setImage(with: URL(string: foodImage))
@@ -322,9 +335,9 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
         if collectionView == typeCollectionView{
             let cell = collectionView.cellForItem(at: indexPath) as! EditTypeCollectionViewCell
             cell.backView.backgroundColor = UIColor(red: 255/255, green: 66/255, blue: 150/255, alpha: 1)
-            print("didselect:\(indexPath.row)")
+//            print("didselect:\(indexPath.row)")
             typeIndex = indexPath.row
-            print("typeIndex: \(typeIndex)")
+//            print("typeIndex: \(typeIndex)")
             if let type = typeArray[indexPath.row].data()["typeName"] as? String{
                 getFood(typeName: type)
             }
@@ -338,7 +351,7 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
         if collectionView == typeCollectionView{
             let cell = collectionView.cellForItem(at: indexPath) as! EditTypeCollectionViewCell
             cell.backView.backgroundColor = UIColor(red: 255/255, green: 162/255, blue: 195/255, alpha: 1)
-            print("diddeselect:\(indexPath.row)")
+//            print("diddeselect:\(indexPath.row)")
         }
         
     }

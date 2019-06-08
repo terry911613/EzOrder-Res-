@@ -8,7 +8,6 @@
 
 import UIKit
 import Firebase
-import FirebaseAuth
 import Kingfisher
 import SVProgressHUD
 
@@ -68,7 +67,7 @@ class EditInfoViewController: UIViewController{
     }
     func getType(){
         if let resID = resID{
-            db.collection(resID).document("food").collection("type").getDocuments { (type, error) in
+            db.collection("res").document(resID).collection("foodType").getDocuments { (type, error) in
                 if let type = type{
                     self.typeArray = type.documents
                     self.typeCollectionView.reloadData()
@@ -88,7 +87,8 @@ class EditInfoViewController: UIViewController{
             let resTel = resTelLabel.text, resTel.isEmpty == false,
             let resLocation = resLocationLabel.text, resLocation.isEmpty == false,
             let resBookingLimit = resBookingLimitLabel.text, resBookingLimit.isEmpty == false,
-            let resTaxID = resTaxIDLabel.text, resTaxID.isEmpty == false{
+            let resTaxID = resTaxIDLabel.text, resTaxID.isEmpty == false,
+            let resID = resID{
             //DocumentReference 指定位置
             //照片參照
             SVProgressHUD.show()
@@ -112,15 +112,13 @@ class EditInfoViewController: UIViewController{
                             self.errorAlert()
                             return
                         }
-                        let db = Firestore.firestore()
-                        let userID = Auth.auth().currentUser!.email!
                         let data: [String: Any] = ["resPhoto": downloadURL.absoluteString,
                                                    "resName": resName,
                                                    "resTel": resTel,
                                                    "resLocation": resLocation,
                                                    "resBookingLimit": resBookingLimit,
                                                    "resTaxID": resTaxID]
-                        db.collection(userID).document("info").setData(data, completion: { (error) in
+                        self.db.collection("res").document(resID).setData(data, completion: { (error) in
                             guard error == nil else {
                                 SVProgressHUD.dismiss()
                                 self.errorAlert()

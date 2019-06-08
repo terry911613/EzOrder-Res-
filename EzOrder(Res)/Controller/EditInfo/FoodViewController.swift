@@ -13,7 +13,7 @@ class FoodViewController: UIViewController{
     
     @IBOutlet weak var foodImageView: UIImageView!
     @IBOutlet weak var foodNameTextfield: UITextField!
-    @IBOutlet weak var foodMoneyTextfield: UITextField!
+    @IBOutlet weak var foodPriceTextfield: UITextField!
     @IBOutlet weak var foodDetailTextfield: UITextView!
     
     let db = Firestore.firestore()
@@ -45,7 +45,7 @@ class FoodViewController: UIViewController{
         
         if let foodImage = foodImageView.image,
             let foodName = foodNameTextfield.text, foodName.isEmpty == false,
-            let foodMoney = Int(foodMoneyTextfield.text!),
+            let foodPrice = Int(foodPriceTextfield.text!),
             let resID = resID,
             let foodIndex = foodIndex,
             let typeIndex = typeIndex,
@@ -71,12 +71,13 @@ class FoodViewController: UIViewController{
                             SVProgressHUD.dismiss()
                             return
                         }
-                        let data: [String: Any] = ["foodName": foodName,
+                        let data: [String: Any] = ["typeIndex": typeIndex,
+                                                   "foodName": foodName,
                                                    "foodImage": downloadURL.absoluteString,
-                                                   "foodMoney": foodMoney,
+                                                   "foodPrice": foodPrice,
                                                    "foodIndex": foodIndex,
                                                    "foodDetail": self.foodDetailTextfield.text ?? ""]
-                        self.db.collection(resID).document("food").collection("type").document(typeName).collection("menu").document(foodName).setData(data, completion: { (error) in
+                        self.db.collection("res").document(resID).collection("foodType").document(typeName).collection("menu").document(foodName).setData(data, completion: { (error) in
                             guard error == nil else {
                                 SVProgressHUD.dismiss()
                                 return

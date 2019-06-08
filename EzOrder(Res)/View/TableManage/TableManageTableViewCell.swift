@@ -10,10 +10,15 @@ import UIKit
 
 class TableManageTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var tableNumberLabel: UILabel!
-    @IBOutlet weak var serviceBellImageView: UIImageView!
-    @IBOutlet weak var foodCompleteImageView: UIImageView!
+    @IBOutlet weak var tableNoLabel: UILabel!
+    @IBOutlet weak var serviceBellButton: UIButton!
+    @IBOutlet weak var orderCompleteButton: UIButton!
     @IBOutlet weak var payImageView: UIImageView!
+    
+    var callBackService: ((_ clickService: Bool)->())?
+    var callBackOrderComplete: ((_ clickFoodComplete: Bool)->())?
+    var isSeviceOn = false
+    var isOrderComplete = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,4 +31,12 @@ class TableManageTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBAction func serviceBellButton(_ sender: UIButton) {
+        isSeviceOn = !isSeviceOn
+        callBackService?(isSeviceOn)
+    }
+    @IBAction func orderCompleteButton(_ sender: UIButton) {
+        isOrderComplete = !isOrderComplete
+        callBackService?(isOrderComplete)
+    }
 }
