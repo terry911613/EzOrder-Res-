@@ -7,19 +7,43 @@
 //
 
 import UIKit
+import Firebase
 import FirebaseAuth
+import Kingfisher
 
 class RestaurantInfoViewController: UIViewController {
 
-    @IBOutlet weak var restaurantImageView: UIImageView!
-    @IBOutlet weak var restaurantNameLabel: UILabel!
-    @IBOutlet weak var restaurantTableView: UITableView!
+    @IBOutlet weak var resTableView: UITableView!
+    @IBOutlet weak var resImageView: UIImageView!
+    @IBOutlet weak var resNameLabel: UILabel!
+    @IBOutlet weak var resTaxIDLabel: UILabel!
     
     var restaurant = ["QRCode生成", "查看廣告審核", "申請關店"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        getInfo()
+    }
+    
+    func getInfo(){
+        let db = Firestore.firestore()
+        if let resID = Auth.auth().currentUser?.email{
+            db.collection("res").document(resID).getDocument { (res, error) in
+                if let res = res{
+                    if let resData = res.data(){
+                        if let resImage = resData["resImage"] as? String,
+                            let resName = resData["resName"] as? String,
+                            let resTaxID = resData["resTaxID"] as? String{
+                            
+                            self.resImageView.kf.setImage(with: URL(string: resImage))
+                            self.resNameLabel.text = resName
+                            self.resTaxIDLabel.text = "統一編號：\(resTaxID)"
+                        }
+                    }
+                }
+            }
+        }
     }
     
     @IBAction func logOut(_ sender: UIBarButtonItem) {

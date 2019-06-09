@@ -22,7 +22,13 @@ class TableManageTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        if isSeviceOn == false{
+            serviceBellButton.setImage(UIImage(named: "服務鈴"), for: .normal)
+        }
+        if isOrderComplete == false{
+            orderCompleteButton.setImage(UIImage(named: "餐點完成"), for: .normal)
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -47,12 +47,13 @@
                                                         <constraint firstAttribute="width" secondItem="Qxh-0K-w1A" secondAttribute="height" multiplier="1:1" id="zJR-FW-Lmx"/>
                                                     </constraints>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GW8-xY-irH">
+                                                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GW8-xY-irH">
                                                     <rect key="frame" x="272" y="40" width="40" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="GW8-xY-irH" secondAttribute="height" multiplier="1:1" id="I4b-7j-sB9"/>
                                                     </constraints>
-                                                    <state key="normal" title="Button" image="餐點完成"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <state key="normal" image="完成"/>
                                                     <connections>
                                                         <action selector="orderCompleteButton:" destination="eYD-fj-8Dv" eventType="touchUpInside" id="TTe-LU-ZW1"/>
                                                     </connections>
@@ -62,7 +63,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="V9T-sJ-DNQ" secondAttribute="height" multiplier="1:1" id="ngd-LV-4La"/>
                                                     </constraints>
-                                                    <state key="normal" title="Button" image="服務鈴"/>
+                                                    <state key="normal" image="服務鈴"/>
                                                     <connections>
                                                         <action selector="serviceBellButton:" destination="eYD-fj-8Dv" eventType="touchUpInside" id="Sgd-dB-0SS"/>
                                                     </connections>
@@ -119,11 +120,107 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableStatusTableView" destination="1mq-9J-ilD" id="acT-yc-dRJ"/>
+                        <segue destination="0xZ-bC-kyx" kind="show" identifier="tableFoodSegue" id="baU-Ln-Jo6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wct-2Y-ugN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="884" y="192.95352323838082"/>
+        </scene>
+        <!--Table Food View Controller-->
+        <scene sceneID="51i-Vv-aP9">
+            <objects>
+                <viewController id="0xZ-bC-kyx" customClass="TableFoodViewController" customModule="EzOrder_Res_" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dg4-ZE-R0P">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="120" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sRP-NW-Qcg">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tableFoodCell" rowHeight="120" id="tff-Lk-bLh" customClass="TableFoodTableViewCell" customModule="EzOrder_Res_" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="120"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tff-Lk-bLh" id="HFz-Ws-Nw3">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="119.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tTj-2a-gXM">
+                                                    <rect key="frame" x="15" y="10" width="150" height="100"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="100" id="TC0-PK-QIr"/>
+                                                        <constraint firstAttribute="width" constant="150" id="W1O-0P-sNw"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="滷肉飯" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UQQ-jC-tf6">
+                                                    <rect key="frame" x="173" y="8" width="62" height="24"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="數量 : 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QFm-rQ-ohM">
+                                                    <rect key="frame" x="173" y="40" width="68" height="24"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lmh-bB-xlC">
+                                                    <rect key="frame" x="320" y="64.5" width="40" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="lmh-bB-xlC" secondAttribute="height" multiplier="1:1" id="ayT-PM-tPO"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <state key="normal" image="完成"/>
+                                                    <connections>
+                                                        <action selector="foodCompleteButton:" destination="tff-Lk-bLh" eventType="touchUpInside" id="0oK-Ik-dRk"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="QFm-rQ-ohM" firstAttribute="top" secondItem="UQQ-jC-tf6" secondAttribute="bottom" constant="8" id="71z-qf-czj"/>
+                                                <constraint firstItem="tTj-2a-gXM" firstAttribute="centerY" secondItem="HFz-Ws-Nw3" secondAttribute="centerY" id="G1H-eP-F3Z"/>
+                                                <constraint firstItem="tTj-2a-gXM" firstAttribute="leading" secondItem="HFz-Ws-Nw3" secondAttribute="leading" constant="15" id="RYd-Ix-cJu"/>
+                                                <constraint firstItem="QFm-rQ-ohM" firstAttribute="leading" secondItem="tTj-2a-gXM" secondAttribute="trailing" constant="8" id="TPh-kL-Abd"/>
+                                                <constraint firstAttribute="trailing" secondItem="lmh-bB-xlC" secondAttribute="trailing" constant="15" id="TTw-2k-ihs"/>
+                                                <constraint firstItem="UQQ-jC-tf6" firstAttribute="leading" secondItem="tTj-2a-gXM" secondAttribute="trailing" constant="8" id="Whs-40-DLw"/>
+                                                <constraint firstItem="UQQ-jC-tf6" firstAttribute="top" secondItem="HFz-Ws-Nw3" secondAttribute="top" constant="8" id="WmX-hH-2sV"/>
+                                                <constraint firstAttribute="bottom" secondItem="lmh-bB-xlC" secondAttribute="bottom" constant="15" id="ulP-tl-PAA"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <constraints>
+                                            <constraint firstItem="lmh-bB-xlC" firstAttribute="height" secondItem="tff-Lk-bLh" secondAttribute="height" multiplier="1/3" id="q1M-E9-75p"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="foodAmountLabel" destination="QFm-rQ-ohM" id="i9N-jU-ChC"/>
+                                            <outlet property="foodCompleteButton" destination="lmh-bB-xlC" id="CMx-Pn-1Yx"/>
+                                            <outlet property="foodImageView" destination="tTj-2a-gXM" id="cwu-ju-Fub"/>
+                                            <outlet property="foodNameLabel" destination="UQQ-jC-tf6" id="XZB-xy-iEB"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="0xZ-bC-kyx" id="be3-m9-DuU"/>
+                                    <outlet property="delegate" destination="0xZ-bC-kyx" id="3y0-BT-W4P"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="LJh-9x-tOh" firstAttribute="bottom" secondItem="sRP-NW-Qcg" secondAttribute="bottom" id="5Qd-Pb-iSb"/>
+                            <constraint firstItem="sRP-NW-Qcg" firstAttribute="top" secondItem="LJh-9x-tOh" secondAttribute="top" id="8RW-y2-xPD"/>
+                            <constraint firstItem="LJh-9x-tOh" firstAttribute="trailing" secondItem="sRP-NW-Qcg" secondAttribute="trailing" id="AzT-SI-Wz9"/>
+                            <constraint firstItem="sRP-NW-Qcg" firstAttribute="leading" secondItem="LJh-9x-tOh" secondAttribute="leading" id="GzJ-LY-GND"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="LJh-9x-tOh"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableFoodTableView" destination="sRP-NW-Qcg" id="sdS-qX-cTv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oe2-CH-CVG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1632" y="197"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="sYd-bV-XLK">
@@ -147,8 +244,8 @@
     </scenes>
     <resources>
         <image name="付款" width="13.333333015441895" height="13.333333015441895"/>
+        <image name="完成" width="13.333333015441895" height="13.333333015441895"/>
         <image name="服務鈴" width="13.333333015441895" height="13.333333015441895"/>
         <image name="桌位" width="36" height="36"/>
-        <image name="餐點完成" width="13.333333015441895" height="13.333333015441895"/>
     </resources>
 </document>

@@ -41,6 +41,8 @@
 		447A1753228C6BF3003AB41E /* TableManageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447A1752228C6BF3003AB41E /* TableManageViewController.swift */; };
 		447A1755228C6C02003AB41E /* CheckReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447A1754228C6C02003AB41E /* CheckReservationViewController.swift */; };
 		447A1757228C6C14003AB41E /* RestaurantInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447A1756228C6C14003AB41E /* RestaurantInfoViewController.swift */; };
+		44BED98922ACE26700647517 /* TableFoodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BED98822ACE26700647517 /* TableFoodTableViewCell.swift */; };
+		44BED98B22ACE28700647517 /* TableFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BED98A22ACE28700647517 /* TableFoodViewController.swift */; };
 		82AA67C747B391C3D8E58B6D /* Pods_EzOrder_Res_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C59C6FF9A8ACB56AD3337782 /* Pods_EzOrder_Res_.framework */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +83,8 @@
 		447A1752228C6BF3003AB41E /* TableManageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableManageViewController.swift; sourceTree = "<group>"; };
 		447A1754228C6C02003AB41E /* CheckReservationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckReservationViewController.swift; sourceTree = "<group>"; };
 		447A1756228C6C14003AB41E /* RestaurantInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantInfoViewController.swift; sourceTree = "<group>"; };
+		44BED98822ACE26700647517 /* TableFoodTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableFoodTableViewCell.swift; sourceTree = "<group>"; };
+		44BED98A22ACE28700647517 /* TableFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableFoodViewController.swift; sourceTree = "<group>"; };
 		597CF6BDC1FEDA0BE862026C /* Pods-EzOrder(Res).release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EzOrder(Res).release.xcconfig"; path = "Target Support Files/Pods-EzOrder(Res)/Pods-EzOrder(Res).release.xcconfig"; sourceTree = "<group>"; };
 		6A7AFE9E5777504BD28CF2A0 /* Pods-EzOrder(Res).debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EzOrder(Res).debug.xcconfig"; path = "Target Support Files/Pods-EzOrder(Res)/Pods-EzOrder(Res).debug.xcconfig"; sourceTree = "<group>"; };
 		C59C6FF9A8ACB56AD3337782 /* Pods_EzOrder_Res_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EzOrder_Res_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -122,6 +126,7 @@
 			children = (
 				447A1745228C69F1003AB41E /* TableManage.storyboard */,
 				4429B28C22A810A500649E0E /* TableManageTableViewCell.swift */,
+				44BED98822ACE26700647517 /* TableFoodTableViewCell.swift */,
 			);
 			path = TableManage;
 			sourceTree = "<group>";
@@ -192,6 +197,7 @@
 				4429B28A22A7EA8800649E0E /* LoginViewController.swift */,
 				447A174F228C6B90003AB41E /* EditInfo */,
 				447A174E228C6B8E003AB41E /* ApplyForAD */,
+				447A1750228C6BE7003AB41E /* ApplyForADViewController.swift */,
 				447A174D228C6B8C003AB41E /* TableManage */,
 				447A174C228C6B8B003AB41E /* CheckReservation */,
 				447A174B228C6B89003AB41E /* RestaurantInfo */,
@@ -245,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				447A1752228C6BF3003AB41E /* TableManageViewController.swift */,
+				44BED98A22ACE28700647517 /* TableFoodViewController.swift */,
 			);
 			path = TableManage;
 			sourceTree = "<group>";
@@ -252,7 +259,6 @@
 		447A174E228C6B8E003AB41E /* ApplyForAD */ = {
 			isa = PBXGroup;
 			children = (
-				447A1750228C6BE7003AB41E /* ApplyForADViewController.swift */,
 			);
 			path = ApplyForAD;
 			sourceTree = "<group>";
@@ -459,7 +465,9 @@
 				447A1753228C6BF3003AB41E /* TableManageViewController.swift in Sources */,
 				44369EDD22A8DBC900BF7369 /* CheckADDetailViewController.swift in Sources */,
 				44369ED922A8CA1C00BF7369 /* CheckADViewController.swift in Sources */,
+				44BED98922ACE26700647517 /* TableFoodTableViewCell.swift in Sources */,
 				447A172C228C688A003AB41E /* AppDelegate.swift in Sources */,
+				44BED98B22ACE28700647517 /* TableFoodViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

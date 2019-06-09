@@ -16,6 +16,7 @@ class TableManageViewController: UIViewController {
     
     var table = [String]()
     var allOrder = [QueryDocumentSnapshot]()
+    var selectOrderNo: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +44,14 @@ class TableManageViewController: UIViewController {
         UIView.animate(views: tableStatusTableView.visibleCells, animations: animations, completion: nil)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "tableFoodSegue"{
+            let tableFoodVC = segue.destination as! TableFoodViewController
+            if let selectOrderNo = selectOrderNo{
+                tableFoodVC.orderNo = selectOrderNo
+            }
+        }
+    }
 }
 
 extension TableManageViewController: UITableViewDelegate, UITableViewDataSource{
@@ -61,34 +70,34 @@ extension TableManageViewController: UITableViewDelegate, UITableViewDataSource{
             
             cell.tableNoLabel.text = "\(tableNo)桌"
             
-            cell.callBackService = { isServiceOn in
-                if isServiceOn{
-                    cell.serviceBellButton.setImage(UIImage(named: "服務鈴亮燈"), for: .normal)
-                }
-                else{
-                    cell.serviceBellButton.setImage(UIImage(named: "服務鈴"), for: .normal)
-                }
+//            cell.callBackService = { isServiceOn in
+//                if isServiceOn{
+//                    cell.serviceBellButton.setImage(UIImage(named: "服務鈴亮燈"), for: .normal)
+//                }
+//                else{
+//                    cell.serviceBellButton.setImage(UIImage(named: "服務鈴"), for: .normal)
+//                }
+//            }
+//            cell.callBackOrderComplete = { isOrderComplete in
+//                if isOrderComplete{
+//                    cell.orderCompleteButton.setImage(UIImage(named: "餐點完成亮燈"), for: .normal)
+//                }
+//                else{
+//                    cell.orderCompleteButton.setImage(UIImage(named: "餐點完成"), for: .normal)
+//                }
+//            }
+            if serviceBell == 0{
+                cell.serviceBellButton.setImage(UIImage(named: "服務鈴"), for: .normal)
             }
-            cell.callBackOrderComplete = { isOrderComplete in
-                if isOrderComplete{
-                    cell.orderCompleteButton.setImage(UIImage(named: "餐點完成亮燈"), for: .normal)
-                }
-                else{
-                    cell.orderCompleteButton.setImage(UIImage(named: "餐點完成"), for: .normal)
-                }
+            else{
+                cell.serviceBellButton.setImage(UIImage(named: "服務鈴亮燈"), for: .normal)
             }
-//            if serviceBell == 0{
-//                cell.serviceBellButton.setImage(UIImage(named: "服務鈴"), for: .normal)
-//            }
-//            else{
-//                cell.serviceBellButton.setImage(UIImage(named: "服務鈴亮燈"), for: .normal)
-//            }
-//            if orderCompleteStatus == 0{
-//                cell.foodCompleteButton.setImage(UIImage(named: "餐點完成"), for: .normal)
-//            }
-//            else{
-//                cell.foodCompleteButton.setImage(UIImage(named: "餐點完成亮燈"), for: .normal)
-//            }
+            if orderCompleteStatus == 0{
+                cell.orderCompleteButton.setImage(UIImage(named: "完成"), for: .normal)
+            }
+            else{
+                cell.orderCompleteButton.setImage(UIImage(named: "完成亮燈"), for: .normal)
+            }
             if payStatus == 0{
                 cell.payImageView.image = UIImage(named: "付款")
             }
@@ -99,5 +108,13 @@ extension TableManageViewController: UITableViewDelegate, UITableViewDataSource{
         }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let order = allOrder[indexPath.row]
+        if let orderNo = order.data()["orderNo"] as? String{
+            selectOrderNo = orderNo
+            performSegue(withIdentifier: "tableFoodSegue", sender: self)
+        }
     }
 }

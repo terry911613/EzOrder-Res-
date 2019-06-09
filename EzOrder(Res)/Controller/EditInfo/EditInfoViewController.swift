@@ -112,7 +112,7 @@ class EditInfoViewController: UIViewController{
                             self.errorAlert()
                             return
                         }
-                        let data: [String: Any] = ["resPhoto": downloadURL.absoluteString,
+                        let data: [String: Any] = ["resImage": downloadURL.absoluteString,
                                                    "resName": resName,
                                                    "resTel": resTel,
                                                    "resLocation": resLocation,
