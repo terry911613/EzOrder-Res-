@@ -52,6 +52,7 @@ class ApplyForADViewController: UIViewController {
         dateAlert.addAction(cancelAction)
         self.present(dateAlert, animated: true, completion: nil)
     }
+    
     @IBAction func chooseADImage(_ sender: Any) {
         let imagePickerContorller = UIImagePickerController()
         imagePickerContorller.sourceType = .photoLibrary
@@ -61,6 +62,10 @@ class ApplyForADViewController: UIViewController {
     
     @IBAction func applyButton(_ sender: UIButton) {
         
+        upload()
+    }
+    
+    func upload(){
         let alert = UIAlertController(title: "確定送出廣告審核？", message: nil, preferredStyle: .alert)
         let ok = UIAlertAction(title: "確定", style: .default) { (ok) in
             
@@ -129,7 +134,6 @@ class ApplyForADViewController: UIViewController {
         alert.addAction(ok)
         alert.addAction(cancel)
         present(alert, animated: true, completion: nil)
-        
     }
     
     func errorAlert(){

@@ -50,7 +50,6 @@ class EditMenuViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         getType()
-        print(typeIndex)
         if typeArray.isEmpty == false, let typeIndex = typeIndex{
             if let type = typeArray[typeIndex].data()["typeName"] as? String{
                 print(type)

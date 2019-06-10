@@ -16,11 +16,21 @@ class TableManageViewController: UIViewController {
     
     var table = [String]()
     var allOrder = [QueryDocumentSnapshot]()
+    var allServiceBell = [QueryDocumentSnapshot]()
     var selectOrderNo: String?
+    var orderNo: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        getOrder()
+    }
+    func getOrder(){
         let db = Firestore.firestore()
         let resID = Auth.auth().currentUser?.email
         if let resID = resID{
@@ -38,12 +48,12 @@ class TableManageViewController: UIViewController {
             }
         }
     }
+    
     func animateTableStatusTableView(){
         let animations = [AnimationType.from(direction: .top, offset: 30.0)]
         tableStatusTableView.reloadData()
         UIView.animate(views: tableStatusTableView.visibleCells, animations: animations, completion: nil)
     }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "tableFoodSegue"{
             let tableFoodVC = segue.destination as! TableFoodViewController
@@ -63,50 +73,30 @@ extension TableManageViewController: UITableViewDelegate, UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableStatusCell", for: indexPath) as! TableManageTableViewCell
         
         let order = allOrder[indexPath.row]
-        if let serviceBell = order.data()["serviceBell"] as? Int,
-            let orderCompleteStatus = order.data()["orderCompleteStatus"] as? Int,
-            let payStatus = order.data()["payStatus"] as? Int,
-            let tableNo = order.data()["tableNo"] as? Int{
-            
-            cell.tableNoLabel.text = "\(tableNo)桌"
-            
-//            cell.callBackService = { isServiceOn in
-//                if isServiceOn{
-//                    cell.serviceBellButton.setImage(UIImage(named: "服務鈴亮燈"), for: .normal)
-//                }
-//                else{
-//                    cell.serviceBellButton.setImage(UIImage(named: "服務鈴"), for: .normal)
-//                }
-//            }
-//            cell.callBackOrderComplete = { isOrderComplete in
-//                if isOrderComplete{
-//                    cell.orderCompleteButton.setImage(UIImage(named: "餐點完成亮燈"), for: .normal)
-//                }
-//                else{
-//                    cell.orderCompleteButton.setImage(UIImage(named: "餐點完成"), for: .normal)
-//                }
-//            }
-            if serviceBell == 0{
-                cell.serviceBellButton.setImage(UIImage(named: "服務鈴"), for: .normal)
-            }
-            else{
-                cell.serviceBellButton.setImage(UIImage(named: "服務鈴亮燈"), for: .normal)
-            }
-            if orderCompleteStatus == 0{
-                cell.orderCompleteButton.setImage(UIImage(named: "完成"), for: .normal)
-            }
-            else{
-                cell.orderCompleteButton.setImage(UIImage(named: "完成亮燈"), for: .normal)
-            }
-            if payStatus == 0{
-                cell.payImageView.image = UIImage(named: "付款")
-            }
-            else{
-                cell.payImageView.image = UIImage(named: "付款亮燈")
-            }
-            
-        }
         
+        if let tableNo = order.data()["tableNo"] as? Int,
+            let orderNo = order.data()["orderNo"] as? String,
+            let userID = order.data()["userID"] as? String{
+            cell.tableNoLabel.text = "\(tableNo)桌"
+            cell.orderNo = orderNo
+            cell.userID = userID
+            
+            let db = Firestore.firestore()
+            if let resID = Auth.auth().currentUser?.email{
+                db.collection("res").document(resID).collection("order").document(orderNo).collection("serviceBellStatus").document("isServiceBell").addSnapshotListener { (serviceBell, error) in
+                    if let serviceBellData = serviceBell?.data(),
+                        let serviceBellStatus = serviceBellData["serviceBellStatus"] as? Int{
+                        if serviceBellStatus == 0{
+                            cell.serviceBellButton.setImage(UIImage(named: "服務鈴"), for: .normal)
+                        }
+                        else{
+                            cell.serviceBellButton.setImage(UIImage(named: "服務鈴亮燈"), for: .normal)
+                        }
+                    }
+                }
+                
+            }
+        }
         return cell
     }
     

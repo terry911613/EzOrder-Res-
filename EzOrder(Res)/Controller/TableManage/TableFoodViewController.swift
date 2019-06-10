@@ -19,13 +19,13 @@ class TableFoodViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        getTableFood()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getTableFood()
     }
+    
     func getTableFood(){
         let db = Firestore.firestore()
         if let resID = Auth.auth().currentUser?.email,
@@ -44,6 +44,7 @@ class TableFoodViewController: UIViewController {
             }
         }
     }
+    
     func animateTableFoodTableView(){
         let animations = [AnimationType.from(direction: .top, offset: 30.0)]
         tableFoodTableView.reloadData()

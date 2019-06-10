@@ -82,7 +82,7 @@ class EditInfoViewController: UIViewController{
     
     @IBAction func uploadButton(_ sender: UIBarButtonItem) {
         
-        if let resPhoto = resLogoImageView.image,
+        if let resImage = resLogoImageView.image,
             let resName = resNameLabel.text, resName.isEmpty == false,
             let resTel = resTelLabel.text, resTel.isEmpty == false,
             let resLocation = resLocationLabel.text, resLocation.isEmpty == false,
@@ -94,9 +94,9 @@ class EditInfoViewController: UIViewController{
             SVProgressHUD.show()
             let storageReference = Storage.storage().reference()
             let fileReference = storageReference.child(UUID().uuidString + ".jpg")
-            let size = CGSize(width: 640, height: resPhoto.size.height * 640 / resPhoto.size.width)
+            let size = CGSize(width: 640, height: resImage.size.height * 640 / resImage.size.width)
             UIGraphicsBeginImageContext(size)
-            resPhoto.draw(in: CGRect(origin: .zero, size: size))
+            resImage.draw(in: CGRect(origin: .zero, size: size))
             let resizeImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
             if let data = resizeImage?.jpegData(compressionQuality: 0.8){

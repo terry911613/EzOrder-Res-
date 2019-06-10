@@ -197,7 +197,6 @@
 				4429B28A22A7EA8800649E0E /* LoginViewController.swift */,
 				447A174F228C6B90003AB41E /* EditInfo */,
 				447A174E228C6B8E003AB41E /* ApplyForAD */,
-				447A1750228C6BE7003AB41E /* ApplyForADViewController.swift */,
 				447A174D228C6B8C003AB41E /* TableManage */,
 				447A174C228C6B8B003AB41E /* CheckReservation */,
 				447A174B228C6B89003AB41E /* RestaurantInfo */,
@@ -259,6 +258,7 @@
 		447A174E228C6B8E003AB41E /* ApplyForAD */ = {
 			isa = PBXGroup;
 			children = (
+				447A1750228C6BE7003AB41E /* ApplyForADViewController.swift */,
 			);
 			path = ApplyForAD;
 			sourceTree = "<group>";
