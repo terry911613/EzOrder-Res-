@@ -63,11 +63,32 @@ extension TableFoodViewController: UITableViewDelegate, UITableViewDataSource{
         if let foodName = food.data()["foodName"] as? String,
             let foodImage = food.data()["foodImage"] as? String,
             let foodAmount = food.data()["foodAmount"] as? Int,
-            let orderFoodStatus = food.data()["orderFoodStatus"] as? Int{
+            let orderFoodStatus = food.data()["orderFoodStatus"] as? Int,
+            let userID = food.data()["userID"] as? String,
+            let orderNo = orderNo{
             
+            cell.foodName = foodName
+            cell.userID = userID
+            cell.orderNo = orderNo
             cell.foodNameLabel.text = foodName
             cell.foodImageView.kf.setImage(with: URL(string: foodImage))
             cell.foodAmountLabel.text = "數量：\(foodAmount)"
+            
+            let db = Firestore.firestore()
+            if let resID = Auth.auth().currentUser?.email{
+                db.collection("res").document(resID).collection("order").document(orderNo).collection("orderFoodDetail").document(foodName).addSnapshotListener { (foodStatus, error) in
+                    if let foodStatusData = foodStatus?.data(),
+                        let orderFoodStatus = foodStatusData["orderFoodStatus"] as? Int{
+                        if orderFoodStatus == 0{
+                            cell.foodCompleteButton.setImage(UIImage(named: "完成"), for: .normal)
+                        }
+                        else{
+                            cell.foodCompleteButton.setImage(UIImage(named: "完成亮燈"), for: .normal)
+                        }
+                    }
+                }
+                
+            }
             if orderFoodStatus == 0 {
                 cell.foodCompleteButton.setImage(UIImage(named: "完成"), for: .normal)
             }

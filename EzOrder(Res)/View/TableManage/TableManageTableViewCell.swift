@@ -53,8 +53,7 @@ class TableManageTableViewCell: UITableViewCell {
     }
     
     @IBAction func serviceBellButton(_ sender: UIButton) {
-        //        isSeviceOn = !isSeviceOn
-        //        callBackService?(isSeviceOn)
+        
         let db = Firestore.firestore()
         if let resID = Auth.auth().currentUser?.email,
             let orderNo = orderNo,
