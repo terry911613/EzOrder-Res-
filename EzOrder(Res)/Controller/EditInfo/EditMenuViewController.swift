@@ -29,6 +29,7 @@ class EditMenuViewController: UIViewController {
     var typeIndex: Int?
     var foodIndex: Int?
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
