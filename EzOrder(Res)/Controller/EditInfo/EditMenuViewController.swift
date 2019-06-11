@@ -18,17 +18,10 @@ class EditMenuViewController: UIViewController {
     @IBOutlet weak var foodCollectionView: UICollectionView!
     @IBOutlet var optinss: [UIButton]!
     @IBOutlet var longPress: UILongPressGestureRecognizer!
+    @IBOutlet var foodLongPress: UILongPressGestureRecognizer!
     var editState = false
     var p: CGPoint?
-    
-    var isEditPressed = false {
-        didSet {
-            if oldValue != isEditPressed {
-                foodCollectionView?.reloadData()
-            }
-        }
-    }
-    
+    var isEditPressed = false
     let db = Firestore.firestore()
     let resID = Auth.auth().currentUser?.email
     var typeArray = [QueryDocumentSnapshot]()
@@ -40,7 +33,8 @@ class EditMenuViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        foodCollectionView.addGestureRecognizer(self.longPress)
+        foodCollectionView.addGestureRecognizer(self.foodLongPress)
+        typeCollectionView.addGestureRecognizer(self.longPress)
         for optinasss in foodCollections {
             UIView.animate(withDuration: 0.8, animations: {optinasss.isHidden = false
                 self.view.layoutIfNeeded()
@@ -54,7 +48,7 @@ class EditMenuViewController: UIViewController {
             if let type = typeArray[typeIndex].data()["typeName"] as? String{
                 print(type)
                 getFood(typeName: type)
-                print(22222)
+                
             }
         }
     }
@@ -65,14 +59,14 @@ class EditMenuViewController: UIViewController {
                 if let type = type{
                     if type.documentChanges.isEmpty{
                         self.typeArray.removeAll()
-                        self.typeCollectionView.reloadData()
+                       self.typeCollectionView.reloadData()
                     }
                     else{
                         let documentChange = type.documentChanges[0]
                         if documentChange.type == .added {
                             self.typeArray = type.documents
                             self.typeAnimateCollectionView()
-                            print("getType")
+                          //  print("getType")
                         }
                     }
                 }
@@ -81,13 +75,14 @@ class EditMenuViewController: UIViewController {
     }
     func getFood(typeName: String){
         print("-------------")
-        print(typeName)
+     //   print(typeName)
         if let resID = resID{
             db.collection("res").document(resID).collection("foodType").document(typeName).collection("menu").order(by: "foodIndex", descending: false).addSnapshotListener { (food, error) in
                 if let food = food{
                     if food.documents.isEmpty{
                         self.foodArray.removeAll()
                         self.foodCollectionView.reloadData()
+                       
                     }
                     else{
                         let documentChange = food.documentChanges[0]
@@ -105,6 +100,7 @@ class EditMenuViewController: UIViewController {
     }
     //  顯示特效
     func typeAnimateCollectionView(){
+        print(2000)
         typeCollectionView.reloadData()
         let animations = [AnimationType.from(direction: .bottom, offset: 30.0)]
         typeCollectionView.performBatchUpdates({
@@ -137,15 +133,6 @@ class EditMenuViewController: UIViewController {
         let typeVC = storyboard?.instantiateViewController(withIdentifier: "typeVC") as! TypeViewController
         typeVC.index = typeArray.count
         present(typeVC, animated: true, completion: nil)
-        
-//        for optina in optinss {
-//            UIView.animate(withDuration: 0.5, animations:{ optina.isHidden = !optina.isHidden
-////                self.view.layoutIfNeeded()
-//                let typeVC = self.storyboard?.instantiateViewController(withIdentifier: "typeVC") as! AddTypeViewController
-//                self.navigationController?.pushViewController(typeVC, animated: true)
-//                self.editState = !self.editState
-//            })
-//        }
     }
     
     @IBAction func addMenu(_ sender: Any) {
@@ -162,14 +149,6 @@ class EditMenuViewController: UIViewController {
             alert.addAction(ok)
             present(alert, animated: true, completion: nil)
         }
-//        for optina in optinss {
-//            UIView.animate(withDuration: 0.5, animations:{ optina.isHidden = !optina.isHidden
-////                self.view.layoutIfNeeded()
-//                let menuVC = self.storyboard?.instantiateViewController(withIdentifier: "menuVC") as! AddMenuViewController
-//                self.navigationController?.pushViewController(menuVC, animated: true)
-//                self.editState = !self.editState
-//            })
-//        }
     }
     
     @IBAction func editType(_ sender: UIButton) {
@@ -179,16 +158,13 @@ class EditMenuViewController: UIViewController {
                 self.editState = !self.editState
             })
         }
+        typeCollectionView.reloadData()
         isEditPressed = !isEditPressed
-//        for optina in optinss {
-//            UIView.animate(withDuration: 0.5, animations:{ optina.isHidden = !optina.isHidden
-////                self.view.layoutIfNeeded()
-//                let typeVC = self.storyboard?.instantiateViewController(withIdentifier: "typeVC") as! AddTypeViewController
-//                self.navigationController?.pushViewController(typeVC, animated: true)
-//                self.editState = !self.editState
-//            })
-//        }
+        
+        
     }
+
+    
     
     @IBAction func editMenu(_ sender: Any) {
         for optina in optinss {
@@ -197,28 +173,31 @@ class EditMenuViewController: UIViewController {
                 self.editState = !self.editState
             })
         }
-        isEditPressed = !isEditPressed
-//        for optina in optinss {
-//            UIView.animate(withDuration: 0.5, animations:{ optina.isHidden = !optina.isHidden
-//                self.view.layoutIfNeeded()
-////                self.editState = !self.editState
-//                let menuVC = self.storyboard?.instantiateViewController(withIdentifier: "menuVC") as! AddMenuViewController
-//                self.navigationController?.pushViewController(menuVC, animated: true)
-//                self.editState = !self.editState
-//            })
-//        }
-//        longPressed = !longPressed
-    }
-    
-//    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-//        if editState  {
-//            return false
-//        } else {
-//            return true
-//        }
-//    }
+     
+            }
     
     @IBAction func longPress(_ sender: UILongPressGestureRecognizer){
+        if isEditPressed == true {
+            switch (sender.state) {
+            case .began:
+                guard let selectedIndexPath = typeCollectionView.indexPathForItem(at: sender.location(in:typeCollectionView))else{
+                    break
+                }
+                typeCollectionView.beginInteractiveMovementForItem(at: selectedIndexPath)
+            case.changed:
+              typeCollectionView.updateInteractiveMovementTargetPosition(sender.location(in: typeCollectionView!))
+
+            case.ended:
+                typeCollectionView.endInteractiveMovement()
+                
+            default:
+                typeCollectionView.cancelInteractiveMovement()
+                
+            }
+        }
+    }
+    
+    @IBAction func foodLongPresss(_ sender: UILongPressGestureRecognizer) {
         if isEditPressed == true {
             switch (sender.state) {
             case .began:
@@ -227,12 +206,8 @@ class EditMenuViewController: UIViewController {
                 }
                 foodCollectionView.beginInteractiveMovementForItem(at: selectedIndexPath)
             case.changed:
-//                p = LOngPress.location(in: menuCollectionView)
-//                if let p = p, let indexPath = menuCollectionView?.indexPathForItem(at: p) {
-//                    print(5)
-                    isEditPressed = true
-                    foodCollectionView.updateInteractiveMovementTargetPosition(sender.location(in: foodCollectionView!))
-//                }
+                foodCollectionView.updateInteractiveMovementTargetPosition(sender.location(in: foodCollectionView!))
+                
             case.ended:
                 foodCollectionView.endInteractiveMovement()
                 
@@ -242,18 +217,7 @@ class EditMenuViewController: UIViewController {
             }
         }
     }
-    func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
-        p = gestureRecognizer.location(in: foodCollectionView)
-        if let p = p, let _ = foodCollectionView?.indexPathForItem(at: p) {
-            isEditPressed = true
-        }
-    }
-    func handleTap(_ gestureRecognizer: UITapGestureRecognizer) {
-        p = gestureRecognizer.location(in: foodCollectionView)
-        if let p = p, foodCollectionView?.indexPathForItem(at: p) == nil {
-            isEditPressed = false
-        }
-    }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -290,13 +254,26 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == typeCollectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "typeCell", for: indexPath) as! EditTypeCollectionViewCell
-            
             let type = typeArray[indexPath.row]
             cell.typeLabel.text = type.data()["typeName"] as? String
             cell.typeImage.kf.setImage(with: URL(string: type.data()["typeImage"] as! String))
+            if isEditPressed {
+                let anim = CABasicAnimation(keyPath: "transform.rotation")
+                anim.toValue = 0
+                anim.fromValue = Double.pi/32
+                anim.duration = 0.1
+                anim.repeatCount = MAXFLOAT
+                anim.autoreverses = true
+                cell.layer.add(anim, forKey: "SpringboardShake")
+            }else {
+                cell.layer.removeAllAnimations()
+            }
+            
             return cell
         }
         else{
+            
+            
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "foodCell", for: indexPath) as! EditFoodCollectionViewCell
             
             let food = foodArray[indexPath.row]
@@ -307,24 +284,6 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
                 cell.foodNameLabel.text = foodName
                 cell.foodImageView.kf.setImage(with: URL(string: foodImage))
                 cell.foodMoneyLabel.text = "$\(foodMoney)"
-                
-//                if isEditPressed {
-//                    cell.editNameTextfield.isHidden = false
-//                    cell.editMoneyTextfield.isHidden = false
-//                    cell.statusSwich.isHidden = false
-//                    
-//                    cell.editNameTextfield.text = foodName
-//                    cell.editMoneyTextfield.text = String(foodMoney)
-//                }
-//                else{
-//                    cell.layer.removeAllAnimations()
-//                    cell.statusSwich.isHidden = true
-//                    cell.editNameTextfield.isHidden = true
-//                    cell.editMoneyTextfield.isHidden = true
-//                    if cell.menuView.alpha < 0.5 {
-//                        cell.foodNameLabel.text = "一條龍"
-//                    }
-//                }
             }
             return cell
         }
@@ -338,18 +297,21 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
             typeIndex = indexPath.row
 //            print("typeIndex: \(typeIndex)")
             if let type = typeArray[indexPath.row].data()["typeName"] as? String{
-                getFood(typeName: type)
+            getFood(typeName: type)
             }
+            
         }
         else{
             foodIndex = indexPath.row
             performSegue(withIdentifier: "foodDetailSegue", sender: self)
+            print(69)
         }
     }
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if collectionView == typeCollectionView{
             let cell = collectionView.cellForItem(at: indexPath) as! EditTypeCollectionViewCell
             cell.backView.backgroundColor = UIColor(red: 255/255, green: 162/255, blue: 195/255, alpha: 1)
+            print(20)
 //            print("diddeselect:\(indexPath.row)")
         }
         
@@ -360,13 +322,17 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
     }
     func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         if collectionView == typeCollectionView{
-            
+            let item = typeArray.remove(at: sourceIndexPath.item)
+            typeArray.insert(item, at: destinationIndexPath.item)
         }
         else{
             let item = foodArray.remove(at: sourceIndexPath.item)
             foodArray.insert(item, at: destinationIndexPath.item)
         }
     }
+    
+    
+ 
 }
 
 
