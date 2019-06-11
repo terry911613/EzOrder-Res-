@@ -22,6 +22,8 @@ class EditFoodCollectionViewCell: UICollectionViewCell {
     @IBAction func statusAction(_ sender:UISwitch) {
         if sender.isOn {
             menuView.alpha = 1
+            
+            
         }
         else {
             menuView.alpha = 0.4
