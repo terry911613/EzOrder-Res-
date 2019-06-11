@@ -63,7 +63,6 @@ extension TableFoodViewController: UITableViewDelegate, UITableViewDataSource{
         if let foodName = food.data()["foodName"] as? String,
             let foodImage = food.data()["foodImage"] as? String,
             let foodAmount = food.data()["foodAmount"] as? Int,
-            let orderFoodStatus = food.data()["orderFoodStatus"] as? Int,
             let userID = food.data()["userID"] as? String,
             let orderNo = orderNo{
             
@@ -88,12 +87,6 @@ extension TableFoodViewController: UITableViewDelegate, UITableViewDataSource{
                     }
                 }
                 
-            }
-            if orderFoodStatus == 0 {
-                cell.foodCompleteButton.setImage(UIImage(named: "完成"), for: .normal)
-            }
-            else{
-                cell.foodCompleteButton.setImage(UIImage(named: "完成亮燈"), for: .normal)
             }
         }
         
