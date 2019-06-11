@@ -17,14 +17,27 @@ class EditInfoViewController: UIViewController{
 //    @IBOutlet weak var cellCollectionView: AddCollectionViewCell!
     @IBOutlet weak var resLogoImageView: UIImageView!
 //    @IBOutlet var longPressGest: UILongPressGestureRecognizer!
-    @IBOutlet weak var resNameLabel: UITextField!
-    @IBOutlet weak var resTelLabel: UITextField!
-    @IBOutlet weak var resLocationLabel: UITextField!
-    @IBOutlet weak var resBookingLimitLabel: UITextField!
-    @IBOutlet weak var resTaxIDLabel: UITextField!
+    @IBOutlet weak var resNameTextfield: UITextField!
+    @IBOutlet weak var resTelTextfield: UITextField!
+    @IBOutlet weak var resLocationTextfield: UITextField!
+    @IBOutlet weak var resBookingLimitTextfield: UITextField!
+    @IBOutlet weak var resTaxIDTextfield: UITextField!
+    
+    @IBOutlet weak var resNameLabel: UILabel!
+    @IBOutlet weak var resTelLabel: UILabel!
+    @IBOutlet weak var resLocationLabel: UILabel!
+    @IBOutlet weak var resBookingLimitLabel: UILabel!
+    @IBOutlet weak var resTaxIDLabel: UILabel!
+    
+    @IBOutlet weak var editButton: UIButton!
     
     let db = Firestore.firestore()
     let resID = Auth.auth().currentUser?.email
+    var isEdit = false
+    var resImage: String?
+    var resName: String?
+    
+    
     
 //    var p: CGPoint?
 //    var longPressed = false {
@@ -43,27 +56,58 @@ class EditInfoViewController: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let db = Firestore.firestore()
-//        db.collection("photo").addSnapshotListener{ (querySnapshot, error) in
-//            if let querySnapshot = querySnapshot {
-//                if self.isFirstGetPhotos {
-//                    self.isFirstGetPhotos = false
-//                    self.photos = querySnapshot.documents
-//                    self.foodCollectionVIew.reloadData()
-//                }else {
-//                    //    self.photos = querySnapshot.documents
-//                    let documentChange = querySnapshot.documentChanges[0]
-//                    if documentChange.type == .modified
-//                        ,documentChange.document.data()["photoUrl"] != nil{
-//                        self.photos.insert(documentChange.document, at: 0)
-//                        self.foodCollectionVIew.reloadData()
-//                    }
-//                }
-//
-//            }
-//
-//        }
-//        foodCollectionVIew.addGestureRecognizer(longPressGest)
+        
+        if let resID = resID{
+            db.collection("res").document(resID).addSnapshotListener { (res, error) in
+                if let resData = res?.data(){
+                    if let resImage = resData["resImage"] as? String,
+                        let resName = resData["resName"] as? String,
+                        let resTel = resData["resTel"] as? String,
+                        let resLocation = resData["resLocation"] as? String,
+                        let resBookingLimit = resData["resBookingLimit"] as? Int,
+                        let resTaxID = resData["resTaxID"] as? String{
+                        
+                        self.isEdit = false
+                        
+                        self.resLogoImageView.kf.setImage(with: URL(string: resImage))
+                        self.resNameLabel.text = resName
+                        self.resTelLabel.text = resTel
+                        self.resLocationLabel.text = resLocation
+                        self.resBookingLimitLabel.text = "\(resBookingLimit)"
+                        self.resTaxIDLabel.text = resTaxID
+                        
+                        self.resNameTextfield.isHidden = true
+                        self.resTelTextfield.isHidden = true
+                        self.resLocationTextfield.isHidden = true
+                        self.resBookingLimitTextfield.isHidden = true
+                        self.resTaxIDTextfield.isHidden = true
+                        self.resLogoImageView.isUserInteractionEnabled = false
+                        self.editButton.isHidden = true
+                    }
+                    
+                }
+                else{
+                    
+                    self.isEdit = true
+                    
+                    self.resNameTextfield.isHidden = false
+                    self.resTelTextfield.isHidden = false
+                    self.resLocationTextfield.isHidden = false
+                    self.resBookingLimitTextfield.isHidden = false
+                    self.resTaxIDTextfield.isHidden = false
+                    self.editButton.isHidden = false
+                    self.resLogoImageView.isUserInteractionEnabled = true
+                    
+                    self.resNameLabel.isHidden = true
+                    self.resTelLabel.isHidden = true
+                    self.resLocationLabel.isHidden = true
+                    self.resBookingLimitLabel.isHidden = true
+                    self.resTaxIDLabel.isHidden = true
+                    
+                }
+            }
+        }
+        
     }
     func getType(){
         if let resID = resID{
@@ -83,11 +127,11 @@ class EditInfoViewController: UIViewController{
     @IBAction func uploadButton(_ sender: UIBarButtonItem) {
         
         if let resImage = resLogoImageView.image,
-            let resName = resNameLabel.text, resName.isEmpty == false,
-            let resTel = resTelLabel.text, resTel.isEmpty == false,
-            let resLocation = resLocationLabel.text, resLocation.isEmpty == false,
-            let resBookingLimit = resBookingLimitLabel.text, resBookingLimit.isEmpty == false,
-            let resTaxID = resTaxIDLabel.text, resTaxID.isEmpty == false,
+            let resName = resNameTextfield.text, resName.isEmpty == false,
+            let resTel = resTelTextfield.text, resTel.isEmpty == false,
+            let resLocation = resLocationTextfield.text, resLocation.isEmpty == false,
+            let resBookingLimit = Int(resBookingLimitTextfield.text!),
+            let resTaxID = resTaxIDTextfield.text, resTaxID.isEmpty == false,
             let resID = resID{
             //DocumentReference 指定位置
             //照片參照
@@ -214,9 +258,45 @@ class EditInfoViewController: UIViewController{
 //            longPressed = false
 //        }
 //    }
-//    @IBAction func gerkmgekrglke(_ sender: Any) {
+    @IBAction func editInfoButton(_ sender: Any) {
 //        longPressed = !longPressed
-//    }
+        
+        isEdit = !isEdit
+        if isEdit{
+            resNameTextfield.isHidden = false
+            resTelTextfield.isHidden = false
+            resLocationTextfield.isHidden = false
+            resBookingLimitTextfield.isHidden = false
+            resTaxIDTextfield.isHidden = false
+            editButton.isHidden = false
+            
+            resNameLabel.isHidden = true
+            resTelLabel.isHidden = true
+            resLocationLabel.isHidden = true
+            resBookingLimitLabel.isHidden = true
+            resTaxIDLabel.isHidden = true
+            
+            
+            resLogoImageView.isUserInteractionEnabled = true
+        }
+        else{
+            resNameTextfield.isHidden = true
+            resTelTextfield.isHidden = true
+            resLocationTextfield.isHidden = true
+            resBookingLimitTextfield.isHidden = true
+            resTaxIDTextfield.isHidden = true
+            editButton.isHidden = true
+            
+            resNameLabel.isHidden = false
+            resTelLabel.isHidden = false
+            resLocationLabel.isHidden = false
+            resBookingLimitLabel.isHidden = false
+            resTaxIDLabel.isHidden = false
+            
+            resLogoImageView.isUserInteractionEnabled = false
+        }
+        
+    }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }

@@ -61,7 +61,7 @@ class EditMenuViewController: UIViewController {
     
     func getType(){
         if let resID = resID{
-            db.collection("res").document(resID).collection("foodType").addSnapshotListener { (type, error) in
+            db.collection("res").document(resID).collection("foodType").order(by: "index", descending: false).addSnapshotListener { (type, error) in
                 if let type = type{
                     if type.documentChanges.isEmpty{
                         self.typeArray.removeAll()
@@ -83,7 +83,7 @@ class EditMenuViewController: UIViewController {
         print("-------------")
         print(typeName)
         if let resID = resID{
-            db.collection("res").document(resID).collection("foodType").document(typeName).collection("menu").addSnapshotListener { (food, error) in
+            db.collection("res").document(resID).collection("foodType").document(typeName).collection("menu").order(by: "foodIndex", descending: false).addSnapshotListener { (food, error) in
                 if let food = food{
                     if food.documents.isEmpty{
                         self.foodArray.removeAll()

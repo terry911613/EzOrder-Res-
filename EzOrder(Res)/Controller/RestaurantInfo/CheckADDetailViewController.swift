@@ -19,7 +19,7 @@ class CheckADDetailViewController: UIViewController {
     }
     
     @IBAction func okButton(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
     
 }
