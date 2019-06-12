@@ -10,27 +10,23 @@ import UIKit
 import Firebase
 import Kingfisher
 import SVProgressHUD
-
-class EditInfoViewController: UIViewController{
+import MapKit
+class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
     
     @IBOutlet weak var typeCollectionView: UICollectionView!
-    //    @IBOutlet weak var cellCollectionView: AddCollectionViewCell!
     @IBOutlet weak var resLogoImageView: UIImageView!
-    //    @IBOutlet var longPressGest: UILongPressGestureRecognizer!
     @IBOutlet weak var resNameTextfield: UITextField!
     @IBOutlet weak var resTelTextfield: UITextField!
     @IBOutlet weak var resLocationTextfield: UITextField!
     @IBOutlet weak var resBookingLimitTextfield: UITextField!
     @IBOutlet weak var resTaxIDTextfield: UITextField!
-    
     @IBOutlet weak var resNameLabel: UILabel!
     @IBOutlet weak var resTelLabel: UILabel!
     @IBOutlet weak var resLocationLabel: UILabel!
     @IBOutlet weak var resBookingLimitLabel: UILabel!
     @IBOutlet weak var resTaxIDLabel: UILabel!
-    
     @IBOutlet weak var editButton: UIButton!
-    
+    @IBOutlet weak var myMap: MKMapView!
     let db = Firestore.firestore()
     let resID = Auth.auth().currentUser?.email
     var isEdit = false
@@ -40,8 +36,8 @@ class EditInfoViewController: UIViewController{
     var resLocation: String?
     var resBookingLimit: Int?
     var resTaxID: String?
-    var isEditImage: Bool?
     var typeArray = [QueryDocumentSnapshot]()
+    var locations:CLLocationManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,6 +74,30 @@ class EditInfoViewController: UIViewController{
                         self.resTaxIDTextfield.isHidden = true
                         self.resLogoImageView.isUserInteractionEnabled = false
                         self.editButton.isHidden = true
+                        self.locations = CLLocationManager()
+                        self.locations.delegate = self
+                        self.locations.requestWhenInUseAuthorization()
+                        self.locations.startUpdatingLocation()
+                        self.setMapRegion()
+                        let text = "我很帥"
+                        let geocoder = CLGeocoder()
+                        geocoder.geocodeAddressString(text) { (placemarks, error) in
+                            if error == nil && placemarks != nil && placemarks!.count > 0 {
+                                if let placemark = placemarks!.first {
+                                    let location = placemark.location!
+//                                    self.setMapCenter(center: location.coordinate)
+//                                    self.setMapAnnotation(location)
+                                }
+                            } else {
+                                let title = "收尋失敗"
+                                let message = "目前網路連線不穩定"
+                                let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                                let ok = UIAlertAction(title: "OK", style: .default)
+                                alertController.addAction(ok)
+                                self.present(alertController, animated: true, completion: nil)
+                            }
+                        }
+                        
                     }
                     
                 }
@@ -121,7 +141,6 @@ class EditInfoViewController: UIViewController{
     
     
     @IBAction func tapResLogoImageView(_ sender: UITapGestureRecognizer) {
-        isEditImage = true
         let imagePickerController = UIImagePickerController()
         imagePickerController.sourceType = .photoLibrary
         imagePickerController.delegate = self
@@ -172,53 +191,48 @@ class EditInfoViewController: UIViewController{
                 //DocumentReference 指定位置
                 //照片參照
                 SVProgressHUD.show()
-                if let isEditImage = isEditImage{
-                    if isEditImage{
-                        let storageReference = Storage.storage().reference()
-                        let fileReference = storageReference.child(UUID().uuidString + ".jpg")
-                        let size = CGSize(width: 640, height: resImage.size.height * 640 / resImage.size.width)
-                        UIGraphicsBeginImageContext(size)
-                        resImage.draw(in: CGRect(origin: .zero, size: size))
-                        let resizeImage = UIGraphicsGetImageFromCurrentImageContext()
-                        UIGraphicsEndImageContext()
-                        if let data = resizeImage?.jpegData(compressionQuality: 0.8){
-                            fileReference.putData(data,metadata: nil) {(metadate, error) in
-                                guard let _ = metadate, error == nil else {
+                let storageReference = Storage.storage().reference()
+                let fileReference = storageReference.child(UUID().uuidString + ".jpg")
+                let size = CGSize(width: 640, height: resImage.size.height * 640 / resImage.size.width)
+                UIGraphicsBeginImageContext(size)
+                resImage.draw(in: CGRect(origin: .zero, size: size))
+                let resizeImage = UIGraphicsGetImageFromCurrentImageContext()
+                UIGraphicsEndImageContext()
+                if let data = resizeImage?.jpegData(compressionQuality: 0.8){
+                    fileReference.putData(data,metadata: nil) {(metadate, error) in
+                        guard let _ = metadate, error == nil else {
+                            SVProgressHUD.dismiss()
+                            self.errorAlert()
+                            return
+                        }
+                        fileReference.downloadURL(completion: { (url, error) in
+                            guard let downloadURL = url else {
+                                SVProgressHUD.dismiss()
+                                self.errorAlert()
+                                return
+                            }
+                            let data: [String: Any] = ["resImage": downloadURL.absoluteString,
+                                                       "resName": resName,
+                                                       "resTel": resTel,
+                                                       "resLocation": resLocation,
+                                                       "resBookingLimit": resBookingLimit,
+                                                       "resTaxID": resTaxID]
+                            self.db.collection("res").document(resID).setData(data, completion: { (error) in
+                                guard error == nil else {
                                     SVProgressHUD.dismiss()
                                     self.errorAlert()
                                     return
                                 }
-                                fileReference.downloadURL(completion: { (url, error) in
-                                    guard let downloadURL = url else {
-                                        SVProgressHUD.dismiss()
-                                        self.errorAlert()
-                                        return
-                                    }
-                                    self.db.collection("res").document(resID).updateData(["resImage": downloadURL.absoluteString])
-                                })
-                            }
-                        }
+                                SVProgressHUD.dismiss()
+                                let alert = UIAlertController(title: "上傳完成", message: nil, preferredStyle: .alert)
+                                let ok = UIAlertAction(title: "確定", style: .default, handler: nil)
+                                alert.addAction(ok)
+                                self.present(alert, animated: true, completion: nil)
+                            })
+                            SVProgressHUD.dismiss()
+                        })
                     }
                 }
-                
-                let data: [String: Any] = ["resName": resName,
-                                           "resTel": resTel,
-                                           "resLocation": resLocation,
-                                           "resBookingLimit": resBookingLimit,
-                                           "resTaxID": resTaxID]
-                self.db.collection("res").document(resID).updateData(data, completion: { (error) in
-                    guard error == nil else {
-                        SVProgressHUD.dismiss()
-                        self.errorAlert()
-                        return
-                    }
-                    SVProgressHUD.dismiss()
-                    let alert = UIAlertController(title: "上傳完成", message: nil, preferredStyle: .alert)
-                    let ok = UIAlertAction(title: "確定", style: .default, handler: nil)
-                    alert.addAction(ok)
-                    self.present(alert, animated: true, completion: nil)
-                })
-                SVProgressHUD.dismiss()
             }
                 
             else{
@@ -256,6 +270,14 @@ class EditInfoViewController: UIViewController{
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
+    func setMapRegion() {
+        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        var region = MKCoordinateRegion()
+        region.span = span
+        myMap.setRegion(region, animated: true)
+        myMap.regionThatFits(region)
+    }
+    
 }
 
 extension EditInfoViewController: UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
@@ -268,25 +290,6 @@ extension EditInfoViewController: UICollectionViewDelegate,UICollectionViewDataS
         cell.typeLabel.text = type.data()["typeName"] as? String
         cell.typeImageView.kf.setImage(with: URL(string: type.data()["typeImage"] as! String))
         return cell
-        //        let photo = typeArray[indexPath.row]
-        //        cell.foofLabel.text = photo.data()["Label"] as? String
-        //        if let urlString = photo.data()["photoUrl"] as? String {
-        //            cell.foodImageView.kf.setImage(with: URL(string: urlString))
-        //            if longPressed {
-        //                let anim = CABasicAnimation(keyPath: "transform.rotation")
-        //                anim.toValue = 0
-        //                anim.fromValue = Double.pi/32
-        //                anim.duration = 0.1
-        //                anim.repeatCount = MAXFLOAT
-        //                anim.autoreverses = true
-        //                //            cell.layer.shouldRasterize = true
-        //                cell.layer.add(anim, forKey: "SpringboardShake")
-        //            }else {
-        //
-        //                cell.layer.removeAllAnimations()
-        //            }
-        //        }
-        //        return cell
     }
     func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
         return true

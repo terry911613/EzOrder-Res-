@@ -10,7 +10,6 @@ import UIKit
 import Firebase
 import Kingfisher
 import ViewAnimator
-
 class EditMenuViewController: UIViewController {
     
     @IBOutlet weak var typeCollectionView: UICollectionView!
@@ -32,9 +31,8 @@ class EditMenuViewController: UIViewController {
     var prepare = false
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
         foodCollectionView.addGestureRecognizer(self.foodLongPress)
         typeCollectionView.addGestureRecognizer(self.longPress)
         for optinasss in foodCollections {
