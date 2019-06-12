@@ -38,6 +38,7 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
     var resTaxID: String?
     var typeArray = [QueryDocumentSnapshot]()
     var locations:CLLocationManager!
+     var coordinates: CLLocationCoordinate2D?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,14 +80,14 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
                         self.locations.requestWhenInUseAuthorization()
                         self.locations.startUpdatingLocation()
                         self.setMapRegion()
-                        let text = "我很帥"
+                        let text = resLocation
                         let geocoder = CLGeocoder()
                         geocoder.geocodeAddressString(text) { (placemarks, error) in
                             if error == nil && placemarks != nil && placemarks!.count > 0 {
                                 if let placemark = placemarks!.first {
                                     let location = placemark.location!
-//                                    self.setMapCenter(center: location.coordinate)
-//                                    self.setMapAnnotation(location)
+                                    self.setMapCenter(center: location.coordinate)
+                                    self.setMapAnnotation(location)
                                 }
                             } else {
                                 let title = "收尋失敗"
@@ -259,6 +260,21 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
         }
         
     }
+    func setMapAnnotation(_ location: CLLocation) {
+        let text = resLocationLabel.text
+        let coordinate = location.coordinate
+        let annotation = MKPointAnnotation()
+        self.coordinates = coordinate
+        annotation.coordinate = coordinate
+        annotation.title = text
+        annotation.subtitle = "(\(coordinate.latitude), \(coordinate.longitude))"
+        myMap.addAnnotation(annotation)
+        
+    }
+    func setMapCenter(center: CLLocationCoordinate2D) {
+        myMap.setCenter(center, animated: true)
+        
+    }
     
     func errorAlert(){
         let alert = UIAlertController(title: "上傳失敗", message: "請稍後再試一次", preferredStyle: .alert)
@@ -271,7 +287,7 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
         self.view.endEditing(true)
     }
     func setMapRegion() {
-        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
         var region = MKCoordinateRegion()
         region.span = span
         myMap.setRegion(region, animated: true)
