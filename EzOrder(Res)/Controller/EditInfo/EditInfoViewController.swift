@@ -90,8 +90,8 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
                                     self.setMapAnnotation(location)
                                 }
                             } else {
-                                let title = "收尋失敗"
-                                let message = "目前網路連線不穩定"
+                                let title = "地理位置錯誤"
+                                let message = "請輸入正確地址"
                                 let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
                                 let ok = UIAlertAction(title: "OK", style: .default)
                                 alertController.addAction(ok)
@@ -147,6 +147,7 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
         imagePickerController.delegate = self
         present(imagePickerController,animated: true)
     }
+    
     @IBAction func editInfoButton(_ sender: Any) {
         
         isEdit = !isEdit

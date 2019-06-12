@@ -15,7 +15,9 @@ class RegisterViewController: UIViewController {
     
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
-
+    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var passwordLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -24,6 +26,12 @@ class RegisterViewController: UIViewController {
         SVProgressHUD.show()
         Auth.auth().createUser(withEmail: emailTextfield.text!, password: passwordTextfield.text!) { (user, error) in
             if error != nil {
+                self.emailLabel.isHidden = false
+                self.passwordLabel.isHidden  = false
+                self.emailLabel.text = "請輸入正確格式"
+                self.passwordLabel.text = "請輸入六到十二位數密碼"
+                self.emailLabel.textColor = .red
+                self.passwordLabel.textColor = .red
                 print(error!)
                 SVProgressHUD.dismiss()
                 let alert = UIAlertController(title: "註冊失敗", message: error?.localizedDescription, preferredStyle: .alert)
@@ -32,6 +40,8 @@ class RegisterViewController: UIViewController {
                 self.present(alert, animated: true, completion: nil)
             }
             else{
+                self.emailLabel.isHidden = true
+                self.passwordLabel.isHidden = true
                 //  success
                 print("Registration Successful!")
                 SVProgressHUD.dismiss()
@@ -43,5 +53,10 @@ class RegisterViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
+    @IBAction func back(_ sender: Any) {
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
 
 }
