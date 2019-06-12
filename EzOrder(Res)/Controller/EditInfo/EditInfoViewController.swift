@@ -41,21 +41,7 @@ class EditInfoViewController: UIViewController{
     var resBookingLimit: Int?
     var resTaxID: String?
     var isEditImage: Bool?
-    
-    //    var p: CGPoint?
-    //    var longPressed = false {
-    //        didSet {
-    //
-    //            if oldValue != longPressed {
-    //                foodCollectionVIew?.reloadData()
-    //            }
-    //
-    //        }
-    //    }
     var typeArray = [QueryDocumentSnapshot]()
-    //    var isFirstGetPhotos = true
-    //    var newImageVIew : UIImage?
-    //    var foodArrays = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -133,21 +119,6 @@ class EditInfoViewController: UIViewController{
         getType()
     }
     
-    // 判斷點選到哪個
-    //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    //        if segue.identifier == "Mune" {
-    //            if let indexPath = foodCollectionVIew.indexPath(for: sender as! AddCollectionViewCell) {
-    //                let phot = photos[indexPath.row]
-    //                let mune = segue.destination as! MenuViewController
-    //                mune.photos = [phot]
-    //                let  DocumentID = segue.destination as! MenuViewController
-    //                DocumentID.an = phot.documentID
-    //                print(phot)
-    //
-    //
-    //            }
-    //        }
-    //    }
     
     @IBAction func tapResLogoImageView(_ sender: UITapGestureRecognizer) {
         isEditImage = true
@@ -156,49 +127,7 @@ class EditInfoViewController: UIViewController{
         imagePickerController.delegate = self
         present(imagePickerController,animated: true)
     }
-    //    @IBAction func LongfoodInageViewAciton(_ sender: UILongPressGestureRecognizer) {
-    //        if longPressed == true {
-    //            switch (sender.state) {
-    //            case .began:
-    //                guard let select = foodCollectionVIew.indexPathForItem(at: sender.location(in:foodCollectionVIew))else{
-    //                    print(1)
-    //
-    //                    break
-    //                }
-    //                foodCollectionVIew.beginInteractiveMovementForItem(at: select)
-    //            case.changed:
-    //                p = longPressGest.location(in: foodCollectionVIew)
-    //                if let p = p, let indexPath = foodCollectionVIew?.indexPathForItem(at: p) {
-    //                    print(5)
-    //                    longPressed = true
-    //
-    //                    foodCollectionVIew.updateInteractiveMovementTargetPosition(sender.location(in: foodCollectionVIew!))
-    //                }
-    //            case.ended:
-    //                foodCollectionVIew.endInteractiveMovement()
-    //
-    //            default:
-    //                foodCollectionVIew.cancelInteractiveMovement()
-    //
-    //            }
-    //        }
-    //    }
-    //
-    //    func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
-    //        p = gestureRecognizer.location(in: foodCollectionVIew)
-    //        if let p = p, let _ = foodCollectionVIew?.indexPathForItem(at: p) {
-    //            longPressed = true
-    //        }
-    //    }
-    //
-    //    func handleTap(_ gestureRecognizer: UITapGestureRecognizer) {
-    //        p = gestureRecognizer.location(in: foodCollectionVIew)
-    //        if let p = p, foodCollectionVIew?.indexPathForItem(at: p) == nil {
-    //            longPressed = false
-    //        }
-    //    }
     @IBAction func editInfoButton(_ sender: Any) {
-        //        longPressed = !longPressed
         
         isEdit = !isEdit
         if isEdit{

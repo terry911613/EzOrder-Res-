@@ -28,7 +28,8 @@ class EditMenuViewController: UIViewController {
     var foodArray = [QueryDocumentSnapshot]()
     var typeIndex: Int?
     var foodIndex: Int?
-    
+    var selectIndex: IndexPath?
+    var prepare = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,9 +42,7 @@ class EditMenuViewController: UIViewController {
                 self.view.layoutIfNeeded()
             })
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
+        
         getType()
         if typeArray.isEmpty == false, let typeIndex = typeIndex{
             if let type = typeArray[typeIndex].data()["typeName"] as? String{
@@ -159,8 +158,13 @@ class EditMenuViewController: UIViewController {
                 self.editState = !self.editState
             })
         }
-        typeCollectionView.reloadData()
+        if let selectIndex = selectIndex{
+            let cell = typeCollectionView.cellForItem(at: selectIndex) as! EditTypeCollectionViewCell
+            cell.backView.backgroundColor = UIColor(red: 255/255, green: 162/255, blue: 195/255, alpha: 1)
+        }
+        prepare = !prepare
         isEditPressed = !isEditPressed
+        typeCollectionView.reloadData()
         
         
     }
@@ -178,6 +182,7 @@ class EditMenuViewController: UIViewController {
             }
     
     @IBAction func longPress(_ sender: UILongPressGestureRecognizer){
+        
         if isEditPressed == true {
             switch (sender.state) {
             case .began:
@@ -218,10 +223,8 @@ class EditMenuViewController: UIViewController {
             }
         }
     }
-    
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        if prepare == false {
         if segue.identifier == "foodDetailSegue"{
             let foodDetailVC = segue.destination as! FoodDetailViewController
             if let foodIndex = foodIndex{
@@ -239,6 +242,8 @@ class EditMenuViewController: UIViewController {
             }
         }
     }
+    }
+    
 
 }
 
@@ -292,6 +297,7 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == typeCollectionView{
+            selectIndex = indexPath
             let cell = collectionView.cellForItem(at: indexPath) as! EditTypeCollectionViewCell
             cell.backView.backgroundColor = UIColor(red: 255/255, green: 66/255, blue: 150/255, alpha: 1)
 //            print("didselect:\(indexPath.row)")
@@ -310,6 +316,7 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
     }
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if collectionView == typeCollectionView{
+            
             let cell = collectionView.cellForItem(at: indexPath) as! EditTypeCollectionViewCell
             cell.backView.backgroundColor = UIColor(red: 255/255, green: 162/255, blue: 195/255, alpha: 1)
             print(20)
