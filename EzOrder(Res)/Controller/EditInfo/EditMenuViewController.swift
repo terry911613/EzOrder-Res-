@@ -158,7 +158,7 @@ class EditMenuViewController: UIViewController {
         }
         if let selectIndex = selectIndex{
             let cell = typeCollectionView.cellForItem(at: selectIndex) as! EditTypeCollectionViewCell
-            cell.backView.backgroundColor = UIColor(red: 255/255, green: 162/255, blue: 195/255, alpha: 1)
+            cell.typeImage.alpha = 0.2
         }
         prepare = !prepare
         isEditPressed = !isEditPressed
@@ -297,10 +297,8 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
         if collectionView == typeCollectionView{
             selectIndex = indexPath
             let cell = collectionView.cellForItem(at: indexPath) as! EditTypeCollectionViewCell
-            cell.backView.backgroundColor = UIColor(red: 255/255, green: 66/255, blue: 150/255, alpha: 1)
-            //            print("didselect:\(indexPath.row)")
+            cell.typeImage.alpha = 1
             typeIndex = indexPath.row
-            //            print("typeIndex: \(typeIndex)")
             if let type = typeArray[indexPath.row].data()["typeName"] as? String{
                 getFood(typeName: type)
             }
@@ -309,16 +307,13 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
         else{
             foodIndex = indexPath.row
             performSegue(withIdentifier: "foodDetailSegue", sender: self)
-            print(69)
         }
     }
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if collectionView == typeCollectionView{
             
             let cell = collectionView.cellForItem(at: indexPath) as! EditTypeCollectionViewCell
-            cell.backView.backgroundColor = UIColor(red: 255/255, green: 162/255, blue: 195/255, alpha: 1)
-            print(20)
-            //            print("diddeselect:\(indexPath.row)")
+            cell.typeImage.alpha = 0.2
         }
     }
     
@@ -329,10 +324,30 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
         if collectionView == typeCollectionView{
             let item = typeArray.remove(at: sourceIndexPath.item)
             typeArray.insert(item, at: destinationIndexPath.item)
+            
+            let db = Firestore.firestore()
+            if let resID = resID{
+                for i in 0...typeArray.count - 1{
+                    if let typeName = typeArray[i].data()["typeName"] as? String{
+                        db.collection("res").document(resID).collection("foodType").document(typeName).updateData(["index": i])
+                    }
+                }
+            }
         }
         else{
             let item = foodArray.remove(at: sourceIndexPath.item)
             foodArray.insert(item, at: destinationIndexPath.item)
+            
+            let db = Firestore.firestore()
+            if let resID = resID{
+                for i in 0...foodArray.count - 1{
+                    if let foodName = foodArray[i].data()["foodName"] as? String,
+                        let typeIndex = foodArray[i].data()["typeIndex"] as? Int,
+                        let typeName = typeArray[typeIndex].data()["typeName"] as? String{
+                        db.collection("res").document(resID).collection("foodType").document(typeName).collection("menu").document(foodName).updateData(["foodIndex": i])
+                    }
+                }
+            }
         }
     }
 }

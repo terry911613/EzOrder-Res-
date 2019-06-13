@@ -228,17 +228,11 @@ extension MenuViewController: UICollectionViewDelegate,UICollectionViewDataSourc
             if let urlString = photo.data()["photoUrl"] as? String {
                 cell.foodImageView.kf.setImage(with: URL(string: urlString))
                 if longPressed {
-                    cell.editNameTextfield.isHidden = false
-                    cell.editMoneyTextfield.isHidden = false
                     cell.statusSwich.isHidden = false
                     
                 }else {
-                    foodMoney = cell.editMoneyTextfield.text ?? ""
-                    foodName = cell.editNameTextfield.text ?? ""
                     cell.layer.removeAllAnimations()
                     cell.statusSwich.isHidden = true
-                    cell.editNameTextfield.isHidden = true
-                    cell.editMoneyTextfield.isHidden = true
                     if cell.menuView.alpha < 0.5 {
                         cell.foodNameLabel.text = "一條龍"
                     }
