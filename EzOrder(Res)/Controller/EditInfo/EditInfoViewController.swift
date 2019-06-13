@@ -52,9 +52,11 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
     var resPeriod: String?
     var typeArray = [QueryDocumentSnapshot]()
     var locations:CLLocationManager!
+    var coordinates: CLLocationCoordinate2D?
     var isMorning = false
     var isNoon = false
     var isEvening = false
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -121,23 +123,19 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
                         self.resTimeTextfield.isHidden = true
                         self.resLogoImageView.isUserInteractionEnabled = false
                         self.editButton.isHidden = true
-                        //                        self.morningButton.isHidden = true
-                        //                        self.noonButton.isHidden = true
-                        print("fuck")
-                        //                        self.eveningButton.isHidden = false
                         self.locations = CLLocationManager()
                         self.locations.delegate = self
                         self.locations.requestWhenInUseAuthorization()
                         self.locations.startUpdatingLocation()
                         self.setMapRegion()
-                        let text = "我很帥"
+                        let text = resLocation
                         let geocoder = CLGeocoder()
                         geocoder.geocodeAddressString(text) { (placemarks, error) in
                             if error == nil && placemarks != nil && placemarks!.count > 0 {
                                 if let placemark = placemarks!.first {
                                     let location = placemark.location!
-                                    //                                    self.setMapCenter(center: location.coordinate)
-                                    //                                    self.setMapAnnotation(location)
+                                self.setMapCenter(center: location.coordinate)
+                                self.setMapAnnotation(location)
                                 }
                             } else {
                                 let title = "收尋失敗"
@@ -395,9 +393,25 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
         alert.addAction(ok)
         present(alert, animated: true, completion: nil)
     }
-    
+    func setMapAnnotation(_ location: CLLocation) {
+        if let text = resLocation {
+        let coordinate = location.coordinate
+        let annotation = MKPointAnnotation()
+        self.coordinates = coordinate
+        annotation.coordinate = coordinate
+        annotation.title = text
+        annotation.subtitle = "(\(coordinate.latitude), \(coordinate.longitude))"
+        myMap.addAnnotation(annotation)
+        }
+        
+        
+    }
+    func setMapCenter(center: CLLocationCoordinate2D) {
+        myMap.setCenter(center, animated: true)
+        
+    }
     func setMapRegion() {
-        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
         var region = MKCoordinateRegion()
         region.span = span
         myMap.setRegion(region, animated: true)
