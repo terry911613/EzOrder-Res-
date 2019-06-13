@@ -233,6 +233,12 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
         imagePickerController.delegate = self
         present(imagePickerController,animated: true)
     }
+    
+    @IBAction func confirm(_ sender: Any) {
+        upload()
+    }
+    
+    
     @IBAction func editInfoButton(_ sender: Any) {
         
         isEdit = !isEdit
@@ -421,6 +427,81 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
         myMap.setRegion(region, animated: true)
         myMap.regionThatFits(region)
     }
+    func upload(){
+        let alert = UIAlertController(title: "確定送出審核？", message: nil, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "確定", style: .default) { (ok) in
+            
+            if let resID = self.resID,
+                let resNameLabel = self.resNameLabel.text,
+                let resTelLabel = self.resTelLabel.text,
+                let resLogoImageView = self.resLogoImageView.image{
+                print(1)
+                let timeStamp = Date().timeIntervalSince1970
+                let documentID = String(timeStamp) + resID
+                SVProgressHUD.show()
+                let storageReference = Storage.storage().reference()
+                let fileReference = storageReference.child(UUID().uuidString + ".jpg")
+                let size = CGSize(width: 640, height: resLogoImageView.size.height * 640 / resLogoImageView.size.width)
+                UIGraphicsBeginImageContext(size)
+                resLogoImageView.draw(in: CGRect(origin: .zero, size: size))
+                let resizeImage = UIGraphicsGetImageFromCurrentImageContext()
+                UIGraphicsEndImageContext()
+                if let data = resizeImage?.jpegData(compressionQuality: 0.8){
+                    fileReference.putData(data,metadata: nil) {(metadate, error) in
+                        guard let _ = metadate, error == nil else {
+                            SVProgressHUD.dismiss()
+                            self.errorAlerts()
+                            return
+                        }
+                        fileReference.downloadURL(completion: { (url, error) in
+                            guard let downloadURL = url else {
+                                SVProgressHUD.dismiss()
+                                self.errorAlert()
+                                return
+                            }
+                            let data: [String: Any] = ["resID": resID,
+                                                       "resLogoImageView": downloadURL.absoluteString,
+                                                       "resNameLabel": resNameLabel,
+                                                       "date": Date(),
+                                                       "resTelLabel": resTelLabel,
+                                                       "status": 0]
+                            self.db.collection("manage").document("check").collection("storeconfirm").document(documentID).setData(data, completion: { (error) in
+                                guard error == nil else {
+                                    SVProgressHUD.dismiss()
+                                    self.errorAlert()
+                                    return
+                                }
+                                SVProgressHUD.dismiss()
+                                let alert = UIAlertController(title: "即將為您審核", message: nil, preferredStyle: .alert)
+                                let ok = UIAlertAction(title: "確定", style: .default, handler: nil)
+                                alert.addAction(ok)
+                                self.present(alert, animated: true, completion: nil)
+                            })
+                            SVProgressHUD.dismiss()
+                        })
+                    }
+                }
+            }
+            else{
+                let alert = UIAlertController(title: "請填寫完整", message: nil, preferredStyle: .alert)
+                let ok = UIAlertAction(title: "確定", style: .default, handler: nil)
+                alert.addAction(ok)
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+        let cancel = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func errorAlerts(){
+        let alert = UIAlertController(title: "上傳失敗", message: "請稍後再試一次", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "確定", style: .default, handler: nil)
+        alert.addAction(ok)
+        present(alert, animated: true, completion: nil)
+    }
+
     
 }
 
