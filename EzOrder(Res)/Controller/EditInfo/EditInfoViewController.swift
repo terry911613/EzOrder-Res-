@@ -105,13 +105,16 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
                         self.resPeriod = resPeriod
                         for i in resPeriod{
                             if i == "1"{
-                                self.morningButton.backgroundColor = .blue
+                                self.morningButton.backgroundColor = .white
+                                self.morningButton.alpha = 1
                             }
                             else if i == "2"{
-                                self.noonButton.backgroundColor = .blue
+                                self.noonButton.alpha = 1
+                                self.noonButton.backgroundColor = .white
                             }
                             else{
-                                self.eveningButton.backgroundColor = .blue
+                                self.eveningButton.alpha = 1
+                                self.eveningButton.backgroundColor = .white
                             }
                         }
                         
@@ -134,8 +137,8 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
                             if error == nil && placemarks != nil && placemarks!.count > 0 {
                                 if let placemark = placemarks!.first {
                                     let location = placemark.location!
-                                self.setMapCenter(center: location.coordinate)
-                                self.setMapAnnotation(location)
+                                    self.setMapCenter(center: location.coordinate)
+                                    self.setMapAnnotation(location)
                                 }
                             } else {
                                 let title = "收尋失敗"
@@ -194,28 +197,39 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
         if sender.tag == 0{
             isMorning = !isMorning
             if isMorning{
-                morningButton.backgroundColor = .blue
+                morningButton.alpha = 1
+                
             }
             else{
-                morningButton.backgroundColor = .white
+                morningButton.alpha = 0.5
+                
+                
+                
             }
         }
         else if sender.tag == 1{
             isNoon = !isNoon
             if isNoon{
-                noonButton.backgroundColor = .blue
+                
+                noonButton.alpha = 1
+                
             }
             else{
-                noonButton.backgroundColor = .white
+                noonButton.alpha = 0.5
+                
+                
             }
         }
         else{
             isEvening = !isEvening
             if isEvening{
-                eveningButton.backgroundColor = .blue
+                print(1)
+                eveningButton.alpha = 1
             }
             else{
-                eveningButton.backgroundColor = .white
+                eveningButton.alpha = 0.5
+                
+                
             }
         }
     }
@@ -395,13 +409,13 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
     }
     func setMapAnnotation(_ location: CLLocation) {
         if let text = resLocation {
-        let coordinate = location.coordinate
-        let annotation = MKPointAnnotation()
-        self.coordinates = coordinate
-        annotation.coordinate = coordinate
-        annotation.title = text
-        annotation.subtitle = "(\(coordinate.latitude), \(coordinate.longitude))"
-        myMap.addAnnotation(annotation)
+            let coordinate = location.coordinate
+            let annotation = MKPointAnnotation()
+            self.coordinates = coordinate
+            annotation.coordinate = coordinate
+            annotation.title = text
+            annotation.subtitle = "(\(coordinate.latitude), \(coordinate.longitude))"
+            myMap.addAnnotation(annotation)
         }
         
         
