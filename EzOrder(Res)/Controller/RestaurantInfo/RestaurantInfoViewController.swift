@@ -18,8 +18,8 @@ class RestaurantInfoViewController: UIViewController {
     @IBOutlet weak var resNameLabel: UILabel!
     @IBOutlet weak var resTaxIDLabel: UILabel!
     
-    var restaurant = ["QRCode生成", "查看廣告審核", "申請關店","幫助","編輯"]
-    var lisn = ["","","","",""]
+    var restaurant = ["QRCode生成","查看廣告審核","幫助","編輯","申請關店"]
+    var lisn = ["QRCode","廣告審核結果","info","編輯","申請關店"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,6 +66,7 @@ extension RestaurantInfoViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "restaurantCell", for: indexPath)
         cell.textLabel?.text = restaurant[indexPath.row]
+        cell.imageView?.image = UIImage(named: lisn[indexPath.row])
         return cell
     }
     

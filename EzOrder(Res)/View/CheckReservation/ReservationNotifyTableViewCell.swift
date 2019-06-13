@@ -9,7 +9,7 @@
 import UIKit
 
 class ReservationNotifyTableViewCell: UITableViewCell {
-
+ 
     @IBOutlet weak var reservationNameLabel: UILabel!
     @IBOutlet weak var reservationPeopleLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
