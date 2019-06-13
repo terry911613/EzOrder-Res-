@@ -225,7 +225,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="N64-dC-PBX">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="1" green="0.63421845460000004" blue="0.76385437680000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.96470588239999999" green="0.44705882349999998" blue="0.50196078430000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -239,8 +239,8 @@
     </scenes>
     <resources>
         <image name="付款" width="13.333333015441895" height="13.333333015441895"/>
-        <image name="完成" width="13.333333015441895" height="13.333333015441895"/>
-        <image name="服務鈴" width="13.333333015441895" height="13.333333015441895"/>
+        <image name="完成" width="40" height="40"/>
+        <image name="服務鈴" width="40" height="40"/>
         <image name="桌位" width="36" height="36"/>
     </resources>
 </document>

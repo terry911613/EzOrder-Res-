@@ -15,7 +15,8 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
-
+    @IBOutlet weak var EmailLabel: UILabel!
+    @IBOutlet weak var paswordLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,8 +39,16 @@ class LoginViewController: UIViewController {
                 let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
                 alert.addAction(ok)
                 self.present(alert, animated: true, completion: nil)
+                self.EmailLabel.isHidden = false
+                self.EmailLabel.text = "帳號錯誤"
+                self.EmailLabel.textColor = .red
+                self.paswordLabel.text = "密碼錯誤"
+                self.paswordLabel.textColor = .red
+                self.paswordLabel.isHidden = false
             }
             else{
+                self.EmailLabel.isEnabled = true
+                self.paswordLabel.isEnabled = true
                 print("Log in Successful")
                 SVProgressHUD.dismiss()
                 self.performSegue(withIdentifier: "goToEzOrder", sender: self)

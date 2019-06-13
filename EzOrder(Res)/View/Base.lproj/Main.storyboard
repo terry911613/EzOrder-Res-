@@ -130,7 +130,7 @@
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="nSA-t0-nNx">
-                                <rect key="frame" x="55" y="189" width="40" height="40"/>
+                                <rect key="frame" x="55" y="189" width="40.000000000000028" height="40.000000000000028"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="XgH-IY-Jpc"/>
                                     <constraint firstAttribute="width" constant="40" id="l91-NW-XBy"/>
@@ -232,8 +232,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="cei-VZ-KPn"/>
                     <connections>
+                        <outlet property="EmailLabel" destination="xfU-76-gkJ" id="Isx-D8-VfH"/>
                         <outlet property="emailTextfield" destination="z5j-kM-UPp" id="pzn-Og-FfJ"/>
                         <outlet property="passwordTextfield" destination="8DA-vc-2Im" id="XJJ-Ge-Agd"/>
+                        <outlet property="paswordLabel" destination="eYr-EQ-B82" id="ynI-Aa-sjd"/>
                         <segue destination="I2I-jZ-SrA" kind="show" identifier="goToEzOrder" id="YV8-4q-PQU"/>
                     </connections>
                 </viewController>
@@ -286,7 +288,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="0q6-gm-68G">
-                                <rect key="frame" x="51" y="189" width="40" height="40"/>
+                                <rect key="frame" x="51" y="189" width="40.000000000000028" height="40.000000000000028"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="h6G-20-7Pz"/>
                                     <constraint firstAttribute="width" constant="40" id="mfc-bS-g4m"/>
