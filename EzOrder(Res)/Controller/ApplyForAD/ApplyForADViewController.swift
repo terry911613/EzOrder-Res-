@@ -74,8 +74,6 @@ class ApplyForADViewController: UIViewController {
                 let endDate = self.endDate,
                 let ADImage = self.ADImageView.image{
                 
-                let startTimeStamp = startDate.timeIntervalSince1970
-                let endTimeStamp = endDate.timeIntervalSince1970
                 let timeStamp = Date().timeIntervalSince1970
                 let documentID = String(timeStamp) + resID
                 let db = Firestore.firestore()
@@ -102,10 +100,13 @@ class ApplyForADViewController: UIViewController {
                                 return
                             }
                             let data: [String: Any] = ["documentID": documentID,
+                                                       "resID": resID,
                                                        "ADImage": downloadURL.absoluteString,
-                                                       "startTimeStamp": startTimeStamp,
-                                                       "endTimeStamp": endTimeStamp,
+                                                       "startDate": startDate,
+                                                       "endDate": endDate,
+                                                       "date": Date(),
                                                        "ADStatus": 0]
+                            db.collection("manage").document("check").collection("AD").document(documentID).setData(data)
                             db.collection("res").document(resID).collection("AD").document(documentID).setData(data, completion: { (error) in
                                 guard error == nil else {
                                     SVProgressHUD.dismiss()
@@ -113,6 +114,13 @@ class ApplyForADViewController: UIViewController {
                                     return
                                 }
                                 SVProgressHUD.dismiss()
+                                
+                                self.startDatePickerButton.setTitle("請選擇開始時間", for: .normal)
+                                self.endDatePickerButton.setTitle("請選擇結束時間", for: .normal)
+                                self.ADImageView.image = UIImage(named: "新增圖案")
+                                self.startDate = nil
+                                self.endDate = nil
+                                
                                 let alert = UIAlertController(title: "即將為您審核", message: nil, preferredStyle: .alert)
                                 let ok = UIAlertAction(title: "確定", style: .default, handler: nil)
                                 alert.addAction(ok)

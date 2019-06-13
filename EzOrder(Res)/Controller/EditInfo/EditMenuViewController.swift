@@ -57,14 +57,14 @@ class EditMenuViewController: UIViewController {
                 if let type = type{
                     if type.documentChanges.isEmpty{
                         self.typeArray.removeAll()
-                       self.typeCollectionView.reloadData()
+                        self.typeCollectionView.reloadData()
                     }
                     else{
                         let documentChange = type.documentChanges[0]
                         if documentChange.type == .added {
                             self.typeArray = type.documents
                             self.typeAnimateCollectionView()
-                          //  print("getType")
+                            //  print("getType")
                         }
                     }
                 }
@@ -73,14 +73,14 @@ class EditMenuViewController: UIViewController {
     }
     func getFood(typeName: String){
         print("-------------")
-     //   print(typeName)
+        //   print(typeName)
         if let resID = resID{
             db.collection("res").document(resID).collection("foodType").document(typeName).collection("menu").order(by: "foodIndex", descending: false).addSnapshotListener { (food, error) in
                 if let food = food{
                     if food.documents.isEmpty{
                         self.foodArray.removeAll()
                         self.foodCollectionView.reloadData()
-                       
+                        
                     }
                     else{
                         let documentChange = food.documentChanges[0]
@@ -166,7 +166,7 @@ class EditMenuViewController: UIViewController {
         
         
     }
-
+    
     
     
     @IBAction func editMenu(_ sender: Any) {
@@ -176,8 +176,8 @@ class EditMenuViewController: UIViewController {
                 self.editState = !self.editState
             })
         }
-     
-            }
+        
+    }
     
     @IBAction func longPress(_ sender: UILongPressGestureRecognizer){
         
@@ -189,8 +189,8 @@ class EditMenuViewController: UIViewController {
                 }
                 typeCollectionView.beginInteractiveMovementForItem(at: selectedIndexPath)
             case.changed:
-              typeCollectionView.updateInteractiveMovementTargetPosition(sender.location(in: typeCollectionView!))
-
+                typeCollectionView.updateInteractiveMovementTargetPosition(sender.location(in: typeCollectionView!))
+                
             case.ended:
                 typeCollectionView.endInteractiveMovement()
                 
@@ -223,26 +223,26 @@ class EditMenuViewController: UIViewController {
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if prepare == false {
-        if segue.identifier == "foodDetailSegue"{
-            let foodDetailVC = segue.destination as! FoodDetailViewController
-            if let foodIndex = foodIndex{
-                let food = foodArray[foodIndex]
-                if let foodName = food.data()["foodName"] as? String,
-                    let foodImage = food.data()["foodImage"] as? String,
-                    let foodPrice = food.data()["foodPrice"] as? Int,
-                    let foodDetail = food.data()["foodDetail"] as? String{
-                    
-                    foodDetailVC.foodName = foodName
-                    foodDetailVC.foodImage = foodImage
-                    foodDetailVC.foodPrice = foodPrice
-                    foodDetailVC.foodDetail = foodDetail
+            if segue.identifier == "foodDetailSegue"{
+                let foodDetailVC = segue.destination as! FoodDetailViewController
+                if let foodIndex = foodIndex{
+                    let food = foodArray[foodIndex]
+                    if let foodName = food.data()["foodName"] as? String,
+                        let foodImage = food.data()["foodImage"] as? String,
+                        let foodPrice = food.data()["foodPrice"] as? Int,
+                        let foodDetail = food.data()["foodDetail"] as? String{
+                        
+                        foodDetailVC.foodName = foodName
+                        foodDetailVC.foodImage = foodImage
+                        foodDetailVC.foodPrice = foodPrice
+                        foodDetailVC.foodDetail = foodDetail
+                    }
                 }
             }
         }
     }
-    }
     
-
+    
 }
 
 extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataSource{
@@ -298,11 +298,11 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
             selectIndex = indexPath
             let cell = collectionView.cellForItem(at: indexPath) as! EditTypeCollectionViewCell
             cell.backView.backgroundColor = UIColor(red: 255/255, green: 66/255, blue: 150/255, alpha: 1)
-//            print("didselect:\(indexPath.row)")
+            //            print("didselect:\(indexPath.row)")
             typeIndex = indexPath.row
-//            print("typeIndex: \(typeIndex)")
+            //            print("typeIndex: \(typeIndex)")
             if let type = typeArray[indexPath.row].data()["typeName"] as? String{
-            getFood(typeName: type)
+                getFood(typeName: type)
             }
             
         }
@@ -318,9 +318,8 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
             let cell = collectionView.cellForItem(at: indexPath) as! EditTypeCollectionViewCell
             cell.backView.backgroundColor = UIColor(red: 255/255, green: 162/255, blue: 195/255, alpha: 1)
             print(20)
-//            print("diddeselect:\(indexPath.row)")
+            //            print("diddeselect:\(indexPath.row)")
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
@@ -336,9 +335,6 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
             foodArray.insert(item, at: destinationIndexPath.item)
         }
     }
-    
-    
- 
 }
 
 

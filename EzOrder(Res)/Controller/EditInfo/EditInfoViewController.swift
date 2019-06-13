@@ -198,26 +198,18 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
             isMorning = !isMorning
             if isMorning{
                 morningButton.alpha = 1
-                
             }
             else{
                 morningButton.alpha = 0.5
-                
-                
-                
             }
         }
         else if sender.tag == 1{
             isNoon = !isNoon
             if isNoon{
-                
                 noonButton.alpha = 1
-                
             }
             else{
                 noonButton.alpha = 0.5
-                
-                
             }
         }
         else{
@@ -228,8 +220,6 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
             }
             else{
                 eveningButton.alpha = 0.5
-                
-                
             }
         }
     }

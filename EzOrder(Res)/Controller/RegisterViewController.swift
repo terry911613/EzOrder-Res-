@@ -44,8 +44,7 @@ class RegisterViewController: UIViewController {
                 self.passwordLabel.isHidden = true
                 let db = Firestore.firestore()
                 if let resID = Auth.auth().currentUser?.email{
-                    db.collection("res").document(resID).setData(["resID": resID,
-                                                                  "resStatus": 0])
+                    db.collection("res").document(resID).setData(["resID": resID])
                 }
                 //  success
                 print("Registration Successful!")
