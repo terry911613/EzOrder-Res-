@@ -15,43 +15,69 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
     
     @IBOutlet weak var typeCollectionView: UICollectionView!
     @IBOutlet weak var resLogoImageView: UIImageView!
+    
     @IBOutlet weak var resNameTextfield: UITextField!
     @IBOutlet weak var resTelTextfield: UITextField!
     @IBOutlet weak var resLocationTextfield: UITextField!
     @IBOutlet weak var resBookingLimitTextfield: UITextField!
     @IBOutlet weak var resTaxIDTextfield: UITextField!
+    @IBOutlet weak var resTimeTextfield: UITextField!
+    
     @IBOutlet weak var resNameLabel: UILabel!
     @IBOutlet weak var resTelLabel: UILabel!
     @IBOutlet weak var resLocationLabel: UILabel!
     @IBOutlet weak var resBookingLimitLabel: UILabel!
     @IBOutlet weak var resTaxIDLabel: UILabel!
+    @IBOutlet weak var resTimeLabel: UILabel!
+    //    @IBOutlet weak var resPeriodLabel: UILabel!
+    
+    @IBOutlet weak var morningButton: UIButton!
+    @IBOutlet weak var noonButton: UIButton!
+    @IBOutlet weak var eveningButton: UIButton!
+    
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var myMap: MKMapView!
+    
     let db = Firestore.firestore()
     let resID = Auth.auth().currentUser?.email
     var isEdit = false
+    var isEditImage = false
     var resImage: String?
     var resName: String?
     var resTel: String?
     var resLocation: String?
     var resBookingLimit: Int?
     var resTaxID: String?
+    var resTime: String?
+    var resPeriod: String?
     var typeArray = [QueryDocumentSnapshot]()
     var locations:CLLocationManager!
-     var coordinates: CLLocationCoordinate2D?
+    var isMorning = false
+    var isNoon = false
+    var isEvening = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        getType()
+        print("suck it")
+        
         if let resID = resID{
+            print("fuck it")
             db.collection("res").document(resID).addSnapshotListener { (res, error) in
+                print("mother fucker")
                 if let resData = res?.data(){
+                    print("sucker")
                     if let resImage = resData["resImage"] as? String,
                         let resName = resData["resName"] as? String,
                         let resTel = resData["resTel"] as? String,
                         let resLocation = resData["resLocation"] as? String,
                         let resBookingLimit = resData["resBookingLimit"] as? Int,
-                        let resTaxID = resData["resTaxID"] as? String{
+                        let resTaxID = resData["resTaxID"] as? String,
+                        let resTime = resData["resTime"] as? String,
+                        let resPeriod = resData["resPeriod"] as? String{
+                        
+                        print("got it")
                         
                         self.resImage = resImage
                         self.resName = resName
@@ -59,6 +85,7 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
                         self.resLocation = resLocation
                         self.resBookingLimit = resBookingLimit
                         self.resTaxID = resTaxID
+                        self.resTime = resTime
                         
                         self.isEdit = false
                         self.resLogoImageView.kf.setImage(with: URL(string: resImage))
@@ -67,31 +94,54 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
                         self.resLocationLabel.text = resLocation
                         self.resBookingLimitLabel.text = "\(resBookingLimit)"
                         self.resTaxIDLabel.text = resTaxID
+                        self.resTimeLabel.text = resTime
+                        
+                        self.morningButton.isEnabled = false
+                        self.noonButton.isEnabled = false
+                        self.eveningButton.isEnabled = false
+                        
+                        self.resPeriod = resPeriod
+                        for i in resPeriod{
+                            if i == "1"{
+                                self.morningButton.backgroundColor = .blue
+                            }
+                            else if i == "2"{
+                                self.noonButton.backgroundColor = .blue
+                            }
+                            else{
+                                self.eveningButton.backgroundColor = .blue
+                            }
+                        }
                         
                         self.resNameTextfield.isHidden = true
                         self.resTelTextfield.isHidden = true
                         self.resLocationTextfield.isHidden = true
                         self.resBookingLimitTextfield.isHidden = true
                         self.resTaxIDTextfield.isHidden = true
+                        self.resTimeTextfield.isHidden = true
                         self.resLogoImageView.isUserInteractionEnabled = false
                         self.editButton.isHidden = true
+                        //                        self.morningButton.isHidden = true
+                        //                        self.noonButton.isHidden = true
+                        print("fuck")
+                        //                        self.eveningButton.isHidden = false
                         self.locations = CLLocationManager()
                         self.locations.delegate = self
                         self.locations.requestWhenInUseAuthorization()
                         self.locations.startUpdatingLocation()
                         self.setMapRegion()
-                        let text = resLocation
+                        let text = "我很帥"
                         let geocoder = CLGeocoder()
                         geocoder.geocodeAddressString(text) { (placemarks, error) in
                             if error == nil && placemarks != nil && placemarks!.count > 0 {
                                 if let placemark = placemarks!.first {
                                     let location = placemark.location!
-                                    self.setMapCenter(center: location.coordinate)
-                                    self.setMapAnnotation(location)
+                                    //                                    self.setMapCenter(center: location.coordinate)
+                                    //                                    self.setMapAnnotation(location)
                                 }
                             } else {
-                                let title = "地理位置錯誤"
-                                let message = "請輸入正確地址"
+                                let title = "收尋失敗"
+                                let message = "目前網路連線不穩定"
                                 let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
                                 let ok = UIAlertAction(title: "OK", style: .default)
                                 alertController.addAction(ok)
@@ -105,13 +155,17 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
                 else{
                     
                     self.isEdit = true
-                    
+                    print("fuck it")
                     self.resNameTextfield.isHidden = false
                     self.resTelTextfield.isHidden = false
                     self.resLocationTextfield.isHidden = false
                     self.resBookingLimitTextfield.isHidden = false
                     self.resTaxIDTextfield.isHidden = false
+                    self.resTimeTextfield.isHidden = false
                     self.editButton.isHidden = false
+                    self.morningButton.isEnabled = true
+                    self.noonButton.isEnabled = true
+                    self.eveningButton.isEnabled = true
                     self.resLogoImageView.isUserInteractionEnabled = true
                     
                     self.resNameLabel.isHidden = true
@@ -119,6 +173,8 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
                     self.resLocationLabel.isHidden = true
                     self.resBookingLimitLabel.isHidden = true
                     self.resTaxIDLabel.isHidden = true
+                    self.resTimeLabel.isHidden = true
+                    //                    self.resPeriodLabel.isHidden = true
                     
                 }
             }
@@ -135,42 +191,87 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
             }
         }
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        getType()
+    
+    @IBAction func periodButton(_ sender: UIButton) {
+        if sender.tag == 0{
+            isMorning = !isMorning
+            if isMorning{
+                morningButton.backgroundColor = .blue
+            }
+            else{
+                morningButton.backgroundColor = .white
+            }
+        }
+        else if sender.tag == 1{
+            isNoon = !isNoon
+            if isNoon{
+                noonButton.backgroundColor = .blue
+            }
+            else{
+                noonButton.backgroundColor = .white
+            }
+        }
+        else{
+            isEvening = !isEvening
+            if isEvening{
+                eveningButton.backgroundColor = .blue
+            }
+            else{
+                eveningButton.backgroundColor = .white
+            }
+        }
     }
     
     
+    
     @IBAction func tapResLogoImageView(_ sender: UITapGestureRecognizer) {
+        isEditImage = !isEditImage
         let imagePickerController = UIImagePickerController()
         imagePickerController.sourceType = .photoLibrary
         imagePickerController.delegate = self
         present(imagePickerController,animated: true)
     }
-    
     @IBAction func editInfoButton(_ sender: Any) {
         
         isEdit = !isEdit
         if isEdit{
-            
             resNameTextfield.isHidden = false
             resTelTextfield.isHidden = false
             resLocationTextfield.isHidden = false
             resBookingLimitTextfield.isHidden = false
             resTaxIDTextfield.isHidden = false
+            resTimeTextfield.isHidden = false
             editButton.isHidden = false
+            morningButton.isEnabled = true
+            noonButton.isEnabled = true
+            eveningButton.isEnabled = true
             
             if let resName = resName,
                 let resTel = resTel,
                 let resLocation = resLocation,
                 let resBookingLimit = resBookingLimit,
-                let resTaxID = resTaxID{
+                let resTaxID = resTaxID,
+                let resTime = resTime,
+                let resPeriod = resPeriod{
                 
                 resNameTextfield.text = resName
                 resTelTextfield.text = resTel
                 resLocationTextfield.text = resLocation
                 resBookingLimitTextfield.text = String(resBookingLimit)
                 resTaxIDTextfield.text = resTaxID
+                resTimeTextfield.text = resTime
+                
+                for i in resPeriod{
+                    if i == "1"{
+                        isMorning = true
+                    }
+                    else if i == "2"{
+                        isNoon = true
+                    }
+                    else{
+                        isEvening = true
+                    }
+                }
             }
             
             resNameLabel.isHidden = true
@@ -178,105 +279,116 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
             resLocationLabel.isHidden = true
             resBookingLimitLabel.isHidden = true
             resTaxIDLabel.isHidden = true
-            
+            resTimeLabel.isHidden = true
             
             resLogoImageView.isUserInteractionEnabled = true
         }
         else{
+            resNameTextfield.resignFirstResponder()
+            resTelTextfield.resignFirstResponder()
+            resLocationTextfield.resignFirstResponder()
+            resBookingLimitTextfield.resignFirstResponder()
+            resTaxIDTextfield.resignFirstResponder()
+            resTimeTextfield.resignFirstResponder()
             if let resImage = resLogoImageView.image,
                 let resName = resNameTextfield.text, resName.isEmpty == false,
                 let resTel = resTelTextfield.text, resTel.isEmpty == false,
                 let resLocation = resLocationTextfield.text, resLocation.isEmpty == false,
                 let resBookingLimit = Int(resBookingLimitTextfield.text!),
                 let resTaxID = resTaxIDTextfield.text, resTaxID.isEmpty == false,
+                let resTime = resTimeTextfield.text, resTime.isEmpty == false,
                 let resID = resID{
                 //DocumentReference 指定位置
                 //照片參照
                 SVProgressHUD.show()
-                let storageReference = Storage.storage().reference()
-                let fileReference = storageReference.child(UUID().uuidString + ".jpg")
-                let size = CGSize(width: 640, height: resImage.size.height * 640 / resImage.size.width)
-                UIGraphicsBeginImageContext(size)
-                resImage.draw(in: CGRect(origin: .zero, size: size))
-                let resizeImage = UIGraphicsGetImageFromCurrentImageContext()
-                UIGraphicsEndImageContext()
-                if let data = resizeImage?.jpegData(compressionQuality: 0.8){
-                    fileReference.putData(data,metadata: nil) {(metadate, error) in
-                        guard let _ = metadate, error == nil else {
-                            SVProgressHUD.dismiss()
-                            self.errorAlert()
-                            return
-                        }
-                        fileReference.downloadURL(completion: { (url, error) in
-                            guard let downloadURL = url else {
+                if isEditImage{
+                    let storageReference = Storage.storage().reference()
+                    let fileReference = storageReference.child(UUID().uuidString + ".jpg")
+                    let size = CGSize(width: 640, height: resImage.size.height * 640 / resImage.size.width)
+                    UIGraphicsBeginImageContext(size)
+                    resImage.draw(in: CGRect(origin: .zero, size: size))
+                    let resizeImage = UIGraphicsGetImageFromCurrentImageContext()
+                    UIGraphicsEndImageContext()
+                    if let data = resizeImage?.jpegData(compressionQuality: 0.8){
+                        fileReference.putData(data,metadata: nil) {(metadate, error) in
+                            guard let _ = metadate, error == nil else {
                                 SVProgressHUD.dismiss()
                                 self.errorAlert()
                                 return
                             }
-                            let data: [String: Any] = ["resImage": downloadURL.absoluteString,
-                                                       "resName": resName,
-                                                       "resTel": resTel,
-                                                       "resLocation": resLocation,
-                                                       "resBookingLimit": resBookingLimit,
-                                                       "resTaxID": resTaxID]
-                            self.db.collection("res").document(resID).setData(data, completion: { (error) in
-                                guard error == nil else {
+                            fileReference.downloadURL(completion: { (url, error) in
+                                guard let downloadURL = url else {
                                     SVProgressHUD.dismiss()
                                     self.errorAlert()
                                     return
                                 }
-                                SVProgressHUD.dismiss()
-                                let alert = UIAlertController(title: "上傳完成", message: nil, preferredStyle: .alert)
-                                let ok = UIAlertAction(title: "確定", style: .default, handler: nil)
-                                alert.addAction(ok)
-                                self.present(alert, animated: true, completion: nil)
+                                self.db.collection("res").document(resID).updateData(["resImage": downloadURL.absoluteString])
+                                self.isEditImage = !self.isEditImage
                             })
-                            SVProgressHUD.dismiss()
-                        })
+                        }
                     }
                 }
-            }
                 
+                var resPeriod = ""
+                if isMorning{
+                    resPeriod += "1"
+                }
+                if isNoon{
+                    resPeriod += "2"
+                }
+                if isEvening{
+                    resPeriod += "3"
+                }
+                
+                let data: [String: Any] = ["resName": resName,
+                                           "resTel": resTel,
+                                           "resLocation": resLocation,
+                                           "resBookingLimit": resBookingLimit,
+                                           "resTaxID": resTaxID,
+                                           "resTime": resTime,
+                                           "resPeriod": resPeriod]
+                self.db.collection("res").document(resID).updateData(data, completion: { (error) in
+                    guard error == nil else {
+                        SVProgressHUD.dismiss()
+                        self.errorAlert()
+                        return
+                    }
+                    SVProgressHUD.dismiss()
+                    let alert = UIAlertController(title: "上傳完成", message: nil, preferredStyle: .alert)
+                    let ok = UIAlertAction(title: "確定", style: .default, handler: nil)
+                    alert.addAction(ok)
+                    self.present(alert, animated: true, completion: nil)
+                })
+                SVProgressHUD.dismiss()
+                resNameTextfield.isHidden = true
+                resTelTextfield.isHidden = true
+                resLocationTextfield.isHidden = true
+                resBookingLimitTextfield.isHidden = true
+                resTaxIDTextfield.isHidden = true
+                resTimeTextfield.isHidden = true
+                editButton.isHidden = true
+                morningButton.isEnabled = false
+                noonButton.isEnabled = false
+                eveningButton.isEnabled = false
+                
+                resNameLabel.isHidden = false
+                resTelLabel.isHidden = false
+                resLocationLabel.isHidden = false
+                resBookingLimitLabel.isHidden = false
+                resTaxIDLabel.isHidden = false
+                resTimeLabel.isHidden = false
+                //                resPeriodLabel.isHidden = false
+                
+                resLogoImageView.isUserInteractionEnabled = false
+            }
             else{
                 let alert = UIAlertController(title: "請填寫完整", message: nil, preferredStyle: .alert)
                 let ok = UIAlertAction(title: "確定", style: .default, handler: nil)
                 alert.addAction(ok)
                 present(alert, animated: true, completion: nil)
             }
-            
-            resNameTextfield.isHidden = true
-            resTelTextfield.isHidden = true
-            resLocationTextfield.isHidden = true
-            resBookingLimitTextfield.isHidden = true
-            resTaxIDTextfield.isHidden = true
-            editButton.isHidden = true
-            
-            resNameLabel.isHidden = false
-            resTelLabel.isHidden = false
-            resLocationLabel.isHidden = false
-            resBookingLimitLabel.isHidden = false
-            resTaxIDLabel.isHidden = false
-            
-            resLogoImageView.isUserInteractionEnabled = false
         }
-        
     }
-    func setMapAnnotation(_ location: CLLocation) {
-        let text = resLocationLabel.text
-        let coordinate = location.coordinate
-        let annotation = MKPointAnnotation()
-        self.coordinates = coordinate
-        annotation.coordinate = coordinate
-        annotation.title = text
-        annotation.subtitle = "(\(coordinate.latitude), \(coordinate.longitude))"
-        myMap.addAnnotation(annotation)
-        
-    }
-    func setMapCenter(center: CLLocationCoordinate2D) {
-        myMap.setCenter(center, animated: true)
-        
-    }
-    
     func errorAlert(){
         let alert = UIAlertController(title: "上傳失敗", message: "請稍後再試一次", preferredStyle: .alert)
         let ok = UIAlertAction(title: "確定", style: .default, handler: nil)
@@ -284,11 +396,8 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
         present(alert, animated: true, completion: nil)
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
-    }
     func setMapRegion() {
-        let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
+        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
         var region = MKCoordinateRegion()
         region.span = span
         myMap.setRegion(region, animated: true)
@@ -324,3 +433,4 @@ extension EditInfoViewController: UIImagePickerControllerDelegate,UINavigationCo
         self.dismiss(animated: true)
     }
 }
+
