@@ -13,17 +13,14 @@ class EditFoodCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var foodNameLabel: UILabel!
     @IBOutlet weak var foodMoneyLabel: UILabel!
     @IBOutlet weak var statusSwich: UISwitch!
-    
     @IBOutlet weak var menuView: UIView!
+    
     @IBAction func statusAction(_ sender:UISwitch) {
         if sender.isOn {
             menuView.alpha = 1
-            
-            
         }
         else {
             menuView.alpha = 0.4
-            foodNameLabel.text = ""
         } 
     }
 }
