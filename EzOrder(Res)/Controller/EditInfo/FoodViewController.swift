@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import Kingfisher
 import SVProgressHUD
 
 class FoodViewController: UIViewController{
@@ -21,9 +22,24 @@ class FoodViewController: UIViewController{
     var typeArray = [QueryDocumentSnapshot]()
     var typeIndex: Int?
     var foodIndex: Int?
+    var foodName: String?
+    var foodImage: String?
+    var foodPrice: Int?
+    var foodDetail: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let foodImage = foodImage,
+            let foodName = foodName,
+            let foodPrice = foodPrice,
+            let foodDetail = foodDetail{
+            
+            foodImageView.kf.setImage(with: URL(string: foodImage))
+            foodNameTextfield.text = foodName
+            foodPriceTextfield.text = String(foodPrice)
+            foodDetailTextfield.text = foodDetail
+        }
     }
     
     @IBAction func cancelButton(_ sender: Any) {
@@ -72,10 +88,14 @@ class FoodViewController: UIViewController{
                             return
                         }
                         let data: [String: Any] = ["typeIndex": typeIndex,
+                                                   "typeName": typeName,
                                                    "foodName": foodName,
                                                    "foodImage": downloadURL.absoluteString,
                                                    "foodPrice": foodPrice,
                                                    "foodIndex": foodIndex,
+                                                   "foodStatus": 1,
+                                                   "foodRateCount": 0,
+                                                   "foodTotalRate": 0,
                                                    "foodDetail": self.foodDetailTextfield.text ?? ""]
                         self.db.collection("res").document(resID).collection("foodType").document(typeName).collection("menu").document(foodName).setData(data, completion: { (error) in
                             guard error == nil else {

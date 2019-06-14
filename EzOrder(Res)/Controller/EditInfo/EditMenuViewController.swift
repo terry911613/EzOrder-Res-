@@ -20,7 +20,9 @@ class EditMenuViewController: UIViewController {
     @IBOutlet var foodLongPress: UILongPressGestureRecognizer!
     var editState = false
     var p: CGPoint?
-    var isEditPressed = false
+    var isMovePressed = false
+    var isEditType = false
+    var isEditFood = false
     let db = Firestore.firestore()
     let resID = Auth.auth().currentUser?.email
     var typeArray = [QueryDocumentSnapshot]()
@@ -149,7 +151,7 @@ class EditMenuViewController: UIViewController {
         }
     }
     
-    @IBAction func editType(_ sender: UIButton) {
+    @IBAction func moveButton(_ sender: UIButton) {
         for optina in optinss {
             UIView.animate(withDuration: 0.5, animations:{ optina.isHidden = !optina.isHidden
                 self.view.layoutIfNeeded()
@@ -161,27 +163,35 @@ class EditMenuViewController: UIViewController {
             cell.typeImage.alpha = 0.2
         }
         prepare = !prepare
-        isEditPressed = !isEditPressed
+        isMovePressed = !isMovePressed
         typeCollectionView.reloadData()
-        
-        
     }
     
     
     
-    @IBAction func editMenu(_ sender: Any) {
+    @IBAction func editType(_ sender: UIButton) {
         for optina in optinss {
             UIView.animate(withDuration: 0.5, animations:{ optina.isHidden = !optina.isHidden
                 self.view.layoutIfNeeded()
                 self.editState = !self.editState
             })
         }
-        
+        isEditType = !isEditType
+    }
+    
+    @IBAction func editFood(_ sender: UIButton) {
+        for optina in optinss {
+            UIView.animate(withDuration: 0.5, animations:{ optina.isHidden = !optina.isHidden
+                self.view.layoutIfNeeded()
+                self.editState = !self.editState
+            })
+        }
+        isEditFood = !isEditFood
     }
     
     @IBAction func longPress(_ sender: UILongPressGestureRecognizer){
         
-        if isEditPressed == true {
+        if isMovePressed == true {
             switch (sender.state) {
             case .began:
                 guard let selectedIndexPath = typeCollectionView.indexPathForItem(at: sender.location(in:typeCollectionView))else{
@@ -202,7 +212,7 @@ class EditMenuViewController: UIViewController {
     }
     
     @IBAction func foodLongPresss(_ sender: UILongPressGestureRecognizer) {
-        if isEditPressed == true {
+        if isMovePressed == true {
             switch (sender.state) {
             case .began:
                 guard let selectedIndexPath = foodCollectionView.indexPathForItem(at: sender.location(in:foodCollectionView))else{
@@ -230,19 +240,19 @@ class EditMenuViewController: UIViewController {
                     if let foodName = food.data()["foodName"] as? String,
                         let foodImage = food.data()["foodImage"] as? String,
                         let foodPrice = food.data()["foodPrice"] as? Int,
-                        let foodDetail = food.data()["foodDetail"] as? String{
+                        let foodDetail = food.data()["foodDetail"] as? String,
+                        let typeName = food.data()["typeName"] as? String{
                         
                         foodDetailVC.foodName = foodName
                         foodDetailVC.foodImage = foodImage
                         foodDetailVC.foodPrice = foodPrice
                         foodDetailVC.foodDetail = foodDetail
+                        foodDetailVC.typeName = typeName
                     }
                 }
             }
         }
     }
-    
-    
 }
 
 extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataSource{
@@ -261,7 +271,7 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
             let type = typeArray[indexPath.row]
             cell.typeLabel.text = type.data()["typeName"] as? String
             cell.typeImage.kf.setImage(with: URL(string: type.data()["typeImage"] as! String))
-            if isEditPressed {
+            if isMovePressed {
                 let anim = CABasicAnimation(keyPath: "transform.rotation")
                 anim.toValue = 0
                 anim.fromValue = Double.pi/32
@@ -269,15 +279,13 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
                 anim.repeatCount = MAXFLOAT
                 anim.autoreverses = true
                 cell.layer.add(anim, forKey: "SpringboardShake")
-            }else {
+            }
+            else {
                 cell.layer.removeAllAnimations()
             }
-            
             return cell
         }
         else{
-            
-            
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "foodCell", for: indexPath) as! EditFoodCollectionViewCell
             
             let food = foodArray[indexPath.row]
@@ -289,6 +297,14 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
                 cell.foodImageView.kf.setImage(with: URL(string: foodImage))
                 cell.foodMoneyLabel.text = "$\(foodMoney)"
             }
+            
+            if isEditFood{
+                cell.statusSwich.isHidden = false
+            }
+            else{
+                cell.statusSwich.isHidden = true
+            }
+            
             return cell
         }
     }
@@ -296,22 +312,49 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == typeCollectionView{
             selectIndex = indexPath
-            let cell = collectionView.cellForItem(at: indexPath) as! EditTypeCollectionViewCell
-            cell.typeImage.alpha = 1
-            typeIndex = indexPath.row
-            if let type = typeArray[indexPath.row].data()["typeName"] as? String{
-                getFood(typeName: type)
+            if isEditType{
+                let typeVC = storyboard?.instantiateViewController(withIdentifier: "typeVC") as! TypeViewController
+                let type = typeArray[indexPath.row]
+                if let typeName = type.data()["typeName"] as? String,
+                    let typeImage = type.data()["typeImage"] as? String{
+                    typeVC.typeName = typeName
+                    typeVC.typeImage = typeImage
+                    present(typeVC, animated: true, completion: nil)
+                }
             }
-            
+            else{
+                let cell = collectionView.cellForItem(at: indexPath) as! EditTypeCollectionViewCell
+                cell.typeImage.alpha = 1
+                typeIndex = indexPath.row
+                if let type = typeArray[indexPath.row].data()["typeName"] as? String{
+                    getFood(typeName: type)
+                }
+            }
         }
         else{
-            foodIndex = indexPath.row
-            performSegue(withIdentifier: "foodDetailSegue", sender: self)
+            if isEditFood{
+                let menuVC = storyboard?.instantiateViewController(withIdentifier: "menuVC") as! FoodViewController
+                let food = foodArray[indexPath.row]
+                if let foodName = food.data()["foodName"] as? String,
+                    let foodImage = food.data()["foodImage"] as? String,
+                    let foodPrice = food.data()["foodPrice"] as? Int,
+                    let foodDetail = food.data()["foodDetail"] as? String{
+                    
+                    menuVC.foodImage = foodImage
+                    menuVC.foodName = foodName
+                    menuVC.foodPrice = foodPrice
+                    menuVC.foodDetail = foodDetail
+                    present(menuVC, animated: true, completion: nil)
+                }
+            }
+            else{
+                foodIndex = indexPath.row
+                performSegue(withIdentifier: "foodDetailSegue", sender: self)
+            }
         }
     }
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if collectionView == typeCollectionView{
-            
             let cell = collectionView.cellForItem(at: indexPath) as! EditTypeCollectionViewCell
             cell.typeImage.alpha = 0.2
         }

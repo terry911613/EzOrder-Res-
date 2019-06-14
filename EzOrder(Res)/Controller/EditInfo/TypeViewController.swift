@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Kingfisher
 import SVProgressHUD
 
 class TypeViewController: UIViewController{
@@ -17,10 +18,19 @@ class TypeViewController: UIViewController{
     let db = Firestore.firestore()
     let resID = Auth.auth().currentUser?.email
     var index: Int?
+    var typeName: String?
+    var typeImage: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let typeName = typeName,
+            let typeImage = typeImage{
+            typeNameTextfield.text = typeName
+            typeImageView.kf.setImage(with: URL(string: typeImage))
+        }
     }
+    
     @IBAction func tapImageView(_ sender: UITapGestureRecognizer) {
         let imagePickerContorller = UIImagePickerController()
         imagePickerContorller.sourceType = .photoLibrary
