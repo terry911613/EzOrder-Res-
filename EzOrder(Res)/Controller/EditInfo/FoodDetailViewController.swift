@@ -26,6 +26,7 @@ class FoodDetailViewController: UIViewController {
     var foodPrice: Int?
     var foodDetail: String?
     var typeName: String?
+    var typeDocumentID: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -13,7 +13,6 @@
 		2CA55D0A22A3DE9C00D1E1A0 /* FoodDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA55D0922A3DE9C00D1E1A0 /* FoodDetailViewController.swift */; };
 		2CEB985B22A7E4530098181C /* FoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEB985A22A7E4530098181C /* FoodViewController.swift */; };
 		2CF7DABA229ED79F00CB0493 /* TypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7DAB8229ED79F00CB0493 /* TypeViewController.swift */; };
-		2CF7DABD229FFE9A00CB0493 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7DABC229FFE9A00CB0493 /* MenuViewController.swift */; };
 		4429B28222A7E79700649E0E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4429B28122A7E79700649E0E /* GoogleService-Info.plist */; };
 		4429B28922A7EA7C00649E0E /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4429B28822A7EA7C00649E0E /* RegisterViewController.swift */; };
 		4429B28B22A7EA8800649E0E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4429B28A22A7EA8800649E0E /* LoginViewController.swift */; };
@@ -55,7 +54,6 @@
 		2CA55D0922A3DE9C00D1E1A0 /* FoodDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetailViewController.swift; sourceTree = "<group>"; };
 		2CEB985A22A7E4530098181C /* FoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodViewController.swift; sourceTree = "<group>"; };
 		2CF7DAB8229ED79F00CB0493 /* TypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeViewController.swift; sourceTree = "<group>"; };
-		2CF7DABC229FFE9A00CB0493 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		4429B28122A7E79700649E0E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4429B28822A7EA7C00649E0E /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		4429B28A22A7EA8800649E0E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -177,7 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				447A172B228C688A003AB41E /* AppDelegate.swift */,
-				447A1740228C68B2003AB41E /* Model */,
+				448F5EFE22B3FD6800200E64 /* Model */,
 				447A173F228C689E003AB41E /* View */,
 				447A173E228C689C003AB41E /* Controller */,
 				447A173D228C6898003AB41E /* Supporting File */,
@@ -190,6 +188,7 @@
 		447A173D228C6898003AB41E /* Supporting File */ = {
 			isa = PBXGroup;
 			children = (
+				2C3A6098229CEB5F00D3C477 /* Assets.xcassets */,
 				447A1734228C688B003AB41E /* LaunchScreen.storyboard */,
 			);
 			path = "Supporting File";
@@ -218,16 +217,8 @@
 				4429B28522A7E97200649E0E /* TableManage */,
 				4429B28622A7E99800649E0E /* CheckReservation */,
 				4429B28722A7E9CF00649E0E /* RestaurantInfo */,
-				2C3A6098229CEB5F00D3C477 /* Assets.xcassets */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		447A1740228C68B2003AB41E /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		447A174B228C6B89003AB41E /* RestaurantInfo */ = {
@@ -277,9 +268,15 @@
 				2CF7DAB8229ED79F00CB0493 /* TypeViewController.swift */,
 				2CEB985A22A7E4530098181C /* FoodViewController.swift */,
 				2CA55D0922A3DE9C00D1E1A0 /* FoodDetailViewController.swift */,
-				2CF7DABC229FFE9A00CB0493 /* MenuViewController.swift */,
 			);
 			path = EditInfo;
+			sourceTree = "<group>";
+		};
+		448F5EFE22B3FD6800200E64 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		7D6F5940FC3A8D37881208CD /* Pods */ = {
@@ -460,7 +457,6 @@
 				447A1755228C6C02003AB41E /* CheckReservationViewController.swift in Sources */,
 				4429B28F22A8173A00649E0E /* DateCell.swift in Sources */,
 				44369ED322A8C9D300BF7369 /* QRCodeViewController.swift in Sources */,
-				2CF7DABD229FFE9A00CB0493 /* MenuViewController.swift in Sources */,
 				2CF7DABA229ED79F00CB0493 /* TypeViewController.swift in Sources */,
 				44369EDF22A8F6EF00BF7369 /* ReservationNotifyTableViewCell.swift in Sources */,
 				4429B28922A7EA7C00649E0E /* RegisterViewController.swift in Sources */,

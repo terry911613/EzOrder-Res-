@@ -62,7 +62,6 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
         super.viewDidLoad()
         
         getType()
-        print("suck it")
         
         if let resID = resID{
             print("fuck it")
@@ -362,10 +361,6 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
                         return
                     }
                     SVProgressHUD.dismiss()
-                    let alert = UIAlertController(title: "上傳完成", message: nil, preferredStyle: .alert)
-                    let ok = UIAlertAction(title: "確定", style: .default, handler: nil)
-                    alert.addAction(ok)
-                    self.present(alert, animated: true, completion: nil)
                 })
                 SVProgressHUD.dismiss()
                 resNameTextfield.isHidden = true
