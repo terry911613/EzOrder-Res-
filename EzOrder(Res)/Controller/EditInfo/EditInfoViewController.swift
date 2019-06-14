@@ -65,7 +65,7 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
         print("suck it")
         
         if let resID = resID{
-            db.collection("res").document(resID).addSnapshotListener { (res, error) in
+    db.collection("res").document(resID).addSnapshotListener { (res, error) in
                 print("mother fucker")
                 if let resData = res?.data(){
                     print("sucker")
