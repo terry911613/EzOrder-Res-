@@ -11,7 +11,7 @@ import Firebase
 import ViewAnimator
 
 class TableManageViewController: UIViewController {
-
+    
     @IBOutlet weak var tableStatusTableView: UITableView!
     
     var table = [String]()
@@ -41,8 +41,11 @@ class TableManageViewController: UIViewController {
                         self.tableStatusTableView.reloadData()
                     }
                     else{
-                        self.allOrder = order.documents
-                        self.animateTableStatusTableView()
+                        let documentChange = order.documentChanges[0]
+                        if documentChange.type == .added{
+                            self.allOrder = order.documents
+                            self.animateTableStatusTableView()
+                        }
                     }
                 }
             }
@@ -83,6 +86,17 @@ extension TableManageViewController: UITableViewDelegate, UITableViewDataSource{
             
             let db = Firestore.firestore()
             if let resID = Auth.auth().currentUser?.email{
+                db.collection("res").document(resID).collection("order").document(orderNo).collection("orderCompleteStatus").document("isOrderComplete").addSnapshotListener { (orderCompleteStatus, error) in
+                    if let orderCompleteStatusData = orderCompleteStatus?.data(),
+                        let orderCompleteStatus = orderCompleteStatusData["orderCompleteStatus"] as? Int{
+                        if orderCompleteStatus == 0{
+                            cell.completeImageView.image = UIImage(named: "完成")
+                        }
+                        else{
+                            cell.completeImageView.image = UIImage(named: "完成亮燈")
+                        }
+                    }
+                }
                 db.collection("res").document(resID).collection("order").document(orderNo).collection("serviceBellStatus").document("isServiceBell").addSnapshotListener { (serviceBell, error) in
                     if let serviceBellData = serviceBell?.data(),
                         let serviceBellStatus = serviceBellData["serviceBellStatus"] as? Int{
@@ -97,16 +111,16 @@ extension TableManageViewController: UITableViewDelegate, UITableViewDataSource{
                 db.collection("res").document(resID).collection("order").document(orderNo).collection("orderFoodDetail").addSnapshotListener { (food, error) in
                     if let food = food,
                         food.documents.isEmpty == false{
-//                        print("-------------")
-//                        print(food.documents.count)
-//                        print("-")
+                        //                        print("-------------")
+                        //                        print(food.documents.count)
+                        //                        print("-")
                         let documentChange = food.documentChanges[0]
                         if documentChange.type == .modified{
                             var count = 0
                             for food in food.documents{
-//                                print(count)
-//                                print("------")
-//                                print(food.data()["orderFoodStatus"] as? Int)
+                                //                                print(count)
+                                //                                print("------")
+                                //                                print(food.data()["orderFoodStatus"] as? Int)
                                 
                                 if let orderFoodStatus = food.data()["orderFoodStatus"] as? Int{
                                     if orderFoodStatus == 0{
@@ -126,17 +140,6 @@ extension TableManageViewController: UITableViewDelegate, UITableViewDataSource{
                                 db.collection("res").document(resID).collection("order").document(orderNo).collection("orderCompleteStatus").document("isOrderComplete").updateData(["orderCompleteStatus": 0])
                                 db.collection("user").document(userID).collection("order").document(orderNo).collection("orderCompleteStatus").document("isOrderComplete").updateData(["orderCompleteStatus": 0])
                             }
-                        }
-                    }
-                }
-                db.collection("res").document(resID).collection("order").document(orderNo).collection("orderCompleteStatus").document("isOrderComplete").addSnapshotListener { (orderCompleteStatus, error) in
-                    if let orderCompleteStatusData = orderCompleteStatus?.data(),
-                        let orderCompleteStatus = orderCompleteStatusData["orderCompleteStatus"] as? Int{
-                        if orderCompleteStatus == 0{
-                            cell.completeImageView.image = UIImage(named: "完成")
-                        }
-                        else{
-                            cell.completeImageView.image = UIImage(named: "完成亮燈")
                         }
                     }
                 }

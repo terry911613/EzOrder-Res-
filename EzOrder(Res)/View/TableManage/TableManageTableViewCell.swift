@@ -19,37 +19,12 @@ class TableManageTableViewCell: UITableViewCell {
     var orderNo: String?
     var userID: String?
     
-    //    var callBackService: ((_ clickService: Bool)->())?
-    //    var isSeviceOn = false
-    
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        //        if isSeviceOn == false{
-        //            serviceBellButton.setImage(UIImage(named: "服務鈴"), for: .normal)
-        //        }
-//        let db = Firestore.firestore()
-//        if let orderNo = orderNo,
-//            let resID = Auth.auth().currentUser?.email{
-//            db.collection("res").document(resID).collection("order").document(orderNo).collection("serviceBellStatus").document("isServiceBell").addSnapshotListener { (serviceBell, error) in
-//                if let serviceBellData = serviceBell?.data(),
-//                    let serviceBellStatus = serviceBellData["serviceBellStatus"] as? Int{
-//                    if serviceBellStatus == 0{
-//                        self.serviceBellButton.setImage(UIImage(named: "服務鈴"), for: .normal)
-//                    }
-//                    else{
-//                        self.serviceBellButton.setImage(UIImage(named: "服務鈴亮燈"), for: .normal)
-//                    }
-//                }
-//            }
-//            
-//        }
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
     }
     
     @IBAction func serviceBellButton(_ sender: UIButton) {

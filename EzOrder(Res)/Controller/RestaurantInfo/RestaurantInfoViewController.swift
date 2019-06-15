@@ -18,7 +18,7 @@ class RestaurantInfoViewController: UIViewController {
     @IBOutlet weak var resNameLabel: UILabel!
     @IBOutlet weak var resTaxIDLabel: UILabel!
     
-    var restaurant = ["QRCode生成","查看廣告審核","幫助","編輯","店家狀態","申請關店"]
+    var restaurant = ["QRCode生成","查看廣告審核","訂單記錄","編輯","店家狀態","申請關店"]
     var lisn = ["QRCode","廣告審核結果","info","編輯","house","申請關店"]
     
     override func viewDidLoad() {
@@ -78,6 +78,9 @@ extension RestaurantInfoViewController: UITableViewDelegate, UITableViewDataSour
         else if indexPath.row == 1{
             let checkADVC = storyboard?.instantiateViewController(withIdentifier: "checkADVC") as! CheckADViewController
             navigationController?.pushViewController(checkADVC, animated: true)
+        }
+        else if indexPath.row == 2{
+            performSegue(withIdentifier: "orderRecordSegue", sender: self)
         }
         else if indexPath.row == 4 {
             let ReviewVC = storyboard?.instantiateViewController(withIdentifier: "ReviewVC")
