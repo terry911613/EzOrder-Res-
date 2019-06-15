@@ -169,7 +169,7 @@ class EditMenuViewController: UIViewController {
         guideLabel.text = ""
         
         initTypeImageAlpha()
-        typeCollectionView.reloadData()
+//        typeCollectionView.reloadData()
         initStatus()
         typeCollectionView.reloadData()
 //        initTypeImageAlpha()
@@ -187,11 +187,7 @@ class EditMenuViewController: UIViewController {
             menuVC.foodIndex = foodArray.count
             present(menuVC, animated: true, completion: nil)
             guideLabel.text = ""
-            if let selectIndex = selectIndex{
-                let cell = typeCollectionView.cellForItem(at: selectIndex) as! EditTypeCollectionViewCell
-                cell.typeImage.alpha = 1
-            }
-            typeCollectionView.reloadData()
+            initTypeImageAlpha()
             initStatus()
             typeCollectionView.reloadData()
         }
@@ -349,22 +345,25 @@ class EditMenuViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "foodDetailSegue"{
+            
+            
             let foodDetailVC = segue.destination as! FoodDetailViewController
             if let foodIndex = foodIndex{
                 let food = foodArray[foodIndex]
+                print(food.data()["typeDocumentID"] as? String)
+                print(food.data()["foodDocumentID"] as? String)
                 if let foodName = food.data()["foodName"] as? String,
                     let foodImage = food.data()["foodImage"] as? String,
                     let foodPrice = food.data()["foodPrice"] as? Int,
                     let foodDetail = food.data()["foodDetail"] as? String,
-                    let typeName = food.data()["typeName"] as? String,
                     let typeDocumentID = food.data()["typeDocumentID"] as? String,
                 let foodDocumentID = food.data()["foodDocumentID"] as? String{
+                    print("what the")
                     
                     foodDetailVC.foodName = foodName
                     foodDetailVC.foodImage = foodImage
                     foodDetailVC.foodPrice = foodPrice
                     foodDetailVC.foodDetail = foodDetail
-                    foodDetailVC.typeName = typeName
                     foodDetailVC.typeDocumentID = typeDocumentID
                     foodDetailVC.foodDocumentID = foodDocumentID
                 }
@@ -471,7 +470,7 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
                 }
             }
             else{
-                let cell = collectionView.cellForItem(at: indexPath) as! EditTypeCollectionViewCell
+                let cell = typeCollectionView.cellForItem(at: indexPath) as! EditTypeCollectionViewCell
                 cell.typeImage.alpha = 1
                 typeIndex = indexPath.row
                 if let typeDocumentID = typeArray[indexPath.row].data()["typeDocumentID"] as? String{
@@ -505,7 +504,7 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
     }
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if collectionView == typeCollectionView{
-            let cell = collectionView.cellForItem(at: indexPath) as! EditTypeCollectionViewCell
+            let cell = typeCollectionView.cellForItem(at: indexPath) as! EditTypeCollectionViewCell
             cell.typeImage.alpha = 0.2
         }
     }
