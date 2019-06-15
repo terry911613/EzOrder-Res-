@@ -194,7 +194,6 @@ class EditMenuViewController: UIViewController {
             typeCollectionView.reloadData()
             initStatus()
             typeCollectionView.reloadData()
-            
         }
         else{
             let alert = UIAlertController(title: "請先選擇要新增菜色的分類", message: nil, preferredStyle: .alert)
