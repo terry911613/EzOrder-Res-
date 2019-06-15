@@ -36,7 +36,7 @@
                                     <outlet property="delegate" destination="FwP-5F-eKI" id="hg8-8V-TAb"/>
                                 </connections>
                             </tableView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="h2b-hE-vP9">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="h2b-hE-vP9">
                                 <rect key="frame" x="15" y="79" width="120" height="120"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="d8k-hp-3fR"/>
