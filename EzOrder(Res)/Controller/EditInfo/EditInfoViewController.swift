@@ -50,6 +50,8 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
     var resTaxID: String?
     var resTime: String?
     var resPeriod: String?
+    var status : QueryDocumentSnapshot?
+    var statusNumber : Int?
     var typeArray = [QueryDocumentSnapshot]()
     var locations:CLLocationManager!
     var coordinates: CLLocationCoordinate2D?
@@ -233,8 +235,23 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
     }
     
     @IBAction func confirm(_ sender: Any) {
+        searchStoreconfirm()
+        if statusNumber == 0 {
+            let alert = UIAlertController(title: "審核中", message: "可至個人頁面->店家審核,查看進度", preferredStyle: .alert)
+          let ok = UIAlertAction(title: "確定", style: .default, handler: nil)
+            alert.addAction(ok)
+            present(alert,animated:true,completion: nil)
+        }
+        if statusNumber == 1 {
+            let alert = UIAlertController(title: "審核成功", message: nil, preferredStyle: .alert)
+            let ok = UIAlertAction(title: "確定", style: .default, handler: nil)
+            alert.addAction(ok)
+            present(alert,animated: true,completion: nil)
+        }
+        else {
         upload()
         storeconfirm()
+        }
     }
     func storeconfirm(){
         if let resID = resID{
@@ -245,6 +262,17 @@ db.collection("res").document(resID).collection("storeconfirm").document("status
                     return
                 }
             })
+        }
+    }
+    
+    func searchStoreconfirm(){
+        if let resID = resID {
+            db.collection("res").document(resID).collection("storeconfirm").document("status").addSnapshotListener{(store,error) in
+                if let status = store?.data(){
+                    self.statusNumber = status["status"] as? Int
+                    
+                }
+            }
         }
     }
     
