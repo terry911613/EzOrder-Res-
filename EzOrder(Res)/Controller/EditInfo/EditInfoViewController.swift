@@ -64,8 +64,7 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
         getType()
         
         if let resID = resID{
-            print("fuck it")
-            db.collection("res").document(resID).addSnapshotListener { (res, error) in
+    db.collection("res").document(resID).addSnapshotListener { (res, error) in
                 print("mother fucker")
                 if let resData = res?.data(){
                     print("sucker")
@@ -235,6 +234,18 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
     
     @IBAction func confirm(_ sender: Any) {
         upload()
+        storeconfirm()
+    }
+    func storeconfirm(){
+        if let resID = resID{
+           let data = ["status" : 0]
+db.collection("res").document(resID).collection("storeconfirm").document("status").setData(data,completion:{
+                (error) in
+                guard error == nil else {
+                    return
+                }
+            })
+        }
     }
     
     

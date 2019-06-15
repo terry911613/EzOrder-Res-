@@ -392,12 +392,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="key" width="137.33332824707031" height="137.33332824707031"/>
+        <image name="key" width="137.5" height="137.5"/>
         <image name="logo改" width="360" height="127"/>
-        <image name="profile" width="125.66666412353516" height="125.66666412353516"/>
+        <image name="profile" width="126" height="126"/>
         <image name="箭頭改" width="68" height="53"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="YV8-4q-PQU"/>
+        <segue reference="Dhz-0j-jZ6"/>
     </inferredMetricsTieBreakers>
 </document>

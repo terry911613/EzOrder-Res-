@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2C3A6099229CEB5F00D3C477 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C3A6098229CEB5F00D3C477 /* Assets.xcassets */; };
 		2C3A60B9229D533900D3C477 /* MainTypeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3A60B8229D533900D3C477 /* MainTypeCollectionViewCell.swift */; };
+		2C80BA9E22B3F91D00912C2A /* ReviewVCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C80BA9D22B3F91D00912C2A /* ReviewVCViewController.swift */; };
 		2CA55D0822A3782A00D1E1A0 /* EditFoodCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA55D0722A3782A00D1E1A0 /* EditFoodCollectionViewCell.swift */; };
 		2CA55D0A22A3DE9C00D1E1A0 /* FoodDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA55D0922A3DE9C00D1E1A0 /* FoodDetailViewController.swift */; };
 		2CEB985B22A7E4530098181C /* FoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEB985A22A7E4530098181C /* FoodViewController.swift */; };
@@ -50,6 +51,7 @@
 /* Begin PBXFileReference section */
 		2C3A6098229CEB5F00D3C477 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C3A60B8229D533900D3C477 /* MainTypeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTypeCollectionViewCell.swift; sourceTree = "<group>"; };
+		2C80BA9D22B3F91D00912C2A /* ReviewVCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewVCViewController.swift; sourceTree = "<group>"; };
 		2CA55D0722A3782A00D1E1A0 /* EditFoodCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFoodCollectionViewCell.swift; sourceTree = "<group>"; };
 		2CA55D0922A3DE9C00D1E1A0 /* FoodDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetailViewController.swift; sourceTree = "<group>"; };
 		2CEB985A22A7E4530098181C /* FoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodViewController.swift; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				447A1756228C6C14003AB41E /* RestaurantInfoViewController.swift */,
+				2C80BA9D22B3F91D00912C2A /* ReviewVCViewController.swift */,
 				44369ED222A8C9D300BF7369 /* QRCodeViewController.swift */,
 				44369ED822A8CA1C00BF7369 /* CheckADViewController.swift */,
 				44369EDC22A8DBC900BF7369 /* CheckADDetailViewController.swift */,
@@ -458,6 +461,7 @@
 				4429B28F22A8173A00649E0E /* DateCell.swift in Sources */,
 				44369ED322A8C9D300BF7369 /* QRCodeViewController.swift in Sources */,
 				2CF7DABA229ED79F00CB0493 /* TypeViewController.swift in Sources */,
+				2C80BA9E22B3F91D00912C2A /* ReviewVCViewController.swift in Sources */,
 				44369EDF22A8F6EF00BF7369 /* ReservationNotifyTableViewCell.swift in Sources */,
 				4429B28922A7EA7C00649E0E /* RegisterViewController.swift in Sources */,
 				44DB382822AF9F0E00C69C0B /* OrderRecordViewController.temp_caseinsensitive_rename.swift in Sources */,
