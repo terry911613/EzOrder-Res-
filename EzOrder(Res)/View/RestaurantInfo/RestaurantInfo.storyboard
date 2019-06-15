@@ -439,15 +439,15 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Apg-Lt-Fcw">
                                 <rect key="frame" x="31.5" y="167" width="312.5" height="333.5"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="house" translatesAutoresizingMaskIntoConstraints="NO" id="lYI-el-szr">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="house" translatesAutoresizingMaskIntoConstraints="NO" id="lYI-el-szr">
                                         <rect key="frame" x="208" y="57.5" width="104.5" height="83"/>
                                         <color key="backgroundColor" red="0.22404377419999999" green="0.86581725430000001" blue="0.58928993659999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="house" translatesAutoresizingMaskIntoConstraints="NO" id="b9n-XL-T8d">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="house" translatesAutoresizingMaskIntoConstraints="NO" id="b9n-XL-T8d">
                                         <rect key="frame" x="0.0" y="57.5" width="104" height="83"/>
                                         <color key="backgroundColor" red="0.72156661749999995" green="0.72155511380000004" blue="0.72156941890000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="house" translatesAutoresizingMaskIntoConstraints="NO" id="oh7-iG-eXU">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="house" translatesAutoresizingMaskIntoConstraints="NO" id="oh7-iG-eXU">
                                         <rect key="frame" x="104" y="57.5" width="104" height="83"/>
                                         <color key="backgroundColor" red="0.97122687100000005" green="0.97123724219999996" blue="0.32133901120000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </imageView>
@@ -547,6 +547,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="eXk-y1-mDe"/>
                     </view>
+                    <connections>
+                        <outlet property="ReMarksLabel" destination="MD8-tJ-HY1" id="oJK-e4-TQe"/>
+                        <outlet property="ReviewLabel" destination="end-Ee-nPX" id="lGm-1O-yeV"/>
+                        <outlet property="ReviewStore" destination="oh7-iG-eXU" id="Aj1-rd-yPs"/>
+                        <outlet property="okStore" destination="lYI-el-szr" id="gp5-ye-VpX"/>
+                        <outlet property="shutDownStore" destination="b9n-XL-T8d" id="y2R-iC-sVf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tls-f9-QsM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -615,7 +622,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="house" width="106" height="106"/>
+        <image name="house" width="50" height="50"/>
         <image name="商家資料" width="36" height="36"/>
     </resources>
 </document>
