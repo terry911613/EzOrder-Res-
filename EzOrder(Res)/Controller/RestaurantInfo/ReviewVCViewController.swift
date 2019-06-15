@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 class ReviewVCViewController: UIViewController {
     @IBOutlet weak var shutDownStore: UIImageView!
+    
     @IBOutlet weak var ReviewStore: UIImageView!
     @IBOutlet weak var okStore: UIImageView!
     @IBOutlet weak var ReviewLabel: UILabel!
@@ -18,29 +19,39 @@ class ReviewVCViewController: UIViewController {
     var status : QueryDocumentSnapshot?
     var statusNumber : Int?
     override func viewDidLoad() {
-        searchShutDown()
-        super.viewDidLoad()
+        let db = Firestore.firestore()
+        if  let resID = resID  {
+            print(resID)
+            print(6)
+    db.collection("res").document(resID).collection("storeconfirm").document("status").addSnapshotListener{(store,error) in
+                if let status = store?.data(){
+                    self.statusNumber = status["status"] as? Int
+                    if  self.statusNumber == 0 {
+                        self.ReviewLabel.text = "審核中"
+                        self.ReMarksLabel.text = ""
+                        self.shutDownStore.alpha = 1                                            }
+                    else if self.statusNumber == 1 {
+                        self.okStore.alpha = 1
+                        self.ReviewLabel.text = "審核成功"
+                        self.ReMarksLabel.text = ""
+                    }
+                    else if self.statusNumber == 2 {
+                        self.ReviewStore.alpha = 1
+                        self.ReviewLabel.text = "失敗"
+                        self.ReMarksLabel.text = "餐廳資訊請填寫完整,不可包含不雅圖片及字眼"
+                    }
+                }
+            }
+            super.viewDidLoad()
+
     }
-    
+    }
     @IBAction func backButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     
     func searchShutDown() {
-        let db = Firestore.firestore()
-        if let  resID = resID {
-db.collection("res").document(resID).collection("storeconfirm").whereField("status", isEqualTo: 0)
-            if let selfStatus = status?.data()["status"] as? Int {
-               self.statusNumber = selfStatus
-                if statusNumber == 0 {
-                    shutDownStore.alpha = 1
-                    ReviewLabel.text = "審核中"
-                    ReMarksLabel.text = ""
-                }
-                
-                
-            }
-        }
+
         
     }
     func searchReview(){
