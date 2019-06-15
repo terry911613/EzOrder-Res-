@@ -18,8 +18,11 @@ class EditMenuViewController: UIViewController {
     @IBOutlet var optinss: [UIButton]!
     @IBOutlet var longPress: UILongPressGestureRecognizer!
     @IBOutlet var foodLongPress: UILongPressGestureRecognizer!
-    var editState = false
-    var p: CGPoint?
+    @IBOutlet weak var guideLabel: UILabel!
+    @IBOutlet weak var editLabel: UILabel!
+    
+    var isEndEdit = true
+//    var p: CGPoint?
     var isMovePressed = false
     var isEditType = false
     var isEditFood = false
@@ -30,11 +33,14 @@ class EditMenuViewController: UIViewController {
     var typeIndex: Int?
     var foodIndex: Int?
     var selectIndex: IndexPath?
-    var prepare = false
+    //    var prepare = false
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
+        
+        guideLabel.text = ""
+        editLabel.text = "預覽菜單"
+        
         foodCollectionView.addGestureRecognizer(self.foodLongPress)
         typeCollectionView.addGestureRecognizer(self.longPress)
         for optinasss in foodCollections {
@@ -45,9 +51,9 @@ class EditMenuViewController: UIViewController {
         
         getType()
         if typeArray.isEmpty == false, let typeIndex = typeIndex{
-            if let type = typeArray[typeIndex].data()["typeName"] as? String{
-                print(type)
-                getFood(typeName: type)
+            if let typeDocumentID = typeArray[typeIndex].data()["typeDocumentID"] as? String{
+//                print(type)
+                getFood(typeDocumentID: typeDocumentID)
                 
             }
         }
@@ -73,11 +79,11 @@ class EditMenuViewController: UIViewController {
             }
         }
     }
-    func getFood(typeName: String){
-        print("-------------")
+    func getFood(typeDocumentID: String){
+//        print("-------------")
         //   print(typeName)
         if let resID = resID{
-            db.collection("res").document(resID).collection("foodType").document(typeName).collection("menu").order(by: "foodIndex", descending: false).addSnapshotListener { (food, error) in
+            db.collection("res").document(resID).collection("foodType").document(typeDocumentID).collection("menu").order(by: "foodIndex", descending: false).addSnapshotListener { (food, error) in
                 if let food = food{
                     if food.documents.isEmpty{
                         self.foodArray.removeAll()
@@ -100,7 +106,6 @@ class EditMenuViewController: UIViewController {
     }
     //  顯示特效
     func typeAnimateCollectionView(){
-        print(2000)
         typeCollectionView.reloadData()
         let animations = [AnimationType.from(direction: .bottom, offset: 30.0)]
         typeCollectionView.performBatchUpdates({
@@ -121,27 +126,65 @@ class EditMenuViewController: UIViewController {
         self.view.endEditing(true)
     }
     
+    func reloadTwoCollectionView(){
+        typeCollectionView.reloadData()
+        foodCollectionView.reloadData()
+    }
+    func initStatus(){
+        isMovePressed = false
+        isEditType = false
+        isEditFood = false
+    }
+    func initTypeImageAlpha(){
+        if let selectIndex = selectIndex{
+            let cell = typeCollectionView.cellForItem(at: selectIndex) as! EditTypeCollectionViewCell
+            cell.typeImage.alpha = 0.2
+        }
+    }
+    
     @IBAction func stackAction(_ sender: Any) {
         for optina in optinss {
             UIView.animate(withDuration: 0.3, animations:{ optina.isHidden = !optina.isHidden
                 self.view.layoutIfNeeded()
             })
         }
+        guideLabel.text = ""
+        isEndEdit = !isEndEdit
+        if isEndEdit{
+            editLabel.text = "預覽菜單"
+            initStatus()
+            reloadTwoCollectionView()
+        }
+        else{
+            editLabel.text = ""
+        }
     }
     
     @IBAction func addType(_ sender: UIButton) {
+        
+        initTypeImageAlpha()
+        
         let typeVC = storyboard?.instantiateViewController(withIdentifier: "typeVC") as! TypeViewController
         typeVC.index = typeArray.count
         present(typeVC, animated: true, completion: nil)
+        guideLabel.text = ""
+        initStatus()
+        reloadTwoCollectionView()
     }
     
     @IBAction func addMenu(_ sender: Any) {
+        
+        initTypeImageAlpha()
+        
         let menuVC = storyboard?.instantiateViewController(withIdentifier: "menuVC") as! FoodViewController
         if let typeIndex = typeIndex{
             menuVC.typeIndex = typeIndex
             menuVC.typeArray = typeArray
             menuVC.foodIndex = foodArray.count
             present(menuVC, animated: true, completion: nil)
+            guideLabel.text = ""
+            initStatus()
+            reloadTwoCollectionView()
         }
         else{
             let alert = UIAlertController(title: "請先選擇要新增菜色的分類", message: nil, preferredStyle: .alert)
@@ -152,41 +195,69 @@ class EditMenuViewController: UIViewController {
     }
     
     @IBAction func moveButton(_ sender: UIButton) {
-        for optina in optinss {
-            UIView.animate(withDuration: 0.5, animations:{ optina.isHidden = !optina.isHidden
-                self.view.layoutIfNeeded()
-                self.editState = !self.editState
-            })
-        }
-        if let selectIndex = selectIndex{
-            let cell = typeCollectionView.cellForItem(at: selectIndex) as! EditTypeCollectionViewCell
-            cell.typeImage.alpha = 0.2
-        }
-        prepare = !prepare
+        //        for optina in optinss {
+        //            UIView.animate(withDuration: 0.5, animations:{ optina.isHidden = !optina.isHidden
+        //                self.view.layoutIfNeeded()
+        ////                self.editState = !self.editState
+        //            })
+        //        }
+        initTypeImageAlpha()
+        //        prepare = !prepare
         isMovePressed = !isMovePressed
-        typeCollectionView.reloadData()
+        isEditType = false
+        isEditFood = false
+        reloadTwoCollectionView()
+        
+        if isMovePressed{
+            guideLabel.text = "請長按移動分類或食物到想要的順序"
+        }
+        else{
+            guideLabel.text = ""
+        }
     }
     
-    
-    
     @IBAction func editType(_ sender: UIButton) {
-        for optina in optinss {
-            UIView.animate(withDuration: 0.5, animations:{ optina.isHidden = !optina.isHidden
-                self.view.layoutIfNeeded()
-                self.editState = !self.editState
-            })
-        }
+        //        for optina in optinss {
+        //            UIView.animate(withDuration: 0.5, animations:{ optina.isHidden = !optina.isHidden
+        //                self.view.layoutIfNeeded()
+        ////                self.editState = !self.editState
+        //            })
+        //        }
+        initTypeImageAlpha()
+        
         isEditType = !isEditType
+        isMovePressed = false
+        isEditFood = false
+        reloadTwoCollectionView()
+        
+        if isEditType{
+            guideLabel.text = "請點選想編輯的分類"
+        }
+        else{
+            guideLabel.text = ""
+        }
     }
     
     @IBAction func editFood(_ sender: UIButton) {
-        for optina in optinss {
-            UIView.animate(withDuration: 0.5, animations:{ optina.isHidden = !optina.isHidden
-                self.view.layoutIfNeeded()
-                self.editState = !self.editState
-            })
-        }
+        //        for optina in optinss {
+        //            UIView.animate(withDuration: 0.5, animations:{ optina.isHidden = !optina.isHidden
+        //                self.view.layoutIfNeeded()
+        ////                self.editState = !self.editState
+        //            })
+        //        }
+        initTypeImageAlpha()
+        
         isEditFood = !isEditFood
+        isMovePressed = false
+        isEditType = false
+        reloadTwoCollectionView()
+        
+        if isEditFood{
+            guideLabel.text = "請點選想編輯的食物"
+        }
+        else{
+            guideLabel.text = ""
+        }
     }
     
     @IBAction func longPress(_ sender: UILongPressGestureRecognizer){
@@ -231,24 +302,55 @@ class EditMenuViewController: UIViewController {
             }
         }
     }
+    func updateStar(value: Float, image: UIImageView) {
+        let rate = value
+        if rate < 2.75 {
+            if rate < 0.25 {
+                image.image = UIImage(named: "rate0")
+            } else if rate < 0.75 {
+                image.image = UIImage(named: "rate05")
+            } else if rate < 1.25 {
+                image.image = UIImage(named: "rate1")
+            } else if rate < 1.75 {
+                image.image = UIImage(named: "rate15")
+            } else if rate < 2.25 {
+                image.image = UIImage(named: "rate2")
+            } else {
+                image.image = UIImage(named: "rate25")
+            }
+        } else {
+            if rate < 3.25 {
+                image.image = UIImage(named: "rate3")
+            } else if rate < 3.75 {
+                image.image = UIImage(named: "rate35")
+            } else if rate < 4.25 {
+                image.image = UIImage(named: "rate4")
+            } else if rate < 4.75 {
+                image.image = UIImage(named: "rate45")
+            } else {
+                image.image = UIImage(named: "rate5")
+            }
+        }
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if prepare == false {
-            if segue.identifier == "foodDetailSegue"{
-                let foodDetailVC = segue.destination as! FoodDetailViewController
-                if let foodIndex = foodIndex{
-                    let food = foodArray[foodIndex]
-                    if let foodName = food.data()["foodName"] as? String,
-                        let foodImage = food.data()["foodImage"] as? String,
-                        let foodPrice = food.data()["foodPrice"] as? Int,
-                        let foodDetail = food.data()["foodDetail"] as? String,
-                        let typeName = food.data()["typeName"] as? String{
-                        
-                        foodDetailVC.foodName = foodName
-                        foodDetailVC.foodImage = foodImage
-                        foodDetailVC.foodPrice = foodPrice
-                        foodDetailVC.foodDetail = foodDetail
-                        foodDetailVC.typeName = typeName
-                    }
+        
+        if segue.identifier == "foodDetailSegue"{
+            let foodDetailVC = segue.destination as! FoodDetailViewController
+            if let foodIndex = foodIndex{
+                let food = foodArray[foodIndex]
+                if let foodName = food.data()["foodName"] as? String,
+                    let foodImage = food.data()["foodImage"] as? String,
+                    let foodPrice = food.data()["foodPrice"] as? Int,
+                    let foodDetail = food.data()["foodDetail"] as? String,
+                    let typeName = food.data()["typeName"] as? String,
+                    let typeDocumentID = food.data()["typeDocumentID"] as? String{
+                    
+                    foodDetailVC.foodName = foodName
+                    foodDetailVC.foodImage = foodImage
+                    foodDetailVC.foodPrice = foodPrice
+                    foodDetailVC.foodDetail = foodDetail
+                    foodDetailVC.typeName = typeName
+                    foodDetailVC.typeDocumentID = typeDocumentID
                 }
             }
         }
@@ -291,11 +393,19 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
             let food = foodArray[indexPath.row]
             if let foodName = food.data()["foodName"] as? String,
                 let foodImage = food.data()["foodImage"] as? String,
-                let foodMoney = food.data()["foodPrice"] as? Int{
+                let foodMoney = food.data()["foodPrice"] as? Int,
+                let typeDocumentID = food.data()["typeDocumentID"] as? String{
                 
                 cell.foodNameLabel.text = foodName
                 cell.foodImageView.kf.setImage(with: URL(string: foodImage))
                 cell.foodMoneyLabel.text = "$\(foodMoney)"
+                cell.typeDocumentID = typeDocumentID
+                cell.foodName = foodName
+            }
+            if let foodTotalRate = food.data()["foodTotalRate"] as? Float,
+                let foodRateCount = food.data()["foodRateCount"] as? Float{
+                let avgRate = foodTotalRate/foodRateCount
+                updateStar(value: avgRate, image: cell.rateImageView)
             }
             
             if isEditFood{
@@ -310,9 +420,14 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         if collectionView == typeCollectionView{
             selectIndex = indexPath
             if isEditType{
+                
+                let cell = typeCollectionView.cellForItem(at: indexPath) as! EditTypeCollectionViewCell
+                cell.typeImage.alpha = 1
+                
                 let typeVC = storyboard?.instantiateViewController(withIdentifier: "typeVC") as! TypeViewController
                 let type = typeArray[indexPath.row]
                 if let typeName = type.data()["typeName"] as? String,
@@ -326,8 +441,8 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
                 let cell = collectionView.cellForItem(at: indexPath) as! EditTypeCollectionViewCell
                 cell.typeImage.alpha = 1
                 typeIndex = indexPath.row
-                if let type = typeArray[indexPath.row].data()["typeName"] as? String{
-                    getFood(typeName: type)
+                if let typeDocumentID = typeArray[indexPath.row].data()["typeDocumentID"] as? String{
+                    getFood(typeDocumentID: typeDocumentID)
                 }
             }
         }
@@ -349,7 +464,9 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
             }
             else{
                 foodIndex = indexPath.row
-                performSegue(withIdentifier: "foodDetailSegue", sender: self)
+                if isMovePressed == false {
+                    performSegue(withIdentifier: "foodDetailSegue", sender: self)
+                }
             }
         }
     }
@@ -371,8 +488,8 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
             let db = Firestore.firestore()
             if let resID = resID{
                 for i in 0...typeArray.count - 1{
-                    if let typeName = typeArray[i].data()["typeName"] as? String{
-                        db.collection("res").document(resID).collection("foodType").document(typeName).updateData(["index": i])
+                    if let typeDocumentID = typeArray[i].data()["typeDocumentID"] as? String{
+                        db.collection("res").document(resID).collection("foodType").document(typeDocumentID).updateData(["index": i])
                     }
                 }
             }
@@ -386,8 +503,8 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
                 for i in 0...foodArray.count - 1{
                     if let foodName = foodArray[i].data()["foodName"] as? String,
                         let typeIndex = foodArray[i].data()["typeIndex"] as? Int,
-                        let typeName = typeArray[typeIndex].data()["typeName"] as? String{
-                        db.collection("res").document(resID).collection("foodType").document(typeName).collection("menu").document(foodName).updateData(["foodIndex": i])
+                        let typeDocumentID = typeArray[typeIndex].data()["typeDocumentID"] as? String{
+                        db.collection("res").document(resID).collection("foodType").document(typeDocumentID).collection("menu").document(foodName).updateData(["foodIndex": i])
                     }
                 }
             }

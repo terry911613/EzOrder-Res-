@@ -74,10 +74,12 @@ class TypeViewController: UIViewController{
                             SVProgressHUD.dismiss()
                             return
                         }
-                        let data: [String: Any] = ["typeName": typeName,
+                        let documentID = String(Date().timeIntervalSince1970) + resID
+                        let data: [String: Any] = ["typeDocumentID": documentID,
+                                                   "typeName": typeName,
                                                    "typeImage": downloadURL.absoluteString,
                                                    "index": index]
-                        self.db.collection("res").document(resID).collection("foodType").document(typeName).setData(data, completion: { (error) in
+                        self.db.collection("res").document(resID).collection("foodType").document(documentID).setData(data, completion: { (error) in
                             guard error == nil else {
                                 SVProgressHUD.dismiss()
                                 return

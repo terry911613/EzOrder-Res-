@@ -615,7 +615,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="house" width="50" height="50"/>
+        <image name="house" width="106" height="106"/>
         <image name="商家資料" width="36" height="36"/>
     </resources>
 </document>
