@@ -88,7 +88,9 @@ class FoodViewController: UIViewController{
                             SVProgressHUD.dismiss()
                             return
                         }
-                        let data: [String: Any] = ["typeIndex": typeIndex,
+                        let documentID = String(Date().timeIntervalSince1970) + resID
+                        let data: [String: Any] = ["foodDocumentID": documentID,
+                                                   "typeIndex": typeIndex,
                                                    "typeDocumentID": typeDocumentID,
                                                    "foodName": foodName,
                                                    "foodImage": downloadURL.absoluteString,
@@ -98,7 +100,7 @@ class FoodViewController: UIViewController{
                                                    "foodRateCount": 0,
                                                    "foodTotalRate": 0,
                                                    "foodDetail": self.foodDetailTextfield.text ?? ""]
-                        self.db.collection("res").document(resID).collection("foodType").document(typeDocumentID).collection("menu").document(foodName).setData(data, completion: { (error) in
+                        self.db.collection("res").document(resID).collection("foodType").document(typeDocumentID).collection("menu").document(documentID).setData(data, completion: { (error) in
                             guard error == nil else {
                                 SVProgressHUD.dismiss()
                                 return

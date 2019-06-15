@@ -151,6 +151,7 @@ class EditMenuViewController: UIViewController {
         guideLabel.text = ""
         isEndEdit = !isEndEdit
         if isEndEdit{
+            initTypeImageAlpha()
             editLabel.text = "預覽菜單"
             initStatus()
             reloadTwoCollectionView()
@@ -162,19 +163,22 @@ class EditMenuViewController: UIViewController {
     
     @IBAction func addType(_ sender: UIButton) {
         
-        initTypeImageAlpha()
-        
         let typeVC = storyboard?.instantiateViewController(withIdentifier: "typeVC") as! TypeViewController
         typeVC.index = typeArray.count
         present(typeVC, animated: true, completion: nil)
         guideLabel.text = ""
+        
+        initTypeImageAlpha()
+        typeCollectionView.reloadData()
         initStatus()
-        reloadTwoCollectionView()
+        typeCollectionView.reloadData()
+//        initTypeImageAlpha()
+//        reloadTwoCollectionView()
     }
     
     @IBAction func addMenu(_ sender: Any) {
         
-        initTypeImageAlpha()
+//        initTypeImageAlpha()
         
         let menuVC = storyboard?.instantiateViewController(withIdentifier: "menuVC") as! FoodViewController
         if let typeIndex = typeIndex{
@@ -183,8 +187,14 @@ class EditMenuViewController: UIViewController {
             menuVC.foodIndex = foodArray.count
             present(menuVC, animated: true, completion: nil)
             guideLabel.text = ""
+            if let selectIndex = selectIndex{
+                let cell = typeCollectionView.cellForItem(at: selectIndex) as! EditTypeCollectionViewCell
+                cell.typeImage.alpha = 1
+            }
+            typeCollectionView.reloadData()
             initStatus()
-            reloadTwoCollectionView()
+            typeCollectionView.reloadData()
+//            reloadTwoCollectionView()
         }
         else{
             let alert = UIAlertController(title: "請先選擇要新增菜色的分類", message: nil, preferredStyle: .alert)
@@ -201,8 +211,9 @@ class EditMenuViewController: UIViewController {
         ////                self.editState = !self.editState
         //            })
         //        }
-        initTypeImageAlpha()
+//        initTypeImageAlpha()
         //        prepare = !prepare
+        initTypeImageAlpha()
         isMovePressed = !isMovePressed
         isEditType = false
         isEditFood = false
@@ -214,6 +225,7 @@ class EditMenuViewController: UIViewController {
         else{
             guideLabel.text = ""
         }
+//        initTypeImageAlpha()
     }
     
     @IBAction func editType(_ sender: UIButton) {
@@ -223,8 +235,8 @@ class EditMenuViewController: UIViewController {
         ////                self.editState = !self.editState
         //            })
         //        }
+//        initTypeImageAlpha()
         initTypeImageAlpha()
-        
         isEditType = !isEditType
         isMovePressed = false
         isEditFood = false
@@ -236,6 +248,7 @@ class EditMenuViewController: UIViewController {
         else{
             guideLabel.text = ""
         }
+//        initTypeImageAlpha()
     }
     
     @IBAction func editFood(_ sender: UIButton) {
@@ -250,6 +263,7 @@ class EditMenuViewController: UIViewController {
         isEditFood = !isEditFood
         isMovePressed = false
         isEditType = false
+//        initTypeImageAlpha()
         reloadTwoCollectionView()
         
         if isEditFood{
@@ -258,6 +272,7 @@ class EditMenuViewController: UIViewController {
         else{
             guideLabel.text = ""
         }
+//        initTypeImageAlpha()
     }
     
     @IBAction func longPress(_ sender: UILongPressGestureRecognizer){
@@ -343,7 +358,8 @@ class EditMenuViewController: UIViewController {
                     let foodPrice = food.data()["foodPrice"] as? Int,
                     let foodDetail = food.data()["foodDetail"] as? String,
                     let typeName = food.data()["typeName"] as? String,
-                    let typeDocumentID = food.data()["typeDocumentID"] as? String{
+                    let typeDocumentID = food.data()["typeDocumentID"] as? String,
+                let foodDocumentID = food.data()["foodDocumentID"] as? String{
                     
                     foodDetailVC.foodName = foodName
                     foodDetailVC.foodImage = foodImage
@@ -351,6 +367,7 @@ class EditMenuViewController: UIViewController {
                     foodDetailVC.foodDetail = foodDetail
                     foodDetailVC.typeName = typeName
                     foodDetailVC.typeDocumentID = typeDocumentID
+                    foodDetailVC.foodDocumentID = foodDocumentID
                 }
             }
         }
@@ -394,18 +411,35 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
             if let foodName = food.data()["foodName"] as? String,
                 let foodImage = food.data()["foodImage"] as? String,
                 let foodMoney = food.data()["foodPrice"] as? Int,
-                let typeDocumentID = food.data()["typeDocumentID"] as? String{
+                let typeDocumentID = food.data()["typeDocumentID"] as? String,
+                let foodDocumentID = food.data()["foodDocumentID"] as? String{
                 
                 cell.foodNameLabel.text = foodName
                 cell.foodImageView.kf.setImage(with: URL(string: foodImage))
                 cell.foodMoneyLabel.text = "$\(foodMoney)"
                 cell.typeDocumentID = typeDocumentID
-                cell.foodName = foodName
+                cell.foodDocumentID = foodDocumentID
             }
             if let foodTotalRate = food.data()["foodTotalRate"] as? Float,
                 let foodRateCount = food.data()["foodRateCount"] as? Float{
                 let avgRate = foodTotalRate/foodRateCount
-                updateStar(value: avgRate, image: cell.rateImageView)
+                
+                if foodRateCount == 0{
+                    cell.rateImageView.isHidden = true
+                }
+                else{
+                    cell.rateImageView.isHidden = false
+                    updateStar(value: avgRate, image: cell.rateImageView)
+                }
+            }
+            
+            if let foodStatus = food.data()["foodStatus"] as? Int{
+                if foodStatus == 0{
+                    cell.statusSwich.isOn = false
+                }
+                else{
+                    cell.statusSwich.isOn = true
+                }
             }
             
             if isEditFood{
@@ -490,6 +524,17 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
                 for i in 0...typeArray.count - 1{
                     if let typeDocumentID = typeArray[i].data()["typeDocumentID"] as? String{
                         db.collection("res").document(resID).collection("foodType").document(typeDocumentID).updateData(["index": i])
+                        db.collection("res").document(resID).collection("foodType").document(typeDocumentID).collection("menu").getDocuments { (food, error) in
+                            if let food = food{
+                                if food.documents.isEmpty == false{
+                                    for food in food.documents{
+                                        if let foodDocumentID = food.data()["foodDocumentID"] as? String{
+                                            db.collection("res").document(resID).collection("foodType").document(typeDocumentID).collection("menu").document(foodDocumentID).updateData(["typeIndex": i])
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -501,10 +546,10 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
             let db = Firestore.firestore()
             if let resID = resID{
                 for i in 0...foodArray.count - 1{
-                    if let foodName = foodArray[i].data()["foodName"] as? String,
+                    if let foodDocumentID = foodArray[i].data()["foodDocumentID"] as? String,
                         let typeIndex = foodArray[i].data()["typeIndex"] as? Int,
                         let typeDocumentID = typeArray[typeIndex].data()["typeDocumentID"] as? String{
-                        db.collection("res").document(resID).collection("foodType").document(typeDocumentID).collection("menu").document(foodName).updateData(["foodIndex": i])
+                        db.collection("res").document(resID).collection("foodType").document(typeDocumentID).collection("menu").document(foodDocumentID).updateData(["foodIndex": i])
                     }
                 }
             }
