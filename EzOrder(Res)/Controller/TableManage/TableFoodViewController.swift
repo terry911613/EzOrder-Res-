@@ -64,9 +64,10 @@ extension TableFoodViewController: UITableViewDelegate, UITableViewDataSource{
             let foodImage = food.data()["foodImage"] as? String,
             let foodAmount = food.data()["foodAmount"] as? Int,
             let userID = food.data()["userID"] as? String,
-            let orderNo = orderNo{
+            let orderNo = orderNo,
+            let foodDocumentID = food.data()["foodDocumentID"] as? String{
             
-            cell.foodName = foodName
+            cell.foodDocumentID = foodDocumentID
             cell.userID = userID
             cell.orderNo = orderNo
             cell.foodNameLabel.text = foodName

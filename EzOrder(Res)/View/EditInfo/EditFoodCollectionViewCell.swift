@@ -18,20 +18,20 @@ class EditFoodCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var menuView: UIView!
     
     var typeDocumentID: String?
-    var foodName: String?
+    var foodDocumentID: String?
     
     @IBAction func statusAction(_ sender:UISwitch) {
         let db = Firestore.firestore()
         if let resID = Auth.auth().currentUser?.email,
             let foodType = typeDocumentID,
-            let foodName = foodName{
+            let foodDocumentID = foodDocumentID{
             if sender.isOn {
                 menuView.alpha = 1
-                db.collection("res").document(resID).collection("foodType").document(foodType).collection("menu").document(foodName).updateData(["foodStatus": 1])
+                db.collection("res").document(resID).collection("foodType").document(foodType).collection("menu").document(foodDocumentID).updateData(["foodStatus": 1])
             }
             else {
                 menuView.alpha = 0.2
-                db.collection("res").document(resID).collection("foodType").document(foodType).collection("menu").document(foodName).updateData(["foodStatus": 0])
+                db.collection("res").document(resID).collection("foodType").document(foodType).collection("menu").document(foodDocumentID).updateData(["foodStatus": 0])
             }
         }
     }

@@ -27,6 +27,7 @@ class FoodDetailViewController: UIViewController {
     var foodDetail: String?
     var typeName: String?
     var typeDocumentID: String?
+    var foodDocumentID: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +39,7 @@ class FoodDetailViewController: UIViewController {
             let foodPrice = foodPrice,
             let foodDetail = foodDetail,
             let typeName = typeName,
+            let foodDocumentID = foodDocumentID,
             let resID = Auth.auth().currentUser?.email{
             
             foodImageView.kf.setImage(with: URL(string: foodImage))
@@ -46,7 +48,7 @@ class FoodDetailViewController: UIViewController {
             foodDetailTextView.text = foodDetail
             
             let db = Firestore.firestore()
-            db.collection("res").document(resID).collection("foodType").document(typeName).collection("menu").document(foodName).collection("foodComment").order(by: "date", descending: false).getDocuments { (comment, error) in
+            db.collection("res").document(resID).collection("foodType").document(typeName).collection("menu").document(foodDocumentID).collection("foodComment").order(by: "date", descending: false).getDocuments { (comment, error) in
                 
                 if let comment = comment{
                     if comment.documents.isEmpty{
