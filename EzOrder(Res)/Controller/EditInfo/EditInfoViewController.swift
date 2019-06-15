@@ -235,6 +235,18 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
     
     @IBAction func confirm(_ sender: Any) {
         upload()
+        storeconfirm()
+    }
+    func storeconfirm(){
+        if let resID = resID{
+           let data = ["status" : 0]
+db.collection("res").document(resID).collection("storeconfirm").document("status").setData(data,completion:{
+                (error) in
+                guard error == nil else {
+                    return
+                }
+            })
+        }
     }
     
     

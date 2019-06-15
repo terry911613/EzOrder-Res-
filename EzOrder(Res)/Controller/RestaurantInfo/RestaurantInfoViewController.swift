@@ -18,8 +18,8 @@ class RestaurantInfoViewController: UIViewController {
     @IBOutlet weak var resNameLabel: UILabel!
     @IBOutlet weak var resTaxIDLabel: UILabel!
     
-    var restaurant = ["QRCode生成","查看廣告審核","幫助","編輯","申請關店"]
-    var lisn = ["QRCode","廣告審核結果","info","編輯","申請關店"]
+    var restaurant = ["QRCode生成","查看廣告審核","幫助","編輯","店家狀態","申請關店"]
+    var lisn = ["QRCode","廣告審核結果","info","編輯","house","申請關店"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,7 +79,13 @@ extension RestaurantInfoViewController: UITableViewDelegate, UITableViewDataSour
             let checkADVC = storyboard?.instantiateViewController(withIdentifier: "checkADVC") as! CheckADViewController
             navigationController?.pushViewController(checkADVC, animated: true)
         }
-        else if indexPath.row == 2{
+        else if indexPath.row == 4 {
+            let ReviewVC = storyboard?.instantiateViewController(withIdentifier: "ReviewVC")
+            as! ReviewVCViewController
+                        present(ReviewVC, animated: true, completion: nil)
+            
+        }
+        else if indexPath.row == 5{
             let closeVC = storyboard?.instantiateViewController(withIdentifier: "closeVC") as! CloseViewController
             present(closeVC, animated: true, completion: nil)
         }
