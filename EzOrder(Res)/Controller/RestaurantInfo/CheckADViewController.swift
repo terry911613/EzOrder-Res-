@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Firebase
 class CheckADViewController: UIViewController {
 
     @IBOutlet weak var checkADTableView: UITableView!
