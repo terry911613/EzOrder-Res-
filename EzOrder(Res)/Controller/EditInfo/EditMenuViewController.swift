@@ -51,8 +51,10 @@ class EditMenuViewController: UIViewController {
         
         getType()
         if typeArray.isEmpty == false, let typeIndex = typeIndex{
+            print(100)
             if let typeDocumentID = typeArray[typeIndex].data()["typeDocumentID"] as? String{
-//                print(type)
+                print(1000)
+                print("1",typeDocumentID)
                 getFood(typeDocumentID: typeDocumentID)
                 
             }
@@ -81,7 +83,7 @@ class EditMenuViewController: UIViewController {
     }
     func getFood(typeDocumentID: String){
 //        print("-------------")
-        //   print(typeName)
+           print(typeDocumentID)
         if let resID = resID{
             db.collection("res").document(resID).collection("foodType").document(typeDocumentID).collection("menu").order(by: "foodIndex", descending: false).addSnapshotListener { (food, error) in
                 if let food = food{
