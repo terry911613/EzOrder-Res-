@@ -348,7 +348,6 @@ class EditMenuViewController: UIViewController {
         
         if segue.identifier == "foodDetailSegue"{
             
-            
             let foodDetailVC = segue.destination as! FoodDetailViewController
             if let foodIndex = foodIndex{
                 let food = foodArray[foodIndex]

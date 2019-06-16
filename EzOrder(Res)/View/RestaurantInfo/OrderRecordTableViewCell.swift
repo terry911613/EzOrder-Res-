@@ -9,7 +9,13 @@
 import UIKit
 
 class OrderRecordTableViewCell: UITableViewCell {
-
+    
+    @IBOutlet weak var userImageView: UIImageView!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var totalPriceLabel: UILabel!
+    @IBOutlet weak var userIDLabel: UILabel!
+    @IBOutlet weak var pointLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
