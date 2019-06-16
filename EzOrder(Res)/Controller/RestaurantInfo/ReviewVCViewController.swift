@@ -10,7 +10,6 @@ import UIKit
 import Firebase
 class ReviewVCViewController: UIViewController {
     @IBOutlet weak var shutDownStore: UIImageView!
-    
     @IBOutlet weak var ReviewStore: UIImageView!
     @IBOutlet weak var okStore: UIImageView!
     @IBOutlet weak var ReviewLabel: UILabel!
