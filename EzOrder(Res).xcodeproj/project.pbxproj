@@ -149,8 +149,8 @@
 			children = (
 				447A1747228C6A11003AB41E /* CheckReservation.storyboard */,
 				4429B28E22A8173A00649E0E /* DateCell.swift */,
-				4429B29022A8176E00649E0E /* ReservationDetailTableViewCell.swift */,
 				44369EDE22A8F6EF00BF7369 /* ReservationNotifyTableViewCell.swift */,
+				4429B29022A8176E00649E0E /* ReservationDetailTableViewCell.swift */,
 			);
 			path = CheckReservation;
 			sourceTree = "<group>";

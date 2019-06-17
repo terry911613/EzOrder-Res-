@@ -10,8 +10,9 @@ import UIKit
 
 class ReservationNotifyTableViewCell: UITableViewCell {
  
-    @IBOutlet weak var reservationNameLabel: UILabel!
-    @IBOutlet weak var reservationPeopleLabel: UILabel!
+    @IBOutlet weak var userIDLabel: UILabel!
+    @IBOutlet weak var peopleLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     
     override func awakeFromNib() {
