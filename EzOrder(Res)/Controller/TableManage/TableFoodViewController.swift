@@ -19,18 +19,19 @@ class TableFoodViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        getTableFood()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getTableFood()
+        
     }
     
     func getTableFood(){
         let db = Firestore.firestore()
         if let resID = Auth.auth().currentUser?.email,
             let orderNo = orderNo{
-            db.collection("res").document(resID).collection("order").document(orderNo).collection("orderFoodDetail").getDocuments { (food, erroe) in
+            db.collection("res").document(resID).collection("order").document(orderNo).collection("orderFoodDetail").addSnapshotListener { (food, erroe) in
                 if let food = food{
                     if food.documents.isEmpty{
                         self.foodArray.removeAll()
@@ -76,7 +77,7 @@ extension TableFoodViewController: UITableViewDelegate, UITableViewDataSource{
             
             let db = Firestore.firestore()
             if let resID = Auth.auth().currentUser?.email{
-                db.collection("res").document(resID).collection("order").document(orderNo).collection("orderFoodDetail").document(foodName).addSnapshotListener { (foodStatus, error) in
+                db.collection("res").document(resID).collection("order").document(orderNo).collection("orderFoodDetail").document(foodDocumentID).addSnapshotListener { (foodStatus, error) in
                     if let foodStatusData = foodStatus?.data(),
                         let orderFoodStatus = foodStatusData["orderFoodStatus"] as? Int{
                         if orderFoodStatus == 0{

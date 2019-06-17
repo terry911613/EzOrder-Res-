@@ -227,7 +227,7 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
     
     
     @IBAction func tapResLogoImageView(_ sender: UITapGestureRecognizer) {
-        isEditImage = !isEditImage
+        isEditImage = true
         let imagePickerController = UIImagePickerController()
         imagePickerController.sourceType = .photoLibrary
         imagePickerController.delegate = self

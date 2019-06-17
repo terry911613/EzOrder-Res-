@@ -23,7 +23,7 @@ class OrderRecordViewController: UIViewController {
         super.viewDidLoad()
 
         formatter.locale = Locale(identifier: "zh_TW")
-        self.formatter.dateFormat = "yyyy年M月d日"
+        formatter.dateFormat = "yyyy年M月d日"
         navigationItem.title = formatter.string(from: Date())
         getDatePicker()
         getOrder(date: formatter.string(from: Date()))
