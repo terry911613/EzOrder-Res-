@@ -19,7 +19,7 @@ class TableFoodTableViewCell: UITableViewCell {
     var orderNo: String?
     var foodName: String?
     var userID: String?
-    var foodDocumentID: String?
+    var documentID: String?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -38,18 +38,18 @@ class TableFoodTableViewCell: UITableViewCell {
         if let resID = Auth.auth().currentUser?.email,
             let orderNo = orderNo,
             let userID = userID,
-            let foodDocumentID = foodDocumentID{
-            db.collection("res").document(resID).collection("order").document(orderNo).collection("orderFoodDetail").document(foodDocumentID).getDocument { (food, error) in
+            let documentID = documentID{
+            db.collection("res").document(resID).collection("order").document(orderNo).collection("orderFoodDetail").document(documentID).getDocument { (food, error) in
                 if let foodData = food?.data(){
                     if let orderFoodStatus = foodData["orderFoodStatus"] as? Int{
                         if orderFoodStatus == 0{
-                            db.collection("user").document(userID).collection("order").document(orderNo).collection("orderFoodDetail").document(foodDocumentID).updateData(["orderFoodStatus": 1])
-                            db.collection("res").document(resID).collection("order").document(orderNo).collection("orderFoodDetail").document(foodDocumentID).updateData(["orderFoodStatus": 1])
+                            db.collection("user").document(userID).collection("order").document(orderNo).collection("orderFoodDetail").document(documentID).updateData(["orderFoodStatus": 1])
+                            db.collection("res").document(resID).collection("order").document(orderNo).collection("orderFoodDetail").document(documentID).updateData(["orderFoodStatus": 1])
                             self.foodCompleteButton.setImage(UIImage(named: "完成亮燈"), for: .normal)
                         }
                         else{
-                            db.collection("user").document(userID).collection("order").document(orderNo).collection("orderFoodDetail").document(foodDocumentID).updateData(["orderFoodStatus": 0])
-                            db.collection("res").document(resID).collection("order").document(orderNo).collection("orderFoodDetail").document(foodDocumentID).updateData(["orderFoodStatus": 0])
+                            db.collection("user").document(userID).collection("order").document(orderNo).collection("orderFoodDetail").document(documentID).updateData(["orderFoodStatus": 0])
+                            db.collection("res").document(resID).collection("order").document(orderNo).collection("orderFoodDetail").document(documentID).updateData(["orderFoodStatus": 0])
                             self.foodCompleteButton.setImage(UIImage(named: "完成"), for: .normal)
                         }
                     }

@@ -22,10 +22,10 @@ class TableFoodViewController: UIViewController {
         getTableFood()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        
+//    }
     
     func getTableFood(){
         let db = Firestore.firestore()
@@ -39,18 +39,18 @@ class TableFoodViewController: UIViewController {
                     }
                     else{
                         self.foodArray = food.documents
-                        self.animateTableFoodTableView()
+                        self.tableFoodTableView.reloadData()
                     }
                 }
             }
         }
     }
     
-    func animateTableFoodTableView(){
-        let animations = [AnimationType.from(direction: .top, offset: 30.0)]
-        tableFoodTableView.reloadData()
-        UIView.animate(views: tableFoodTableView.visibleCells, animations: animations, completion: nil)
-    }
+//    func animateTableFoodTableView(){
+//        let animations = [AnimationType.from(direction: .top, offset: 30.0)]
+//        tableFoodTableView.reloadData()
+//        UIView.animate(views: tableFoodTableView.visibleCells, animations: animations, completion: nil)
+//    }
 }
 
 extension TableFoodViewController: UITableViewDelegate, UITableViewDataSource{
@@ -66,9 +66,9 @@ extension TableFoodViewController: UITableViewDelegate, UITableViewDataSource{
             let foodAmount = food.data()["foodAmount"] as? Int,
             let userID = food.data()["userID"] as? String,
             let orderNo = orderNo,
-            let foodDocumentID = food.data()["foodDocumentID"] as? String{
+            let documentID = food.data()["documentID"] as? String{
             
-            cell.foodDocumentID = foodDocumentID
+            cell.documentID = documentID
             cell.userID = userID
             cell.orderNo = orderNo
             cell.foodNameLabel.text = foodName
@@ -77,7 +77,7 @@ extension TableFoodViewController: UITableViewDelegate, UITableViewDataSource{
             
             let db = Firestore.firestore()
             if let resID = Auth.auth().currentUser?.email{
-                db.collection("res").document(resID).collection("order").document(orderNo).collection("orderFoodDetail").document(foodDocumentID).addSnapshotListener { (foodStatus, error) in
+                db.collection("res").document(resID).collection("order").document(orderNo).collection("orderFoodDetail").document(documentID).addSnapshotListener { (foodStatus, error) in
                     if let foodStatusData = foodStatus?.data(),
                         let orderFoodStatus = foodStatusData["orderFoodStatus"] as? Int{
                         if orderFoodStatus == 0{
