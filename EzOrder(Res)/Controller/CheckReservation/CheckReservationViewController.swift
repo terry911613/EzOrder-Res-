@@ -8,6 +8,7 @@
 
 import UIKit
 import JTAppleCalendar
+import Firebase
 
 class CheckReservationViewController: UIViewController {
     
@@ -17,9 +18,11 @@ class CheckReservationViewController: UIViewController {
     @IBOutlet weak var notifyTableView: UITableView!
    
     let dateFormatter: DateFormatter = DateFormatter()
-    var selectDateText = ""
-    var eventDic = [String : [[String]]]()
+    var selectDateText: String?
     var now = Date()
+    var eventDic = [String : String]()
+    var allBooking = [QueryDocumentSnapshot]()
+    var selectDateBooking = [QueryDocumentSnapshot]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,18 +37,51 @@ class CheckReservationViewController: UIViewController {
         calendarView.scrollingMode = .stopAtEachCalendarFrame
         calendarView.showsHorizontalScrollIndicator = false
         
-//        dateLabel.text = "2019-01"
-        
         selectDateText = dateFormatter.string(from: now)
-        
-        //  寫死今天有三項訂位
-        eventDic = ["2019-05-15" : [["小明", "2人", "10:00"], ["小明", "5人", "17:00"]],
-                    "2019-04-15" : [["小明", "6人", "12:00"], ["小明", "8人", "16:00"]],
-                    "2019-03-15" : [["小明", "1人", "12:00"], ["小明", "5人", "15:00"]],
-                    "2019-02-15" : [["小明", "7人", "11:00"], ["小明", "10人", "12:00"]],
-                    "2019-01-15" : [["小明", "5人", "11:00"], ["小明", "3人", "13:00"]]]
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        get()
+    }
+    
+    func get(){
+        let db = Firestore.firestore()
+        if let resID = Auth.auth().currentUser?.email{
+            db.collection("res").document(resID).collection("booking").order(by: "date", descending: false).getDocuments { (booking, error) in
+                if let booking = booking{
+                    if booking.documents.isEmpty == false{
+                        let documentChange = booking.documentChanges[0]
+                        if documentChange.type == .added{
+                            self.allBooking.removeAll()
+                            for booking in booking.documents{
+                                if let bookingDateString = booking.data()["documentID"] as? String{
+                                    self.eventDic[bookingDateString] = "yes"
+                                    print(self.eventDic)
+                                    self.calendarView.reloadData()
+                                    db.collection("res").document(resID).collection("booking").document(bookingDateString).collection("bookDetail").order(by: "date", descending: false).getDocuments{ (bookingDetail, error) in
+                                        if let bookingDetail = bookingDetail{
+                                            if bookingDetail.documents.isEmpty == false{
+                                                let documentChange = bookingDetail.documentChanges[0]
+                                                if documentChange.type == .added{
+                                                    for booking in bookingDetail.documents{
+                                                        self.allBooking.append(booking)
+                                                        self.notifyTableView.reloadData()
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     @IBAction func reservationSegment(_ sender: UISegmentedControl) {
+        
+        get()
         
         if sender.selectedSegmentIndex == 0{
             calendarView.isHidden = false
@@ -60,10 +96,23 @@ class CheckReservationViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         let reservationDetailVC = segue.destination as! ReservationDetailViewController
-        reservationDetailVC.eventDic = eventDic
-        reservationDetailVC.selectDateText = selectDateText
-//        reservationDetailVC.reservationDetailTableView.reloadData()
+        
+        let db = Firestore.firestore()
+        if let resID = Auth.auth().currentUser?.email,
+            let selectDateText = selectDateText{
+            print(selectDateText)
+            db.collection("res").document(resID).collection("booking").document(selectDateText).collection("bookDetail").getDocuments { (booking, error) in
+                if let booking = booking{
+                    if booking.documents.isEmpty == false{
+                        reservationDetailVC.bookingArray = booking.documents
+                        reservationDetailVC.reservationDetailTableView.reloadData()
+                        print("gogo")
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -74,12 +123,12 @@ extension CheckReservationViewController: JTAppleCalendarViewDataSource, JTApple
         /*
          這邊比viewdidload先執行，所以可以在這邊設定dateFormatter格式
          */
-        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.dateFormat = "yyyy年M月d日"
         dateFormatter.locale = Locale.current
         dateFormatter.timeZone = TimeZone.current
         //  設定日曆起始日期和最終日期
-        let startDate = dateFormatter.date(from: "2019-01-01")!
-        let endDate = dateFormatter.date(from: "2030-02-01")!
+        let startDate = dateFormatter.date(from: "2019年1月1日")!
+        let endDate = dateFormatter.date(from: "2030年1月1日")!
         return ConfigurationParameters(startDate: startDate,
                                        endDate: endDate,
                                        generateInDates: .forAllMonths,
@@ -104,7 +153,7 @@ extension CheckReservationViewController: JTAppleCalendarViewDataSource, JTApple
     func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
         //  讓 navigation 的 title 顯示現在的年跟月
         let formatter: DateFormatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM"
+        formatter.dateFormat = "yyyy年M月"
         if let slideYearMonth = visibleDates.monthDates.first?.date{
             let yearMonth = formatter.string(from: slideYearMonth)
             dateLabel.text = "\(yearMonth)"
@@ -116,16 +165,10 @@ extension CheckReservationViewController: JTAppleCalendarViewDataSource, JTApple
         let cell = cell as! DateCell
         if cell.selectedView.isHidden == false{
             performSegue(withIdentifier: "reservationDetailSegue", sender: self)
-//            let reservationDetailVC = storyboard?.instantiateViewController(withIdentifier: "reservationDetailVC") as! ReservationDetailViewController
-//            reservationDetailVC.eventDic = eventDic
-//            reservationDetailVC.selectDateText = selectDateText
-//            reservationDetailVC.reservationDetailTableView.reloadData()
-//            navigationController?.pushViewController(reservationDetailVC, animated: true)
         }
         
         configureCell(view: cell, cellState: cellState)
         selectDateText = dateFormatter.string(from: date)
-        //  讓標籤改成選取到的日期
         dateLabel.text = selectDateText
     }
     //  取消選取的話
@@ -171,14 +214,22 @@ extension CheckReservationViewController: JTAppleCalendarViewDataSource, JTApple
 
 extension CheckReservationViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return allBooking.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reservationNotifyCell", for: indexPath) as! ReservationNotifyTableViewCell
-        cell.reservationNameLabel.text = "小明"
-        cell.reservationPeopleLabel.text = "12"
-        cell.timeLabel.text = "2019年10月10號 7點30分"
+        let booking = allBooking[indexPath.row]
+        if let dateString = booking.data()["dateString"] as? String,
+            let people = booking.data()["people"] as? String,
+            let userID = booking.data()["userID"] as? String,
+            let period = booking.data()["period"] as? String{
+            
+            cell.userIDLabel.text = userID
+            cell.peopleLabel.text = "\(people)人"
+            cell.dateLabel.text = dateString
+            cell.timeLabel.text = period
+        }
         return cell
     }
 }
