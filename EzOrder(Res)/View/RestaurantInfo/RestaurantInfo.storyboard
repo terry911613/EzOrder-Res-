@@ -253,39 +253,50 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="144"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vpu-1K-Wgf">
-                                                    <rect key="frame" x="15" y="11" width="345" height="120"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vpu-1K-Wgf">
+                                                    <rect key="frame" x="0.0" y="8" width="375" height="131"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BgP-uu-Ot5">
-                                                            <rect key="frame" x="8" y="10" width="100" height="100"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BgP-uu-Ot5">
+                                                            <rect key="frame" x="8" y="10" width="125" height="109"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                    <integer key="value" value="50"/>
+                                                                    <integer key="value" value="0"/>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cCy-uz-gMk">
-                                                            <rect key="frame" x="130" y="76" width="182" height="36"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="完成" translatesAutoresizingMaskIntoConstraints="NO" id="GFC-JT-xAR">
+                                                            <rect key="frame" x="313.5" y="33" width="53.5" height="43.5"/>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oX8-sX-mHB">
+                                                            <rect key="frame" x="150" y="10" width="375" height="43.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="完成" translatesAutoresizingMaskIntoConstraints="NO" id="GFC-JT-xAR">
-                                                            <rect key="frame" x="297" y="39" width="48" height="42"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oX8-sX-mHB">
-                                                            <rect key="frame" x="130" y="13" width="168" height="39"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cCy-uz-gMk">
+                                                            <rect key="frame" x="150" y="84.5" width="33" height="16"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.22404377419999999" green="0.86581725430000001" blue="0.58928993659999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="GFC-JT-xAR" secondAttribute="trailing" constant="8" id="0MK-1e-aBW"/>
+                                                        <constraint firstItem="GFC-JT-xAR" firstAttribute="height" secondItem="Vpu-1K-Wgf" secondAttribute="height" multiplier="1:3" id="89j-2O-gIL"/>
+                                                        <constraint firstItem="BgP-uu-Ot5" firstAttribute="leading" secondItem="Vpu-1K-Wgf" secondAttribute="leading" constant="8" id="8s1-QS-70l"/>
+                                                        <constraint firstItem="GFC-JT-xAR" firstAttribute="width" secondItem="Vpu-1K-Wgf" secondAttribute="width" multiplier="1:7" id="Goo-9y-rbr"/>
+                                                        <constraint firstItem="BgP-uu-Ot5" firstAttribute="height" secondItem="Vpu-1K-Wgf" secondAttribute="height" multiplier="1:1.2" id="HFX-Ja-Tiu"/>
+                                                        <constraint firstItem="oX8-sX-mHB" firstAttribute="top" secondItem="Vpu-1K-Wgf" secondAttribute="top" constant="10" id="Ktz-6M-oRu"/>
+                                                        <constraint firstItem="BgP-uu-Ot5" firstAttribute="width" secondItem="Vpu-1K-Wgf" secondAttribute="width" multiplier="1:3" id="SoU-Hp-asO"/>
+                                                        <constraint firstItem="GFC-JT-xAR" firstAttribute="top" secondItem="Vpu-1K-Wgf" secondAttribute="top" constant="33" id="Vcg-0J-lGj"/>
+                                                        <constraint firstItem="cCy-uz-gMk" firstAttribute="leading" secondItem="BgP-uu-Ot5" secondAttribute="trailing" constant="17" id="WcI-I0-ngu"/>
+                                                        <constraint firstItem="oX8-sX-mHB" firstAttribute="leading" secondItem="BgP-uu-Ot5" secondAttribute="trailing" constant="17" id="ceq-6d-eWK"/>
+                                                        <constraint firstItem="oX8-sX-mHB" firstAttribute="height" secondItem="Vpu-1K-Wgf" secondAttribute="height" multiplier="1:3" id="flF-g2-F2Y"/>
+                                                        <constraint firstItem="BgP-uu-Ot5" firstAttribute="top" secondItem="Vpu-1K-Wgf" secondAttribute="top" constant="10" id="jqW-lK-5hK"/>
+                                                        <constraint firstItem="cCy-uz-gMk" firstAttribute="top" secondItem="GFC-JT-xAR" secondAttribute="bottom" constant="8" id="thF-vd-049"/>
+                                                        <constraint firstItem="oX8-sX-mHB" firstAttribute="width" secondItem="Vpu-1K-Wgf" secondAttribute="width" id="zPO-h6-ao7"/>
+                                                    </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <integer key="value" value="10"/>
@@ -293,6 +304,12 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Vpu-1K-Wgf" firstAttribute="height" secondItem="5f7-JG-qqC" secondAttribute="height" multiplier="1:1.1" id="EQS-ku-3pe"/>
+                                                <constraint firstAttribute="bottom" secondItem="Vpu-1K-Wgf" secondAttribute="bottom" constant="5" id="ZWN-ml-cZO"/>
+                                                <constraint firstItem="Vpu-1K-Wgf" firstAttribute="width" secondItem="5f7-JG-qqC" secondAttribute="width" id="eFU-F6-Ylw"/>
+                                                <constraint firstItem="Vpu-1K-Wgf" firstAttribute="centerX" secondItem="5f7-JG-qqC" secondAttribute="centerX" id="n3w-Ru-y91"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="ADimageView" destination="BgP-uu-Ot5" id="E4U-p3-QR7"/>

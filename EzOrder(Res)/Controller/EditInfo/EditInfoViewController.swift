@@ -61,6 +61,7 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
     
     
     override func viewDidLoad() {
+        searchStoreconfirm()
         super.viewDidLoad()
         
         getType()
