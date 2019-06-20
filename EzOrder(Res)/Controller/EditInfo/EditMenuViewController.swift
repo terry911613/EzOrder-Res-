@@ -153,6 +153,7 @@ class EditMenuViewController: UIViewController {
         guideLabel.text = ""
         isEndEdit = !isEndEdit
         if isEndEdit{
+            UIView.animate(withDuration: 10, delay: 0, options: UIView.AnimationOptions.allowUserInteraction, animations:{ self.typeCollectionView.frame = CGRect(x: 100, y: 100, width: 100, height: 100)}, completion: nil)
             initTypeImageAlpha()
             editLabel.text = "預覽菜單"
             initStatus()
