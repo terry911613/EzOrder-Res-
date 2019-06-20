@@ -251,7 +251,6 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
         }
         else {
         upload()
-        storeconfirm()
         }
     }
     func storeconfirm(){
@@ -506,6 +505,8 @@ db.collection("res").document(resID).collection("storeconfirm").document("status
                                     self.errorAlert()
                                     return
                                 }
+                                
+                                self.storeconfirm()
                                 SVProgressHUD.dismiss()
                                 let alert = UIAlertController(title: "即將為您審核", message: nil, preferredStyle: .alert)
                                 let ok = UIAlertAction(title: "確定", style: .default, handler: nil)
