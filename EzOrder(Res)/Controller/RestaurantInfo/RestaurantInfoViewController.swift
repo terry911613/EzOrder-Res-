@@ -24,6 +24,9 @@ class RestaurantInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+      //  getInfo()
+    }
+    override func viewWillAppear(_ animated: Bool) {
         getInfo()
     }
     

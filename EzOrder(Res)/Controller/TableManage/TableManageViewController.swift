@@ -49,7 +49,7 @@ class TableManageViewController: UIViewController {
                     }
                 }
             }
-        }
+        } 
     }
     
     func animateTableStatusTableView(){
@@ -101,6 +101,7 @@ extension TableManageViewController: UITableViewDelegate, UITableViewDataSource{
                     if let serviceBellData = serviceBell?.data(),
                         let serviceBellStatus = serviceBellData["serviceBellStatus"] as? Int{
                         if serviceBellStatus == 0{
+                            print(serviceBellStatus)
                             cell.serviceBellButton.setImage(UIImage(named: "服務鈴"), for: .normal)
                         }
                         else{

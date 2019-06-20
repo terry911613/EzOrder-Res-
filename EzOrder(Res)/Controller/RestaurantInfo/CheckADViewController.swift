@@ -66,11 +66,11 @@ extension CheckADViewController: UITableViewDelegate, UITableViewDataSource{
                         }
                         if ADnumber == 2 {
                             cell.selectImageView.image = UIImage(named: "no")
-                            cell.ColerView.backgroundColor = .init(red: 238/255, green: 191/255, blue: 101/255, alpha: 1)
+                            //cell.ColerView.backgroundColor = .init(red: 215/255, green: 173/255, blue: 221/255, alpha: 1)
 
                                                     }
                         if ADnumber == 0 {   cell.selectImageView.image = UIImage(named: "完成")
-                            cell.ColerView.backgroundColor = UIColor(red: 232/255, green: 160/255, blue: 229/255, alpha: 1)
+                      //      cell.ColerView.backgroundColor = UIColor(red: 100/255, green: 161/255, blue: 221/255, alpha: 1)
 
                         }
                         
