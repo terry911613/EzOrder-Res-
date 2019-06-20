@@ -17,6 +17,7 @@ class CheckADTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         adTime.text = "1"
         self.reloadInputViews()
     }
