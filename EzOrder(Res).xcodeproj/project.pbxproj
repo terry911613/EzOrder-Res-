@@ -29,6 +29,7 @@
 		44369EDD22A8DBC900BF7369 /* CheckADDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44369EDC22A8DBC900BF7369 /* CheckADDetailViewController.swift */; };
 		44369EDF22A8F6EF00BF7369 /* ReservationNotifyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44369EDE22A8F6EF00BF7369 /* ReservationNotifyTableViewCell.swift */; };
 		44369EE122A9691D00BF7369 /* EditTypeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44369EE022A9691D00BF7369 /* EditTypeCollectionViewCell.swift */; };
+		443AA64822BB30B5005E279D /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443AA64722BB30B5005E279D /* ChartViewController.swift */; };
 		4472BB6522AA38A00063ED42 /* EditMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4472BB6422AA38A00063ED42 /* EditMenuViewController.swift */; };
 		447A172C228C688A003AB41E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447A172B228C688A003AB41E /* AppDelegate.swift */; };
 		447A172E228C688A003AB41E /* EditInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447A172D228C688A003AB41E /* EditInfoViewController.swift */; };
@@ -75,6 +76,7 @@
 		44369EDC22A8DBC900BF7369 /* CheckADDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckADDetailViewController.swift; sourceTree = "<group>"; };
 		44369EDE22A8F6EF00BF7369 /* ReservationNotifyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationNotifyTableViewCell.swift; sourceTree = "<group>"; };
 		44369EE022A9691D00BF7369 /* EditTypeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTypeCollectionViewCell.swift; sourceTree = "<group>"; };
+		443AA64722BB30B5005E279D /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		4472BB6422AA38A00063ED42 /* EditMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMenuViewController.swift; sourceTree = "<group>"; };
 		447A1728228C688A003AB41E /* EzOrder(Res).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EzOrder(Res).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		447A172B228C688A003AB41E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -238,13 +240,14 @@
 			isa = PBXGroup;
 			children = (
 				447A1756228C6C14003AB41E /* RestaurantInfoViewController.swift */,
-				2C80BA9D22B3F91D00912C2A /* ReviewVCViewController.swift */,
 				44369ED222A8C9D300BF7369 /* QRCodeViewController.swift */,
 				44369ED822A8CA1C00BF7369 /* CheckADViewController.swift */,
 				44369EDC22A8DBC900BF7369 /* CheckADDetailViewController.swift */,
-				44369EDA22A8CA2700BF7369 /* CloseViewController.swift */,
 				44DB382722AF9F0E00C69C0B /* OrderRecordViewController.temp_caseinsensitive_rename.swift */,
 				44ACCEC822B5517C00DFB2CE /* OrderFoodDetailViewController.swift */,
+				443AA64722BB30B5005E279D /* ChartViewController.swift */,
+				2C80BA9D22B3F91D00912C2A /* ReviewVCViewController.swift */,
+				44369EDA22A8CA2700BF7369 /* CloseViewController.swift */,
 			);
 			path = RestaurantInfo;
 			sourceTree = "<group>";
@@ -396,6 +399,7 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-EzOrder(Res)/Pods-EzOrder(Res)-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/JTAppleCalendar/JTAppleCalendar.framework",
@@ -413,6 +417,7 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JTAppleCalendar.framework",
@@ -484,6 +489,7 @@
 				2CFD3D3322B5F1BF00EC3313 /* CheckADTableViewCell.swift in Sources */,
 				2CA55D0822A3782A00D1E1A0 /* EditFoodCollectionViewCell.swift in Sources */,
 				4429B28D22A810A500649E0E /* TableManageTableViewCell.swift in Sources */,
+				443AA64822BB30B5005E279D /* ChartViewController.swift in Sources */,
 				4429B29122A8176E00649E0E /* ReservationDetailTableViewCell.swift in Sources */,
 				4429B29322A8178000649E0E /* ReservationDetailViewController.swift in Sources */,
 				447A1753228C6BF3003AB41E /* TableManageViewController.swift in Sources */,

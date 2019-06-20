@@ -15,5 +15,6 @@ pod 'Kingfisher'
 pod 'SVProgressHUD'
 pod 'JTAppleCalendar', '~> 7.0'
 pod "ViewAnimator"
+pod 'Charts'
 
 end

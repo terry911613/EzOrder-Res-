@@ -19,7 +19,8 @@ class EditMenuViewController: UIViewController {
     @IBOutlet var longPress: UILongPressGestureRecognizer!
     @IBOutlet var foodLongPress: UILongPressGestureRecognizer!
     @IBOutlet weak var guideLabel: UILabel!
-    @IBOutlet weak var editLabel: UILabel!
+    @IBOutlet weak var stackView: UIStackView!
+    
     
     var isEndEdit = true
 //    var p: CGPoint?
@@ -39,10 +40,9 @@ class EditMenuViewController: UIViewController {
         super.viewDidLoad()
         
         guideLabel.text = ""
-        editLabel.text = "預覽菜單"
-        
         foodCollectionView.addGestureRecognizer(self.foodLongPress)
         typeCollectionView.addGestureRecognizer(self.longPress)
+        
         for optinasss in foodCollections {
             UIView.animate(withDuration: 0.8, animations: {optinasss.isHidden = false
                 self.view.layoutIfNeeded()
@@ -146,7 +146,8 @@ class EditMenuViewController: UIViewController {
     
     @IBAction func stackAction(_ sender: Any) {
         for optina in optinss {
-            UIView.animate(withDuration: 0.3, animations:{ optina.isHidden = !optina.isHidden
+            UIView.animate(withDuration: 0.3, animations:{
+                optina.isHidden = !optina.isHidden
                 self.view.layoutIfNeeded()
             })
         }
@@ -155,12 +156,8 @@ class EditMenuViewController: UIViewController {
         if isEndEdit{
             UIView.animate(withDuration: 10, delay: 0, options: UIView.AnimationOptions.allowUserInteraction, animations:{ self.typeCollectionView.frame = CGRect(x: 100, y: 100, width: 100, height: 100)}, completion: nil)
             initTypeImageAlpha()
-            editLabel.text = "預覽菜單"
             initStatus()
             reloadTwoCollectionView()
-        }
-        else{
-            editLabel.text = ""
         }
     }
     
