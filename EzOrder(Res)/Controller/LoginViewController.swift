@@ -81,12 +81,13 @@ extension LoginViewController {
         if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRect = keyboardFrame.cgRectValue
             let btnLocation = registerButton.superview?.convert(registerButton.frame.origin, to: view)
+            print("location: ",btnLocation)
             let btnY = btnLocation!.y
             let btnHeight = registerButton.frame.height
             let overlap = btnY + btnHeight + keyboardRect.height - viewHeight!
             
             if overlap > 0 {
-                view.frame.origin.y -= (overlap)
+                view.frame.origin.y =  -(overlap + 5)
             }
             
         }

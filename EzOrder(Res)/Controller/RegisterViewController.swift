@@ -79,13 +79,14 @@ extension RegisterViewController {
         viewHeight = view.frame.height
         if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRect = keyboardFrame.cgRectValue
-            let btnLocation = registerBtn.superview?.convert(registerBtn.frame.origin, to: view)
-            let btnY = btnLocation!.y
+            let btnLocation = registerBtn.frame.origin
+            print("location: ",btnLocation)
+            let btnY = btnLocation.y
             let btnHeight = registerBtn.frame.height
             let overlap = btnY + btnHeight + keyboardRect.height - viewHeight!
             
             if overlap > 0 {
-                view.frame.origin.y -= (overlap + 5)
+                view.frame.origin.y =  -(overlap + 5)
             }
             
         }
