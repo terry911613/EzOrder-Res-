@@ -206,6 +206,7 @@
                         <viewLayoutGuide key="safeArea" id="C9o-YM-0sT"/>
                     </view>
                     <connections>
+                        <outlet property="alertView" destination="oN6-VI-kjw" id="uZo-li-vjj"/>
                         <outlet property="passwordTextfield" destination="bsG-Ft-KHY" id="M94-GE-qqY"/>
                     </connections>
                 </viewController>
@@ -503,7 +504,7 @@
                                 <rect key="frame" x="137.5" y="117" width="100" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Wo-T9-gup">
                                 <rect key="frame" x="245.5" y="114" width="41" height="36"/>
