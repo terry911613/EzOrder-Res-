@@ -13,11 +13,13 @@ import SVProgressHUD
 
 class RegisterViewController: UIViewController {
     
+    @IBOutlet weak var registerBtn: UIButton!
     @IBOutlet weak var logoImg: UIImageView!
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var passwordLabel: UILabel!
+    var viewHeight: CGFloat?
     override func viewWillAppear(_ animated: Bool) {
         addKeyboardObserver()
     }
@@ -74,7 +76,19 @@ extension RegisterViewController {
     }
     
     @objc func keyboardWillShow(notification: Notification) {
-        view.frame.origin.y = -(logoImg.frame.height)
+        viewHeight = view.frame.height
+        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRect = keyboardFrame.cgRectValue
+            let btnLocation = registerBtn.superview?.convert(registerBtn.frame.origin, to: view)
+            let btnY = btnLocation!.y
+            let btnHeight = registerBtn.frame.height
+            let overlap = btnY + btnHeight + keyboardRect.height - viewHeight!
+            
+            if overlap > 0 {
+                view.frame.origin.y -= (overlap + 5)
+            }
+            
+        }
     }
     
     @objc func keyboardWillHide(notification: Notification) {
