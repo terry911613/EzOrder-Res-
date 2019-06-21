@@ -154,9 +154,18 @@ class EditMenuViewController: UIViewController {
         guideLabel.text = ""
         isEndEdit = !isEndEdit
         if isEndEdit{
+            UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.allowUserInteraction, animations:{ self.typeCollectionView.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.foodCollectionView.transform = CGAffineTransform(translationX: 0, y: 0)
+            }, completion: nil)
             initTypeImageAlpha()
             initStatus()
             reloadTwoCollectionView()
+        }
+        else{
+            UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.allowUserInteraction, animations:{ self.typeCollectionView.transform = CGAffineTransform(translationX: 0, y: 80)
+                self.foodCollectionView.transform = CGAffineTransform(translationX: 0, y: 80)
+            }, completion: nil)
+            
         }
     }
     
