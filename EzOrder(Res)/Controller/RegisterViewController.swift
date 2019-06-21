@@ -13,11 +13,14 @@ import SVProgressHUD
 
 class RegisterViewController: UIViewController {
     
+    @IBOutlet weak var logoImg: UIImageView!
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var passwordLabel: UILabel!
-    
+    override func viewWillAppear(_ animated: Bool) {
+        addKeyboardObserver()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -63,4 +66,24 @@ class RegisterViewController: UIViewController {
     }
     
 
+}
+extension RegisterViewController {
+    func addKeyboardObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: Notification) {
+        view.frame.origin.y = -(logoImg.frame.height)
+    }
+    
+    @objc func keyboardWillHide(notification: Notification) {
+        view.frame.origin.y = 0
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(true)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
 }

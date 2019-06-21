@@ -13,6 +13,7 @@ import SVProgressHUD
 import MapKit
 class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
     
+    @IBOutlet weak var backGroundScrollView: TouchToEndEditScrollView!
     @IBOutlet weak var typeCollectionView: UICollectionView!
     @IBOutlet weak var resLogoImageView: UIImageView!
     
@@ -59,13 +60,17 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
     var isNoon = false
     var isEvening = false
     
+    var viewHeight: CGFloat?
     
+    override func viewWillAppear(_ animated: Bool) {
+        addKeyboardObserver()
+    }
     override func viewDidLoad() {
         searchStoreconfirm()
         super.viewDidLoad()
-        
         getType()
-        
+        backGroundScrollView.parentVC = self
+        backGroundScrollView.keyboardDismissMode = .onDrag
         if let resID = resID{
     db.collection("res").document(resID).addSnapshotListener { (res, error) in
                 print("mother fucker")
@@ -142,7 +147,7 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
                                     self.setMapAnnotation(location)
                                 }
                             } else {
-                                let title = "收尋失敗"
+                                let title = "搜尋失敗"
                                 let message = "目前網路連線不穩定"
                                 let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
                                 let ok = UIAlertAction(title: "OK", style: .default)
@@ -537,6 +542,8 @@ db.collection("res").document(resID).collection("storeconfirm").document("status
         alert.addAction(ok)
         present(alert, animated: true, completion: nil)
     }
+    
+    
 
     
 }
@@ -560,12 +567,42 @@ extension EditInfoViewController: UICollectionViewDelegate,UICollectionViewDataS
         typeArray.insert(item, at: destinationIndexPath.item)
     }
 }
+
 extension EditInfoViewController: UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
         if let selsct = info[.originalImage] as? UIImage{
             resLogoImageView.image = selsct
         }
         self.dismiss(animated: true)
+    }
+}
+extension EditInfoViewController {
+    func addKeyboardObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: Notification) {
+        // 能取得鍵盤高度就讓view上移鍵盤高度，否則上移view的1/3高度
+        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRect = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRect.height
+            
+            
+            view.frame.origin.y = -keyboardHeight / 3
+        } else {
+            view.frame.origin.y = -view.frame.height / 5
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: Notification) {
+        view.frame.origin.y = 0
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(true)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 }
 
