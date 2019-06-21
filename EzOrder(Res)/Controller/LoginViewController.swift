@@ -13,10 +13,17 @@ import SVProgressHUD
 
 class LoginViewController: UIViewController {
     
+    @IBOutlet weak var registerButton: UIButton!
+    @IBOutlet weak var logoImg: UIImageView!
+    @IBOutlet weak var userImg: UIImageView!
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
     @IBOutlet weak var EmailLabel: UILabel!
     @IBOutlet weak var paswordLabel: UILabel!
+    var viewHeight: CGFloat?
+    override func viewWillAppear(_ animated: Bool) {
+        addKeyboardObserver()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -62,3 +69,37 @@ class LoginViewController: UIViewController {
     @IBAction func unwindSegueBackLogin(segue: UIStoryboardSegue){
     }
 }
+
+extension LoginViewController {
+    func addKeyboardObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: Notification) {
+        viewHeight = view.frame.height
+        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRect = keyboardFrame.cgRectValue
+            let btnLocation = registerButton.superview?.convert(registerButton.frame.origin, to: view)
+            let btnY = btnLocation!.y
+            let btnHeight = registerButton.frame.height
+            let overlap = btnY + btnHeight + keyboardRect.height - viewHeight!
+            
+            if overlap > 0 {
+                view.frame.origin.y -= (overlap)
+            }
+            
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: Notification) {
+        view.frame.origin.y = 0
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(true)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+}
+
