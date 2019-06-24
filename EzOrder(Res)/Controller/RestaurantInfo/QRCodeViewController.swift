@@ -22,7 +22,6 @@ class QRCodeViewController: UIViewController {
     @IBAction func generateButton(_ sender: UIButton) {
         
         if let table = Int(tableTextfield.text!){
-            
             var qrCodeInfo = [String: String]()
             qrCodeInfo["resID"] = resID
             qrCodeInfo["table"] = String(table)

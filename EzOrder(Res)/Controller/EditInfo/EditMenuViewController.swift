@@ -19,7 +19,6 @@ class EditMenuViewController: UIViewController {
     @IBOutlet var longPress: UILongPressGestureRecognizer!
     @IBOutlet var foodLongPress: UILongPressGestureRecognizer!
     @IBOutlet weak var guideLabel: UILabel!
-    @IBOutlet weak var stackView: UIStackView!
     
     
     var isEndEdit = true
@@ -38,6 +37,10 @@ class EditMenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        for optina in optinss {
+//            optina.isHidden = true
+//        }
         
         guideLabel.text = ""
         foodCollectionView.addGestureRecognizer(self.foodLongPress)
@@ -90,7 +93,6 @@ class EditMenuViewController: UIViewController {
                     if food.documents.isEmpty{
                         self.foodArray.removeAll()
                         self.foodCollectionView.reloadData()
-                        
                     }
                     else{
                         let documentChange = food.documentChanges[0]
@@ -145,6 +147,9 @@ class EditMenuViewController: UIViewController {
     }
     
     @IBAction func stackAction(_ sender: Any) {
+        
+//        stackView.isHidden = false
+        
         for optina in optinss {
             UIView.animate(withDuration: 0.3, animations:{
                 optina.isHidden = !optina.isHidden
@@ -154,18 +159,22 @@ class EditMenuViewController: UIViewController {
         guideLabel.text = ""
         isEndEdit = !isEndEdit
         if isEndEdit{
+            print(isEditType)
             UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.allowUserInteraction, animations:{ self.typeCollectionView.transform = CGAffineTransform(translationX: 0, y: 0)
                 self.foodCollectionView.transform = CGAffineTransform(translationX: 0, y: 0)
             }, completion: nil)
             initTypeImageAlpha()
             initStatus()
             reloadTwoCollectionView()
+            print(isEditType)
+            
         }
         else{
             UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.allowUserInteraction, animations:{ self.typeCollectionView.transform = CGAffineTransform(translationX: 0, y: 80)
                 self.foodCollectionView.transform = CGAffineTransform(translationX: 0, y: 80)
             }, completion: nil)
-            
+            print(isEditType)
+//            stackView.isHidden = true
         }
     }
     
@@ -461,8 +470,10 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if collectionView == typeCollectionView{
+            print("fuck")
             selectIndex = indexPath
             if isEditType{
+                print(111)
                 
                 let cell = typeCollectionView.cellForItem(at: indexPath) as! EditTypeCollectionViewCell
                 cell.typeImage.alpha = 1
@@ -477,10 +488,13 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
                 }
             }
             else{
+                print(222)
                 let cell = typeCollectionView.cellForItem(at: indexPath) as! EditTypeCollectionViewCell
                 cell.typeImage.alpha = 1
                 typeIndex = indexPath.row
+                print(typeArray[indexPath.row].data()["typeDocumentID"] as? String)
                 if let typeDocumentID = typeArray[indexPath.row].data()["typeDocumentID"] as? String{
+                    print(123)
                     getFood(typeDocumentID: typeDocumentID)
                 }
             }

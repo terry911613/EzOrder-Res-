@@ -66,15 +66,18 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
         addKeyboardObserver()
     }
     override func viewDidLoad() {
-        searchStoreconfirm()
+        
         super.viewDidLoad()
         getType()
         backGroundScrollView.parentVC = self
         backGroundScrollView.keyboardDismissMode = .onDrag
+        
+        
         if let resID = resID{
             db.collection("res").document(resID).addSnapshotListener { (res, error) in
                 print("mother fucker")
                 if let resData = res?.data(){
+                    
                     print("sucker")
                     if let resImage = resData["resImage"] as? String,
                         let resName = resData["resName"] as? String,
@@ -242,26 +245,11 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
     
     @IBAction func confirm(_ sender: Any) {
         searchStoreconfirm()
-        if statusNumber == 0 {
-            let alert = UIAlertController(title: "審核中", message: "可至個人頁面->店家審核,查看進度", preferredStyle: .alert)
-          let ok = UIAlertAction(title: "確定", style: .default, handler: nil)
-            alert.addAction(ok)
-            present(alert,animated:true,completion: nil)
-        }
-        if statusNumber == 1 {
-            let alert = UIAlertController(title: "審核成功", message: nil, preferredStyle: .alert)
-            let ok = UIAlertAction(title: "確定", style: .default, handler: nil)
-            alert.addAction(ok)
-            present(alert,animated: true,completion: nil)
-        }
-        else {
-        upload()
-        }
     }
     func storeconfirm(){
         if let resID = resID{
-           let data = ["status" : 0]
-db.collection("res").document(resID).collection("storeconfirm").document("status").setData(data,completion:{
+            let data = ["status" : 0]
+            db.collection("res").document(resID).updateData(data,completion:{
                 (error) in
                 guard error == nil else {
                     return
@@ -271,11 +259,30 @@ db.collection("res").document(resID).collection("storeconfirm").document("status
     }
     
     func searchStoreconfirm(){
+        
         if let resID = resID {
-            db.collection("res").document(resID).collection("storeconfirm").document("status").addSnapshotListener{(store,error) in
+            db.collection("res").document(resID).getDocument{(store,error) in
                 if let status = store?.data(){
-                    self.statusNumber = status["status"] as? Int
-                    
+                    if let status = status["status"] as? Int{
+                        if status == 0 {
+                            let alert = UIAlertController(title: "審核中", message: "可至個人頁面->店家審核,查看進度", preferredStyle: .alert)
+                            let ok = UIAlertAction(title: "確定", style: .default, handler: nil)
+                            alert.addAction(ok)
+                            self.present(alert,animated:true,completion: nil)
+                        }
+                        else if  status == 1 {
+                            let alert = UIAlertController(title: "審核成功", message: nil, preferredStyle: .alert)
+                            let ok = UIAlertAction(title: "確定", style: .default, handler: nil)
+                            alert.addAction(ok)
+                            self.present(alert,animated: true,completion: nil)
+                        }
+                        else {
+                            self.upload()
+                        }
+                    }
+                    else{
+                        self.upload()
+                    }
                 }
             }
         }

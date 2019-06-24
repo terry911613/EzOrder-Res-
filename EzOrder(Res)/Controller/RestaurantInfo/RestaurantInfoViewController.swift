@@ -59,6 +59,13 @@ class RestaurantInfoViewController: UIViewController {
             print("error, there was a problem logging out")
         }
     }
+    
+    func qrcodeAlert(){
+        let alert = UIAlertController(title: "審核尚未通過", message: nil, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "確定", style: .default, handler: nil)
+        alert.addAction(ok)
+        present(alert, animated: true, completion: nil)
+    }
 }
 
 extension RestaurantInfoViewController: UITableViewDelegate, UITableViewDataSource{
@@ -75,8 +82,25 @@ extension RestaurantInfoViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0{
-            let QRCodeVC = storyboard?.instantiateViewController(withIdentifier: "QRCodeVC") as! QRCodeViewController 
-            navigationController?.pushViewController(QRCodeVC, animated: true)
+            let db = Firestore.firestore()
+            if let resID = Auth.auth().currentUser?.email{
+                db.collection("res").document(resID).getDocument { (res, error) in
+                    if let resData = res?.data(){
+                        if let status = resData["status"] as? Int{
+                            if status == 1{
+                                let QRCodeVC = self.storyboard?.instantiateViewController(withIdentifier: "QRCodeVC") as! QRCodeViewController
+                                self.navigationController?.pushViewController(QRCodeVC, animated: true)
+                            }
+                            else{
+                                self.qrcodeAlert()
+                            }
+                        }
+                    }
+                    else{
+                        self.qrcodeAlert()
+                    }
+                }
+            }
         }
         else if indexPath.row == 1{
             let checkADVC = storyboard?.instantiateViewController(withIdentifier: "checkADVC") as! CheckADViewController
