@@ -44,6 +44,7 @@ class CheckReservationViewController: UIViewController {
         get()
     }
     
+    
     func get(){
         let db = Firestore.firestore()
         if let resID = Auth.auth().currentUser?.email{
