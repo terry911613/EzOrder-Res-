@@ -23,13 +23,11 @@ class ApplyForADViewController: UIViewController {
         super.viewDidLoad()
         
     }
-    
-    
     @IBAction func datePickerButton(_ sender: UIButton) {
-        
         let datePicker = UIDatePicker()
         datePicker.locale = Locale(identifier: "zh_TW")
         datePicker.datePickerMode = .dateAndTime
+        datePicker.minimumDate = Date()
         datePicker.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 250)
         let formatter: DateFormatter = DateFormatter()
         formatter.dateFormat = "yyyy年M月d日 a hh點mm分"

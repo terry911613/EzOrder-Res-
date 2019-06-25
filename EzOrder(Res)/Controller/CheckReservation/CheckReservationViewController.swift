@@ -44,10 +44,11 @@ class CheckReservationViewController: UIViewController {
         get()
     }
     
+    
     func get(){
         let db = Firestore.firestore()
         if let resID = Auth.auth().currentUser?.email{
-            db.collection("res").document(resID).collection("booking").order(by: "date", descending: false).getDocuments { (booking, error) in
+            db.collection("res").document(resID).collection("booking").order(by: "date", descending: true).getDocuments { (booking, error) in
                 if let booking = booking{
                     if booking.documents.isEmpty == false{
                         let documentChange = booking.documentChanges[0]

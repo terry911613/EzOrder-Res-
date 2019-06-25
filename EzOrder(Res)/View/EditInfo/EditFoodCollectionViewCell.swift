@@ -25,13 +25,9 @@ class EditFoodCollectionViewCell: UICollectionViewCell {
         if let resID = Auth.auth().currentUser?.email,
             let foodType = typeDocumentID,
             let foodDocumentID = foodDocumentID{
-            if sender.isOn {
-                menuView.alpha = 1
-                db.collection("res").document(resID).collection("foodType").document(foodType).collection("menu").document(foodDocumentID).updateData(["foodStatus": 1])
+            if sender.isOn { db.collection("res").document(resID).collection("foodType").document(foodType).collection("menu").document(foodDocumentID).updateData(["foodStatus": 1])
             }
-            else {
-                menuView.alpha = 0.2
-                db.collection("res").document(resID).collection("foodType").document(foodType).collection("menu").document(foodDocumentID).updateData(["foodStatus": 0])
+            else { db.collection("res").document(resID).collection("foodType").document(foodType).collection("menu").document(foodDocumentID).updateData(["foodStatus": 0])
             }
         }
     }
