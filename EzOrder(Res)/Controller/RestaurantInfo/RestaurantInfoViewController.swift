@@ -113,10 +113,8 @@ extension RestaurantInfoViewController: UITableViewDelegate, UITableViewDataSour
             performSegue(withIdentifier: "chartSegue", sender: self)
         }
         else if indexPath.row == 4 {
-            let ReviewVC = storyboard?.instantiateViewController(withIdentifier: "ReviewVC")
-            as! ReviewVCViewController
-                        present(ReviewVC, animated: true, completion: nil)
-            
+            let ReviewVC = storyboard?.instantiateViewController(withIdentifier: "ReviewVC") as! ReviewVCViewController
+            present(ReviewVC, animated: true, completion: nil)
         }
         else if indexPath.row == 5{
             let closeVC = storyboard?.instantiateViewController(withIdentifier: "closeVC") as! CloseViewController
