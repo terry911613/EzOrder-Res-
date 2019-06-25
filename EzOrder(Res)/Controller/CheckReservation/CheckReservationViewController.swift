@@ -17,6 +17,7 @@ class CheckReservationViewController: UIViewController {
     @IBOutlet weak var calendarView: JTAppleCalendarView!
     @IBOutlet weak var notifyTableView: UITableView!
    
+    
     let dateFormatter: DateFormatter = DateFormatter()
     var selectDateText: String?
     var now = Date()
