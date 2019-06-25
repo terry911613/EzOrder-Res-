@@ -44,7 +44,7 @@ class TableManageViewController: UIViewController {
                         let documentChange = order.documentChanges[0]
                         if documentChange.type == .added{
                             self.allOrder = order.documents
-                            self.animateTableStatusTableView()
+                            self.tableStatusTableView.reloadData()
                         }
                     }
                 }

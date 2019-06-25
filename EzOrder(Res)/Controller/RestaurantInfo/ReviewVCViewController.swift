@@ -9,26 +9,31 @@
 import UIKit
 import Firebase
 class ReviewVCViewController: UIViewController {
+    
     @IBOutlet weak var shutDownStore: UIImageView!
     @IBOutlet weak var ReviewStore: UIImageView!
     @IBOutlet weak var okStore: UIImageView!
     @IBOutlet weak var ReviewLabel: UILabel!
     @IBOutlet weak var ReMarksLabel: UILabel!
+    
     let resID = Auth.auth().currentUser?.email
     var status : QueryDocumentSnapshot?
     var statusNumber : Int?
+    
     override func viewDidLoad() {
+        super.viewDidLoad()
         let db = Firestore.firestore()
         if  let resID = resID  {
             print(resID)
             print(6)
-    db.collection("res").document(resID).collection("storeconfirm").document("status").addSnapshotListener{(store,error) in
+            db.collection("res").document(resID).getDocument{(store,error) in
                 if let status = store?.data(){
                     self.statusNumber = status["status"] as? Int
                     if  self.statusNumber == 0 {
                         self.ReviewLabel.text = "審核中"
                         self.ReMarksLabel.text = ""
-                        self.shutDownStore.alpha = 1                                            }
+                        self.shutDownStore.alpha = 1
+                    }
                     else if self.statusNumber == 1 {
                         self.okStore.alpha = 1
                         self.ReviewLabel.text = "審核成功"
@@ -37,38 +42,13 @@ class ReviewVCViewController: UIViewController {
                     else if self.statusNumber == 2 {
                         self.ReviewStore.alpha = 1
                         self.ReviewLabel.text = "失敗"
-                        self.ReMarksLabel.text = "餐廳資訊請填寫完整,不可包含不雅圖片及字眼"
+                        self.ReMarksLabel.text = "餐廳資訊請填寫完整, 不可包含不雅圖片及字眼"
                     }
                 }
             }
-            super.viewDidLoad()
-
-    }
+        }
     }
     @IBAction func backButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-    
-    func searchShutDown() {
-
-        
-    }
-    func searchReview(){
-        let db = Firestore.firestore()
-        if let resID = resID { db.collection("res").document(resID).collection("storeconfirm").whereField("status", isEqualTo: 2)
-        }
-        
-    }
-    func searchokStore() {
-        let db = Firestore.firestore()
-        if let resID = resID { db.collection("res").document(resID).collection("storeconfirm").whereField("status", isEqualTo: 1)
-            
-    
-        }
-        
-    
-    }
-    
-  
-
 }
