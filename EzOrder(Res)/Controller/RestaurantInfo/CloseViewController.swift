@@ -39,7 +39,7 @@ class CloseViewController: UIViewController {
         let okalear = UIAlertAction(title: "確定", style: .default, handler: {(okalear) in
             let db = Firestore.firestore()
             if  let resID = self.resID {
-                db.collection("res").document(resID).updateData(["status": 2])
+                db.collection("res").document(resID).updateData(["status": FieldValue.delete()])
                             }
             self.dismiss(animated: true, completion: nil)
             
