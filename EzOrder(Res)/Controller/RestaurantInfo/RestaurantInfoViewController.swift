@@ -121,17 +121,16 @@ extension RestaurantInfoViewController: UITableViewDelegate, UITableViewDataSour
         else if indexPath.row == 5{
             print(p5status)
             if p5status == 1 {
-            let closeVC = storyboard?.instantiateViewController(withIdentifier: "closeVC") as! CloseViewController
-            present(closeVC, animated: true, completion: nil)
+                let closeVC = storyboard?.instantiateViewController(withIdentifier: "closeVC") as! CloseViewController
+                present(closeVC, animated: true, completion: nil)
             }
             else{
-                
                 let alear = UIAlertController(title: "尚未開店成功", message: nil, preferredStyle: .alert)
                 let okalear = UIAlertAction(title: "確定", style: .default, handler: nil)
                 alear.addAction(okalear)
                 present(alear,animated: true,completion: nil)
                 
             }
-            }
         }
     }
+}
