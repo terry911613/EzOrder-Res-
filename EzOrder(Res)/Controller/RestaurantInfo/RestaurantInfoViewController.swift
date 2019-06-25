@@ -12,7 +12,7 @@ import FirebaseAuth
 import Kingfisher
 
 class RestaurantInfoViewController: UIViewController {
-
+    
     @IBOutlet weak var resTableView: UITableView!
     @IBOutlet weak var resImageView: UIImageView!
     @IBOutlet weak var resNameLabel: UILabel!
@@ -23,9 +23,11 @@ class RestaurantInfoViewController: UIViewController {
     var lisn = ["QRCode","廣告審核結果","info","編輯","house","申請關店"]
     
     override func viewDidLoad() {
+        
+        
         super.viewDidLoad()
         
-      //  getInfo()
+        //  getInfo()
     }
     override func viewWillAppear(_ animated: Bool) {
         getInfo()
@@ -115,22 +117,33 @@ extension RestaurantInfoViewController: UITableViewDelegate, UITableViewDataSour
             performSegue(withIdentifier: "chartSegue", sender: self)
         }
         else if indexPath.row == 4 {
-            let ReviewVC = storyboard?.instantiateViewController(withIdentifier: "ReviewVC") as! ReviewVCViewController
+            let ReviewVC = storyboard?.instantiateViewController(withIdentifier: "ReviewVC")
+                as! ReviewVCViewController
             present(ReviewVC, animated: true, completion: nil)
+            
         }
         else if indexPath.row == 5{
-            print(p5status)
-            if p5status == 1 {
-                let closeVC = storyboard?.instantiateViewController(withIdentifier: "closeVC") as! CloseViewController
-                present(closeVC, animated: true, completion: nil)
+            let db = Firestore.firestore()
+            if let resID = Auth.auth().currentUser?.email{
+                db.collection("res").document(resID).getDocument { (res, error) in
+                    if let resData = res?.data(){
+                        if let status = resData["status"] as? Int{
+                            self.p5status = status
+                            if status == 1{
+                                let closeVC = self.storyboard?.instantiateViewController(withIdentifier: "closeVC") as! CloseViewController
+                                self.present(closeVC, animated: true, completion: nil)
+                            }
+                            else{
+                                self.qrcodeAlert()
+                            }
+                        }
+                    }
+                    else{
+                        self.qrcodeAlert()
+                    }
+                }
             }
-            else{
-                let alear = UIAlertController(title: "尚未開店成功", message: nil, preferredStyle: .alert)
-                let okalear = UIAlertAction(title: "確定", style: .default, handler: nil)
-                alear.addAction(okalear)
-                present(alear,animated: true,completion: nil)
-                
-            }
+            
         }
     }
 }
