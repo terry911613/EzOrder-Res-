@@ -26,7 +26,6 @@ class ApplyForADViewController: UIViewController {
     
     
     @IBAction func datePickerButton(_ sender: UIButton) {
-        
         let datePicker = UIDatePicker()
         datePicker.locale = Locale(identifier: "zh_TW")
         datePicker.datePickerMode = .dateAndTime
