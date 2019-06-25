@@ -17,6 +17,7 @@ class RestaurantInfoViewController: UIViewController {
     @IBOutlet weak var resImageView: UIImageView!
     @IBOutlet weak var resNameLabel: UILabel!
     @IBOutlet weak var resTaxIDLabel: UILabel!
+    var p5status = 0
     
     var restaurant = ["QRCode生成","查看廣告審核","訂單記錄","編輯","店家狀態","申請關店"]
     var lisn = ["QRCode","廣告審核結果","info","編輯","house","申請關店"]
@@ -87,6 +88,7 @@ extension RestaurantInfoViewController: UITableViewDelegate, UITableViewDataSour
                 db.collection("res").document(resID).getDocument { (res, error) in
                     if let resData = res?.data(){
                         if let status = resData["status"] as? Int{
+                            self.p5status = status
                             if status == 1{
                                 let QRCodeVC = self.storyboard?.instantiateViewController(withIdentifier: "QRCodeVC") as! QRCodeViewController
                                 self.navigationController?.pushViewController(QRCodeVC, animated: true)
@@ -117,8 +119,19 @@ extension RestaurantInfoViewController: UITableViewDelegate, UITableViewDataSour
             present(ReviewVC, animated: true, completion: nil)
         }
         else if indexPath.row == 5{
+            print(p5status)
+            if p5status == 1 {
             let closeVC = storyboard?.instantiateViewController(withIdentifier: "closeVC") as! CloseViewController
             present(closeVC, animated: true, completion: nil)
+            }
+            else{
+                
+                let alear = UIAlertController(title: "尚未開店成功", message: nil, preferredStyle: .alert)
+                let okalear = UIAlertAction(title: "確定", style: .default, handler: nil)
+                alear.addAction(okalear)
+                present(alear,animated: true,completion: nil)
+                
+            }
+            }
         }
     }
-}

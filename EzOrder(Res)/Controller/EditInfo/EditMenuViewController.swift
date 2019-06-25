@@ -19,10 +19,8 @@ class EditMenuViewController: UIViewController {
     @IBOutlet var longPress: UILongPressGestureRecognizer!
     @IBOutlet var foodLongPress: UILongPressGestureRecognizer!
     @IBOutlet weak var guideLabel: UILabel!
-    
-    
+    @IBOutlet weak var editItem: UIBarButtonItem!
     var isEndEdit = true
-//    var p: CGPoint?
     var isMovePressed = false
     var isEditType = false
     var isEditFood = false
@@ -147,9 +145,6 @@ class EditMenuViewController: UIViewController {
     }
     
     @IBAction func stackAction(_ sender: Any) {
-        
-//        stackView.isHidden = false
-        
         for optina in optinss {
             UIView.animate(withDuration: 0.3, animations:{
                 optina.isHidden = !optina.isHidden
@@ -159,7 +154,7 @@ class EditMenuViewController: UIViewController {
         guideLabel.text = ""
         isEndEdit = !isEndEdit
         if isEndEdit{
-            print(isEditType)
+            editItem.image = UIImage(named: "新增item")
             UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.allowUserInteraction, animations:{ self.typeCollectionView.transform = CGAffineTransform(translationX: 0, y: 0)
                 self.foodCollectionView.transform = CGAffineTransform(translationX: 0, y: 0)
             }, completion: nil)
@@ -170,8 +165,10 @@ class EditMenuViewController: UIViewController {
             
         }
         else{
+            editItem.image = UIImage(named: "取消")
             UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.allowUserInteraction, animations:{ self.typeCollectionView.transform = CGAffineTransform(translationX: 0, y: 80)
                 self.foodCollectionView.transform = CGAffineTransform(translationX: 0, y: 80)
+                
             }, completion: nil)
             print(isEditType)
 //            stackView.isHidden = true
@@ -217,14 +214,6 @@ class EditMenuViewController: UIViewController {
     }
     
     @IBAction func moveButton(_ sender: UIButton) {
-        //        for optina in optinss {
-        //            UIView.animate(withDuration: 0.5, animations:{ optina.isHidden = !optina.isHidden
-        //                self.view.layoutIfNeeded()
-        ////                self.editState = !self.editState
-        //            })
-        //        }
-//        initTypeImageAlpha()
-        //        prepare = !prepare
         initTypeImageAlpha()
         isMovePressed = !isMovePressed
         isEditType = false
@@ -241,13 +230,6 @@ class EditMenuViewController: UIViewController {
     }
     
     @IBAction func editType(_ sender: UIButton) {
-        //        for optina in optinss {
-        //            UIView.animate(withDuration: 0.5, animations:{ optina.isHidden = !optina.isHidden
-        //                self.view.layoutIfNeeded()
-        ////                self.editState = !self.editState
-        //            })
-        //        }
-//        initTypeImageAlpha()
         initTypeImageAlpha()
         isEditType = !isEditType
         isMovePressed = false
@@ -260,22 +242,15 @@ class EditMenuViewController: UIViewController {
         else{
             guideLabel.text = ""
         }
-//        initTypeImageAlpha()
+
     }
     
     @IBAction func editFood(_ sender: UIButton) {
-        //        for optina in optinss {
-        //            UIView.animate(withDuration: 0.5, animations:{ optina.isHidden = !optina.isHidden
-        //                self.view.layoutIfNeeded()
-        ////                self.editState = !self.editState
-        //            })
-        //        }
         initTypeImageAlpha()
         
         isEditFood = !isEditFood
         isMovePressed = false
         isEditType = false
-//        initTypeImageAlpha()
         reloadTwoCollectionView()
         
         if isEditFood{
