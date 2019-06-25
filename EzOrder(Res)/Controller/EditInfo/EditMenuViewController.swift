@@ -20,10 +20,8 @@ class EditMenuViewController: UIViewController {
     @IBOutlet var foodLongPress: UILongPressGestureRecognizer!
     @IBOutlet weak var guideLabel: UILabel!
     @IBOutlet weak var stackView: UIStackView!
-    
-    
+    @IBOutlet weak var addItem: UIBarButtonItem!
     var isEndEdit = true
-//    var p: CGPoint?
     var isMovePressed = false
     var isEditType = false
     var isEditFood = false
@@ -160,11 +158,14 @@ class EditMenuViewController: UIViewController {
             initTypeImageAlpha()
             initStatus()
             reloadTwoCollectionView()
+            addItem.image = UIImage(named: "新增item")
         }
         else{
             UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.allowUserInteraction, animations:{ self.typeCollectionView.transform = CGAffineTransform(translationX: 0, y: 80)
                 self.foodCollectionView.transform = CGAffineTransform(translationX: 0, y: 80)
+                
             }, completion: nil)
+            addItem.image = UIImage(named: "取消")
             
         }
     }
