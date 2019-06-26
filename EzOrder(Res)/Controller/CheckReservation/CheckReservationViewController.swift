@@ -38,17 +38,13 @@ class CheckReservationViewController: UIViewController {
         calendarView.showsHorizontalScrollIndicator = false
         
         selectDateText = dateFormatter.string(from: now)
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        
         get()
     }
-    
-    
     func get(){
         let db = Firestore.firestore()
         if let resID = Auth.auth().currentUser?.email{
-            db.collection("res").document(resID).collection("booking").order(by: "date", descending: true).getDocuments { (booking, error) in
+            db.collection("res").document(resID).collection("booking").order(by: "date", descending: true).addSnapshotListener { (booking, error) in
                 if let booking = booking{
                     if booking.documents.isEmpty == false{
                         let documentChange = booking.documentChanges[0]
@@ -57,8 +53,6 @@ class CheckReservationViewController: UIViewController {
                             for booking in booking.documents{
                                 if let bookingDateString = booking.data()["documentID"] as? String{
                                     self.eventDic[bookingDateString] = "yes"
-                                    print(self.eventDic)
-                                    self.calendarView.reloadData()
                                     db.collection("res").document(resID).collection("booking").document(bookingDateString).collection("bookDetail").order(by: "date", descending: false).getDocuments{ (bookingDetail, error) in
                                         if let bookingDetail = bookingDetail{
                                             if bookingDetail.documents.isEmpty == false{
@@ -67,6 +61,7 @@ class CheckReservationViewController: UIViewController {
                                                     for booking in bookingDetail.documents{
                                                         self.allBooking.append(booking)
                                                         self.notifyTableView.reloadData()
+                                                        self.calendarView.reloadData()
                                                     }
                                                 }
                                             }
@@ -81,8 +76,6 @@ class CheckReservationViewController: UIViewController {
         }
     }
     @IBAction func reservationSegment(_ sender: UISegmentedControl) {
-        
-        get()
         
         if sender.selectedSegmentIndex == 0{
             calendarView.isHidden = false

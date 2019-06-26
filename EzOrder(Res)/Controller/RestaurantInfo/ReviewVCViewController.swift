@@ -18,7 +18,6 @@ class ReviewVCViewController: UIViewController {
     
     let resID = Auth.auth().currentUser?.email
     var status : QueryDocumentSnapshot?
-    var statusNumber : Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,21 +27,29 @@ class ReviewVCViewController: UIViewController {
             print(6)
             db.collection("res").document(resID).getDocument{(store,error) in
                 if let status = store?.data(){
-                    self.statusNumber = status["status"] as? Int
-                    if  self.statusNumber == 0 {
-                        self.ReviewLabel.text = "審核中"
-                        self.ReMarksLabel.text = ""
-                        self.shutDownStore.alpha = 1
+                    if let statusNumber = status["status"] as? Int{
+                        if statusNumber == 0 {
+                            self.ReviewLabel.text = "審核中"
+                            self.ReMarksLabel.text = ""
+                            self.shutDownStore.alpha = 1
+                        }
+                        else if statusNumber == 1 {
+                            self.okStore.alpha = 1
+                            self.ReviewLabel.text = "審核成功"
+                            self.ReMarksLabel.text = "開店中"
+                        }
+                        else if statusNumber == 2 {
+                            self.ReviewStore.alpha = 1
+                            self.ReviewLabel.text = "審核失敗"
+                            self.ReMarksLabel.text = "餐廳資訊請填寫完整, 不可包含不雅圖片及字眼"
+                        }
                     }
-                    else if self.statusNumber == 1 {
-                        self.okStore.alpha = 1
-                        self.ReviewLabel.text = "審核成功"
-                        self.ReMarksLabel.text = ""
-                    }
-                    else if self.statusNumber == 2 {
-                        self.ReviewStore.alpha = 1
-                        self.ReviewLabel.text = "失敗"
-                        self.ReMarksLabel.text = "餐廳資訊請填寫完整, 不可包含不雅圖片及字眼"
+                    else{
+                        self.shutDownStore.alpha = 0.1
+                        self.ReviewStore.alpha = 0.1
+                        self.okStore.alpha = 0.1
+                        self.ReviewLabel.text = ""
+                        self.ReMarksLabel.text = "尚未申請開店"
                     }
                 }
             }

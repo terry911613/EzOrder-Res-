@@ -23,16 +23,12 @@ class RestaurantInfoViewController: UIViewController {
     var lisn = ["QRCode","廣告審核結果","info","編輯","house","申請關店"]
     
     override func viewDidLoad() {
-        
-        
         super.viewDidLoad()
         
-        //  getInfo()
     }
     override func viewWillAppear(_ animated: Bool) {
         getInfo()
     }
-    
     func getInfo(){
         let db = Firestore.firestore()
         if let resID = Auth.auth().currentUser?.email{
@@ -64,7 +60,7 @@ class RestaurantInfoViewController: UIViewController {
     }
     
     func qrcodeAlert(){
-        let alert = UIAlertController(title: "審核尚未通過", message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: "還未開店", message: nil, preferredStyle: .alert)
         let ok = UIAlertAction(title: "確定", style: .default, handler: nil)
         alert.addAction(ok)
         present(alert, animated: true, completion: nil)
@@ -99,9 +95,9 @@ extension RestaurantInfoViewController: UITableViewDelegate, UITableViewDataSour
                                 self.qrcodeAlert()
                             }
                         }
-                    }
-                    else{
-                        self.qrcodeAlert()
+                        else{
+                            self.qrcodeAlert()
+                        }
                     }
                 }
             }
@@ -120,7 +116,6 @@ extension RestaurantInfoViewController: UITableViewDelegate, UITableViewDataSour
             let ReviewVC = storyboard?.instantiateViewController(withIdentifier: "ReviewVC")
                 as! ReviewVCViewController
             present(ReviewVC, animated: true, completion: nil)
-            
         }
         else if indexPath.row == 5{
             let db = Firestore.firestore()
@@ -137,13 +132,13 @@ extension RestaurantInfoViewController: UITableViewDelegate, UITableViewDataSour
                                 self.qrcodeAlert()
                             }
                         }
+                        else{
+                            self.qrcodeAlert()
+                        }
                     }
-                    else{
-                        self.qrcodeAlert()
-                    }
+                    
                 }
             }
-            
         }
     }
 }
