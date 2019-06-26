@@ -40,4 +40,43 @@ class QRCodeViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
+
+    
+    @IBAction func PrintItem(_ sender: Any) {
+        UIGraphicsBeginImageContextWithOptions(view.frame.size, true, 0)
+        view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
+        let shareImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        let activityViewController = UIActivityViewController(activityItems: [shareImage!], applicationActivities: [])
+        activityViewController.excludedActivityTypes = [.assignToContact, .addToReadingList, .openInIBooks, .markupAsPDF, .postToFacebook, .postToWeibo, .postToFlickr, .postToTwitter]
+        present(activityViewController,animated: true,completion: nil)
+    }
+    
+    
+    @IBAction func getImageItem(_ sender: Any) {
+        UIGraphicsBeginImageContextWithOptions(view.frame.size, true, 0)
+        view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
+        let shareImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        let getImageVIew = UIImageView(image: shareImage)
+        view.addSubview(getImageVIew)
+        UIImageWriteToSavedPhotosAlbum(shareImage!, nil, nil, nil)
+        UIView.animate(withDuration: 1, animations: {
+            getImageVIew.frame = CGRect(x: 0, y: self.view.bounds.height / 1.5, width: self.view.bounds.width / 3, height: self.view.bounds.height / 3)
+            
+        }, completion: {finished in
+            
+            UIView.animate(withDuration: 2,delay: 1, animations: {
+                getImageVIew.alpha = 0
+                
+            }, completion:{finished in
+                getImageVIew.removeFromSuperview()
+            }
+            )
+            
+        })
+
+        
+    }
 }

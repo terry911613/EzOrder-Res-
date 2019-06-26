@@ -95,6 +95,7 @@
                         <segue destination="jBN-cp-ofK" kind="unwind" identifier="goLogin" unwindAction="unwindSegueBackLoginWithSegue:" id="8sZ-m2-iyc"/>
                         <segue destination="nSP-R4-9Ov" kind="show" identifier="orderRecordSegue" id="7lc-MN-iXO"/>
                         <segue destination="Mgk-IH-i7s" kind="show" identifier="chartSegue" id="y1J-Ny-peB"/>
+                        <segue destination="mbN-Xa-DxD" kind="push" id="Uer-i1-FWF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fvJ-0J-nfi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -461,6 +462,20 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="JWP-1o-0y8"/>
                     </view>
+                    <navigationItem key="navigationItem" id="is8-2e-VSr">
+                        <rightBarButtonItems>
+                            <barButtonItem title="列印" id="ILg-gz-suV">
+                                <connections>
+                                    <action selector="PrintItem:" destination="mbN-Xa-DxD" id="2OT-kX-GNW"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="截圖" id="VGP-o1-fuc">
+                                <connections>
+                                    <action selector="getImageItem:" destination="mbN-Xa-DxD" id="BVX-eu-wG2"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <connections>
                         <outlet property="imageView" destination="tJt-hH-XTP" id="GU0-fi-Djo"/>
                         <outlet property="tableTextfield" destination="WUu-fu-qZB" id="0IT-Ri-iaE"/>
