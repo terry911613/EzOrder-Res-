@@ -29,6 +29,8 @@ class FoodViewController: UIViewController{
     var foodDetail: String?
     var typeDocumentID: String?
     var viewHeight: CGFloat?
+    var isEdit = false
+    var foodDocumentID: String?
     override func viewWillAppear(_ animated: Bool) {
         addKeyboardObserver()
     }
@@ -52,7 +54,12 @@ class FoodViewController: UIViewController{
     }
     
     @IBAction func doneButton(_ sender: Any) {
-        upload()
+        if isEdit{
+            editUpload()
+        }
+        else{
+            upload()
+        }
         dismiss(animated: true, completion: nil)
         
     }
@@ -62,6 +69,54 @@ class FoodViewController: UIViewController{
         imagePicker.delegate = self
         present(imagePicker,animated: true)
     }
+    
+    func editUpload(){
+        if let foodImage = foodImageView.image,
+            let foodName = foodNameTextfield.text, foodName.isEmpty == false,
+            let foodPrice = Int(foodPriceTextfield.text!),
+            let resID = resID,
+            let typeIndex = typeIndex,
+            let typeDocumentID = self.typeArray[typeIndex].data()["typeDocumentID"] as? String,
+            let foodDocumentID = foodDocumentID{
+            //DocumentReference 指定位置
+            //照片參照
+            SVProgressHUD.show()
+            let storageReference = Storage.storage().reference()
+            let fileReference = storageReference.child(UUID().uuidString + ".jpg")
+            let size = CGSize(width: 640, height: foodImage.size.height * 640 / foodImage.size.width)
+            UIGraphicsBeginImageContext(size)
+            foodImage.draw(in: CGRect(origin: .zero, size: size))
+            let resizeImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            if let data = resizeImage?.jpegData(compressionQuality: 0.8){
+                fileReference.putData(data,metadata: nil) {(metadate, error) in
+                    guard let _ = metadate, error == nil else {
+                        SVProgressHUD.dismiss()
+                        return
+                    }
+                    fileReference.downloadURL(completion: { (url, error) in
+                        guard let downloadURL = url else {
+                            SVProgressHUD.dismiss()
+                            return
+                        }
+                        let data: [String: Any] = ["foodName": foodName,
+                                                   "foodImage": downloadURL.absoluteString,
+                                                   "foodPrice": foodPrice,
+                                                   "foodDetail": self.foodDetailTextfield.text ?? ""]
+                        self.db.collection("res").document(resID).collection("foodType").document(typeDocumentID).collection("menu").document(foodDocumentID).updateData(data, completion: { (error) in
+                            guard error == nil else {
+                                SVProgressHUD.dismiss()
+                                return
+                            }
+                            SVProgressHUD.dismiss()
+                        })
+                        SVProgressHUD.dismiss()
+                    })
+                }
+            }
+        }
+    }
+    
     func upload(){
         
         if let foodImage = foodImageView.image,

@@ -35,11 +35,6 @@ class EditMenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        for optina in optinss {
-//            optina.isHidden = true
-//        }
-        
         guideLabel.text = ""
         foodCollectionView.addGestureRecognizer(self.foodLongPress)
         typeCollectionView.addGestureRecognizer(self.longPress)
@@ -49,7 +44,6 @@ class EditMenuViewController: UIViewController {
                 self.view.layoutIfNeeded()
             })
         }
-        
         getType()
         if typeArray.isEmpty == false, let typeIndex = typeIndex{
             print(100)
@@ -75,7 +69,10 @@ class EditMenuViewController: UIViewController {
                         if documentChange.type == .added {
                             self.typeArray = type.documents
                             self.typeAnimateCollectionView()
-                            //  print("getType")
+                        }
+                        else{
+                            self.typeArray = type.documents
+                            self.typeAnimateCollectionView()
                         }
                     }
                 }
@@ -96,10 +93,11 @@ class EditMenuViewController: UIViewController {
                         let documentChange = food.documentChanges[0]
                         if documentChange.type == .added {
                             self.foodArray = food.documents
-                            print(self.foodArray.count)
                             self.foodAnimateCollectionView()
-                            print("getFood Success")
-                            print("-------------")
+                        }
+                        else{
+                            self.foodArray = food.documents
+                            self.foodAnimateCollectionView()
                         }
                     }
                 }
@@ -191,8 +189,6 @@ class EditMenuViewController: UIViewController {
     }
     
     @IBAction func addMenu(_ sender: Any) {
-        
-//        initTypeImageAlpha()
         
         let menuVC = storyboard?.instantiateViewController(withIdentifier: "menuVC") as! FoodViewController
         if let typeIndex = typeIndex{
@@ -337,19 +333,15 @@ class EditMenuViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "foodDetailSegue"{
-            
             let foodDetailVC = segue.destination as! FoodDetailViewController
             if let foodIndex = foodIndex{
                 let food = foodArray[foodIndex]
-                print(food.data()["typeDocumentID"] as? String)
-                print(food.data()["foodDocumentID"] as? String)
                 if let foodName = food.data()["foodName"] as? String,
                     let foodImage = food.data()["foodImage"] as? String,
                     let foodPrice = food.data()["foodPrice"] as? Int,
                     let foodDetail = food.data()["foodDetail"] as? String,
                     let typeDocumentID = food.data()["typeDocumentID"] as? String,
-                let foodDocumentID = food.data()["foodDocumentID"] as? String{
-                    print("what the")
+                    let foodDocumentID = food.data()["foodDocumentID"] as? String{
                     
                     foodDetailVC.foodName = foodName
                     foodDetailVC.foodImage = foodImage
@@ -456,9 +448,12 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
                 let typeVC = storyboard?.instantiateViewController(withIdentifier: "typeVC") as! TypeViewController
                 let type = typeArray[indexPath.row]
                 if let typeName = type.data()["typeName"] as? String,
-                    let typeImage = type.data()["typeImage"] as? String{
+                    let typeImage = type.data()["typeImage"] as? String,
+                    let typeDocumentID = type.data()["typeDocumentID"] as? String{
                     typeVC.typeName = typeName
                     typeVC.typeImage = typeImage
+                    typeVC.typeDocumentID = typeDocumentID
+                    typeVC.isEdit = true
                     present(typeVC, animated: true, completion: nil)
                 }
             }
@@ -467,9 +462,7 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
                 let cell = typeCollectionView.cellForItem(at: indexPath) as! EditTypeCollectionViewCell
                 cell.typeImage.alpha = 1
                 typeIndex = indexPath.row
-                print(typeArray[indexPath.row].data()["typeDocumentID"] as? String)
                 if let typeDocumentID = typeArray[indexPath.row].data()["typeDocumentID"] as? String{
-                    print(123)
                     getFood(typeDocumentID: typeDocumentID)
                 }
             }
@@ -481,12 +474,18 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
                 if let foodName = food.data()["foodName"] as? String,
                     let foodImage = food.data()["foodImage"] as? String,
                     let foodPrice = food.data()["foodPrice"] as? Int,
-                    let foodDetail = food.data()["foodDetail"] as? String{
+                    let foodDetail = food.data()["foodDetail"] as? String,
+                    let foodDocumentID = food.data()["foodDocumentID"] as? String,
+                    let typeIndex = food.data()["typeIndex"] as? Int{
                     
                     menuVC.foodImage = foodImage
                     menuVC.foodName = foodName
                     menuVC.foodPrice = foodPrice
                     menuVC.foodDetail = foodDetail
+                    menuVC.foodDocumentID = foodDocumentID
+                    menuVC.isEdit = true
+                    menuVC.typeIndex = typeIndex
+                    menuVC.typeArray = typeArray
                     present(menuVC, animated: true, completion: nil)
                 }
             }
