@@ -19,7 +19,30 @@ class QRCodeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    @IBAction func generateButton(_ sender: UIButton) {
+    
+    
+    @IBAction func ImageFram(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 1 {
+            self.imageView.center = view.center
+            let imageSize = CGSize(width: 250, height: 250)
+            self.imageView.bounds.size = imageSize
+        }
+        else if sender.selectedSegmentIndex == 2{
+            self.imageView.center = view.center
+            let imageSize = CGSize(width: 150  , height: 150)
+            self.imageView.bounds.size = imageSize
+
+        } else if sender.selectedSegmentIndex == 0 {
+            self.imageView.center = view.center
+            let imageSize = CGSize(width: 343, height: 343)
+            self.imageView.bounds.size = imageSize
+        }
+        
+    }
+
+    
+    
+        @IBAction func generateButton(_ sender: UIButton) {
         
         if let table = Int(tableTextfield.text!){
             var qrCodeInfo = [String: String]()
@@ -54,15 +77,14 @@ class QRCodeViewController: UIViewController {
     
     
     @IBAction func getImageItem(_ sender: Any) {
-        UIGraphicsBeginImageContextWithOptions(view.frame.size, true, 0)
-        view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
+        UIGraphicsBeginImageContextWithOptions(view.bounds.size,true, 0)
+       view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
         let shareImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        
         let getImageVIew = UIImageView(image: shareImage)
         view.addSubview(getImageVIew)
         UIImageWriteToSavedPhotosAlbum(shareImage!, nil, nil, nil)
-        UIView.animate(withDuration: 1, animations: {
+        UIView.animate(withDuration: 0.7, animations: {
             getImageVIew.frame = CGRect(x: 0, y: self.view.bounds.height / 1.5, width: self.view.bounds.width / 3, height: self.view.bounds.height / 3)
             
         }, completion: {finished in
