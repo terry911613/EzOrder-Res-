@@ -30,7 +30,7 @@ class ApplyForADViewController: UIViewController {
         datePicker.minimumDate = Date()
         datePicker.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 250)
         let formatter: DateFormatter = DateFormatter()
-        formatter.dateFormat = "yyyy年M月d日 a hh點mm分"
+        formatter.dateFormat = "yyyy年M月d日"
         formatter.locale = Locale(identifier: "zh_TW")
         formatter.timeZone = TimeZone(identifier: "zh_TW")
         let dateAlert = UIAlertController(title: "\n\n\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .actionSheet)

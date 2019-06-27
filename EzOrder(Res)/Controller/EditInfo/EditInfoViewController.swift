@@ -193,7 +193,7 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
     }
     func getType(){
         if let resID = resID{
-            db.collection("res").document(resID).collection("foodType").getDocuments { (type, error) in
+            db.collection("res").document(resID).collection("foodType").addSnapshotListener { (type, error) in
                 if let type = type{
                     self.typeArray = type.documents
                     self.typeCollectionView.reloadData()
@@ -459,8 +459,6 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
             annotation.subtitle = "(\(coordinate.latitude), \(coordinate.longitude))"
             myMap.addAnnotation(annotation)
         }
-        
-        
     }
     func setMapCenter(center: CLLocationCoordinate2D) {
         myMap.setCenter(center, animated: true)

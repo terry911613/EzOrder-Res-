@@ -22,7 +22,8 @@ class TypeViewController: UIViewController{
     var typeName: String?
     var typeImage: String?
     var viewHeight: CGFloat?
-    
+    var typeDocumentID: String?
+    var isEdit = false
     
     override func viewWillAppear(_ animated: Bool) {
         addKeyboardObserver()
@@ -46,12 +47,58 @@ class TypeViewController: UIViewController{
     }
     
     @IBAction func doneButton(_ sender: Any) {
-        upload()
+        if isEdit{
+            editUpload()
+        }
+        else{
+            upload()
+        }
         dismiss(animated: true, completion: nil)
     }
     
     @IBAction func cancelButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    func editUpload(){
+        if let typeName = typeNameTextfield.text, typeName.isEmpty == false,
+            let typeImage = typeImageView.image,
+            let resID = resID,
+            let documentID = typeDocumentID{
+            
+            SVProgressHUD.show()
+            let storageReference = Storage.storage().reference()
+            let fileReference = storageReference.child(UUID().uuidString + ".jpg")
+            let size = CGSize(width: 640, height: typeImage.size.height * 640 / typeImage.size.width)
+            UIGraphicsBeginImageContext(size)
+            typeImage.draw(in: CGRect(origin: .zero, size: size))
+            let resizeImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            if let data = resizeImage?.jpegData(compressionQuality: 0.8){
+                fileReference.putData(data,metadata: nil) {(metadate, error) in
+                    guard let _ = metadate, error == nil else {
+                        SVProgressHUD.dismiss()
+                        return
+                    }
+                    fileReference.downloadURL(completion: { (url, error) in
+                        guard let downloadURL = url else {
+                            SVProgressHUD.dismiss()
+                            return
+                        }
+                        let data: [String: Any] = ["typeName": typeName,
+                                                   "typeImage": downloadURL.absoluteString]
+                        self.db.collection("res").document(resID).collection("foodType").document(documentID).updateData(data, completion: { (error) in
+                            guard error == nil else {
+                                SVProgressHUD.dismiss()
+                                return
+                            }
+                            SVProgressHUD.dismiss()
+                        })
+                        SVProgressHUD.dismiss()
+                    })
+                }
+            }
+        }
     }
     
     func upload() {
