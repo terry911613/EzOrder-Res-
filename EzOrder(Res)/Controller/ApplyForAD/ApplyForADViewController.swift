@@ -26,7 +26,7 @@ class ApplyForADViewController: UIViewController {
     @IBAction func datePickerButton(_ sender: UIButton) {
         let datePicker = UIDatePicker()
         datePicker.locale = Locale(identifier: "zh_TW")
-        datePicker.datePickerMode = .dateAndTime
+        datePicker.datePickerMode = .date
         datePicker.minimumDate = Date()
         datePicker.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 250)
         let formatter: DateFormatter = DateFormatter()
