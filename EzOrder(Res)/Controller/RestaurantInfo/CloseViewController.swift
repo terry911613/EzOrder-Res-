@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 class CloseViewController: UIViewController {
-
+    
     @IBOutlet weak var alertView: UIView!
     @IBOutlet weak var passwordTextfield: UITextField!
     var viewHeight: CGFloat?
@@ -22,7 +22,6 @@ class CloseViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
     
     @IBAction func cancelButton(_ sender: UIButton) {
@@ -34,23 +33,23 @@ class CloseViewController: UIViewController {
             let alear = UIAlertAction(title: "確定", style: .default, handler: nil)
             alearContorller.addAction(alear)
             present(alearContorller,animated: true,completion: nil)
-        }else{
-        let okAlearContorller = UIAlertController(title: "是否確認送出", message: "送出後將無法返回", preferredStyle: .alert)
-        let okalear = UIAlertAction(title: "確定", style: .default, handler: {(okalear) in
-            let db = Firestore.firestore()
-            if  let resID = self.resID {
-                db.collection("res").document(resID).updateData(["status": FieldValue.delete()])
-                            }
-            self.dismiss(animated: true, completion: nil)
-            
-        })
+        }
+        else{
+            let okAlearContorller = UIAlertController(title: "是否確認送出", message: "送出後將無法返回", preferredStyle: .alert)
+            let okalear = UIAlertAction(title: "確定", style: .default, handler: {(okalear) in
+                let db = Firestore.firestore()
+                if  let resID = self.resID {
+                    db.collection("res").document(resID).updateData(["status": FieldValue.delete()])
+                }
+                self.dismiss(animated: true, completion: nil)
+            })
             let cancel = UIAlertAction(title: "取消", style: .cancel, handler: nil)
             okAlearContorller.addAction(cancel)
             okAlearContorller.addAction(okalear)
             present(okAlearContorller,animated: true,completion: nil)
-        
+            
         }
-
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
