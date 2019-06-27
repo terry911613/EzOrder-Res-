@@ -19,8 +19,8 @@ class RestaurantInfoViewController: UIViewController {
     @IBOutlet weak var resTaxIDLabel: UILabel!
     var p5status = 0
     
-    var restaurant = ["QRCode生成","查看廣告審核","訂單記錄","編輯","店家狀態","申請關店"]
-    var lisn = ["QRCode","廣告審核結果","info","編輯","house","申請關店"]
+    var restaurant = ["QRCode生成","查看廣告審核","訂單記錄","統計","店家狀態","申請關店"]
+    var lisn = ["QRCode","廣告審核結果","info","statistics","house","申請關店"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
