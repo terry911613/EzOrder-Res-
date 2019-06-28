@@ -460,7 +460,10 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="原因..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MD8-tJ-HY1">
-                                        <rect key="frame" x="131.5" y="216.5" width="49" height="20.5"/>
+                                        <rect key="frame" x="15" y="216.5" width="282.5" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="IaU-bC-nAj"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -476,6 +479,7 @@
                                     <constraint firstItem="lYI-el-szr" firstAttribute="leading" secondItem="oh7-iG-eXU" secondAttribute="trailing" id="6Rv-hm-ZG9"/>
                                     <constraint firstItem="lYI-el-szr" firstAttribute="top" secondItem="mrF-0X-uAp" secondAttribute="bottom" id="Akz-Eg-rGX"/>
                                     <constraint firstAttribute="trailing" secondItem="wuS-yv-6gD" secondAttribute="trailing" constant="110" id="DNR-Ab-U2d"/>
+                                    <constraint firstItem="MD8-tJ-HY1" firstAttribute="leading" secondItem="Apg-Lt-Fcw" secondAttribute="leading" constant="15" id="EoB-MG-hUu"/>
                                     <constraint firstItem="lYI-el-szr" firstAttribute="width" secondItem="Apg-Lt-Fcw" secondAttribute="width" multiplier="1:3" id="Exx-2T-gk4"/>
                                     <constraint firstItem="oh7-iG-eXU" firstAttribute="height" secondItem="Apg-Lt-Fcw" secondAttribute="height" multiplier="1:4" id="Ip4-3Z-ayz"/>
                                     <constraint firstItem="mrF-0X-uAp" firstAttribute="top" secondItem="Apg-Lt-Fcw" secondAttribute="top" id="Jdu-l5-tZ6"/>
@@ -486,6 +490,7 @@
                                     <constraint firstItem="b9n-XL-T8d" firstAttribute="width" secondItem="Apg-Lt-Fcw" secondAttribute="width" multiplier="1:3" id="eeo-O7-lxZ"/>
                                     <constraint firstItem="b9n-XL-T8d" firstAttribute="leading" secondItem="Apg-Lt-Fcw" secondAttribute="leading" id="fvf-J9-ZPb"/>
                                     <constraint firstItem="lYI-el-szr" firstAttribute="height" secondItem="Apg-Lt-Fcw" secondAttribute="height" multiplier="1:4" id="jw4-Kx-LHT"/>
+                                    <constraint firstAttribute="trailing" secondItem="MD8-tJ-HY1" secondAttribute="trailing" constant="15" id="kAg-Vb-lUI"/>
                                     <constraint firstItem="b9n-XL-T8d" firstAttribute="top" secondItem="mrF-0X-uAp" secondAttribute="bottom" id="qJd-pI-Maf"/>
                                     <constraint firstItem="b9n-XL-T8d" firstAttribute="height" secondItem="Apg-Lt-Fcw" secondAttribute="height" multiplier="1:4" id="qyA-yR-eZC"/>
                                     <constraint firstItem="oh7-iG-eXU" firstAttribute="leading" secondItem="b9n-XL-T8d" secondAttribute="trailing" id="rvL-g1-jwq"/>
