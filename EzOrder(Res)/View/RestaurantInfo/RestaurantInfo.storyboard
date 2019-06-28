@@ -550,7 +550,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Rqa-J9-6a5">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="personal" translatesAutoresizingMaskIntoConstraints="NO" id="Rqa-J9-6a5">
                                                     <rect key="frame" x="10" y="10" width="100" height="100"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="Rqa-J9-6a5" secondAttribute="height" multiplier="1:1" id="IO6-X5-NoP"/>
@@ -828,6 +828,7 @@
     </scenes>
     <resources>
         <image name="house" width="50" height="50"/>
+        <image name="personal" width="128" height="128"/>
         <image name="商家資料" width="36" height="36"/>
         <image name="完成" width="40" height="40"/>
     </resources>

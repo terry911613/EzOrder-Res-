@@ -429,7 +429,6 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
             else{
                 cell.statusSwich.isHidden = true
             }
-            
             return cell
         }
     }
@@ -509,6 +508,7 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
     }
     func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         if collectionView == typeCollectionView{
+            
             let item = typeArray.remove(at: sourceIndexPath.item)
             typeArray.insert(item, at: destinationIndexPath.item)
             
@@ -533,6 +533,7 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
             }
         }
         else{
+            
             let item = foodArray.remove(at: sourceIndexPath.item)
             foodArray.insert(item, at: destinationIndexPath.item)
             
@@ -549,7 +550,3 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
         }
     }
 }
-
-
-
-
