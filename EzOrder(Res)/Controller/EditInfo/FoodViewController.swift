@@ -166,6 +166,7 @@ class FoodViewController: UIViewController{
                                 SVProgressHUD.dismiss()
                                 return
                             }
+                            self.delegate?.getFood(typeDocumentID: typeDocumentID)
                             SVProgressHUD.dismiss()
                         })
                         SVProgressHUD.dismiss()

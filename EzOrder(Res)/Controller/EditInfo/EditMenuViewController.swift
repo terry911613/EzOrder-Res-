@@ -44,7 +44,7 @@ class EditMenuViewController: UIViewController {
                 self.view.layoutIfNeeded()
             })
         }
-//        getType()
+        getType()
         if typeArray.isEmpty == false, let typeIndex = typeIndex{
             print(100)
             if let typeDocumentID = typeArray[typeIndex].data()["typeDocumentID"] as? String{
@@ -56,11 +56,11 @@ class EditMenuViewController: UIViewController {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        getType()
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//
+//        getType()
+//    }
     
     func getType(){
         if let resID = resID{
@@ -183,6 +183,7 @@ class EditMenuViewController: UIViewController {
         
         let typeVC = storyboard?.instantiateViewController(withIdentifier: "typeVC") as! TypeViewController
         typeVC.index = typeArray.count
+        typeVC.delegate = self
         present(typeVC, animated: true, completion: nil)
         guideLabel.text = ""
         
@@ -201,6 +202,7 @@ class EditMenuViewController: UIViewController {
             menuVC.typeIndex = typeIndex
             menuVC.typeArray = typeArray
             menuVC.foodIndex = foodArray.count
+            menuVC.delegate = self
             present(menuVC, animated: true, completion: nil)
             guideLabel.text = ""
             initTypeImageAlpha()

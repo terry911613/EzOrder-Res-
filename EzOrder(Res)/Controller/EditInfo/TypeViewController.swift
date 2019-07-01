@@ -50,7 +50,6 @@ class TypeViewController: UIViewController{
     @IBAction func doneButton(_ sender: Any) {
         if isEdit{
             editUpload()
-            
         }
         else{
             upload()
@@ -141,6 +140,7 @@ class TypeViewController: UIViewController{
                                 SVProgressHUD.dismiss()
                                 return
                             }
+                            self.delegate?.getType()
                             SVProgressHUD.dismiss()
                         })
                         SVProgressHUD.dismiss()
