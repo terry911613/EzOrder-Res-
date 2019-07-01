@@ -41,7 +41,9 @@ class TableManageViewController: UIViewController {
                         self.tableStatusTableView.reloadData()
                     }
                     else{
-                        self.tabBarItem.badgeValue = "New"
+                        if self.tabBarController?.selectedIndex != 2 {
+                            self.tabBarItem.badgeValue = "New"
+                        }
                         let documentChange = order.documentChanges[0]
                         if documentChange.type == .added{
                             self.allOrder = order.documents
