@@ -62,6 +62,10 @@ class CheckReservationViewController: UIViewController {
                                                         self.allBooking.append(booking)
                                                         self.notifyTableView.reloadData()
                                                         self.calendarView.reloadData()
+                                                        // 讓app一啟動就是今天的日曆
+                                                        self.calendarView.scrollToDate(self.now, animateScroll: false)
+                                                        
+                                                        
                                                     }
                                                 }
                                             }

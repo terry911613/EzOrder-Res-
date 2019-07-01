@@ -414,7 +414,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VjI-1G-Lka"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="訂位紀錄" image="訂位紀錄" id="u98-Dy-0ec"/>
+                    <tabBarItem key="tabBarItem" title="訂位管理" image="訂位紀錄" id="u98-Dy-0ec"/>
                     <navigationItem key="navigationItem" title="訂位管理" id="NcL-3P-rTq"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
