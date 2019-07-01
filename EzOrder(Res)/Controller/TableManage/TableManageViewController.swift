@@ -27,7 +27,7 @@ class TableManageViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        tabBarItem.badgeValue = nil
         getOrder()
     }
     func getOrder(){
@@ -41,6 +41,7 @@ class TableManageViewController: UIViewController {
                         self.tableStatusTableView.reloadData()
                     }
                     else{
+                        self.tabBarItem.badgeValue = "New"
                         let documentChange = order.documentChanges[0]
                         if documentChange.type == .added{
                             self.allOrder = order.documents
@@ -48,6 +49,7 @@ class TableManageViewController: UIViewController {
                         }
                     }
                 }
+                
             }
         } 
     }
