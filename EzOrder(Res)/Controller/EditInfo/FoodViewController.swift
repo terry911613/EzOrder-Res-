@@ -29,6 +29,7 @@ class FoodViewController: UIViewController{
     var foodDetail: String?
     var typeDocumentID: String?
     var viewHeight: CGFloat?
+    weak var delegate: EditMenuViewController?
     var isEdit = false
     var foodDocumentID: String?
     override func viewWillAppear(_ animated: Bool) {
@@ -108,6 +109,7 @@ class FoodViewController: UIViewController{
                                 SVProgressHUD.dismiss()
                                 return
                             }
+                            self.delegate?.getFood(typeDocumentID: typeDocumentID)
                             SVProgressHUD.dismiss()
                         })
                         SVProgressHUD.dismiss()
