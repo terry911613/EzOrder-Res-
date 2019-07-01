@@ -247,7 +247,7 @@
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="la7-fp-FYs">
                                                     <rect key="frame" x="10" y="10" width="30" height="30"/>
-                                                    <color key="backgroundColor" red="0.97907656430000001" green="0.79835665229999997" blue="0.79070764780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" red="1" green="0.59670647659999998" blue="0.57797562250000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="9Jn-R5-ldv"/>
                                                         <constraint firstAttribute="width" constant="30" id="gJV-5d-sSK"/>
