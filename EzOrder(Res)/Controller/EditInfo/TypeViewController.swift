@@ -23,6 +23,7 @@ class TypeViewController: UIViewController{
     var typeImage: String?
     var viewHeight: CGFloat?
     var typeDocumentID: String?
+    weak var delegate: EditMenuViewController?
     var isEdit = false
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,6 +54,7 @@ class TypeViewController: UIViewController{
         else{
             upload()
         }
+        
         dismiss(animated: true, completion: nil)
     }
     
@@ -92,6 +94,7 @@ class TypeViewController: UIViewController{
                                 SVProgressHUD.dismiss()
                                 return
                             }
+                            self.delegate?.getType()
                             SVProgressHUD.dismiss()
                         })
                         SVProgressHUD.dismiss()
@@ -137,6 +140,7 @@ class TypeViewController: UIViewController{
                                 SVProgressHUD.dismiss()
                                 return
                             }
+                            self.delegate?.getType()
                             SVProgressHUD.dismiss()
                         })
                         SVProgressHUD.dismiss()

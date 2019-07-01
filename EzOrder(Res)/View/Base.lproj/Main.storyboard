@@ -98,7 +98,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lZb-za-NDT">
                                 <rect key="frame" x="0.0" y="177" width="375" height="150"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="nSA-t0-nNx">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="personal" translatesAutoresizingMaskIntoConstraints="NO" id="nSA-t0-nNx">
                                         <rect key="frame" x="15" y="25" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="nSA-t0-nNx" secondAttribute="height" multiplier="1:1" id="i9S-Af-Roo"/>
@@ -396,10 +396,11 @@
     <resources>
         <image name="key" width="137.5" height="137.5"/>
         <image name="logo改" width="360" height="127"/>
+        <image name="personal" width="128" height="128"/>
         <image name="profile" width="126" height="126"/>
         <image name="箭頭改" width="68" height="53"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Dhz-0j-jZ6"/>
+        <segue reference="YV8-4q-PQU"/>
     </inferredMetricsTieBreakers>
 </document>

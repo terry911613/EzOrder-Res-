@@ -56,9 +56,15 @@ class EditMenuViewController: UIViewController {
         }
     }
     
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//
+//        getType()
+//    }
+    
     func getType(){
         if let resID = resID{
-            db.collection("res").document(resID).collection("foodType").order(by: "index", descending: false).addSnapshotListener { (type, error) in
+            db.collection("res").document(resID).collection("foodType").order(by: "index", descending: false).getDocuments { (type, error) in
                 if let type = type{
                     if type.documentChanges.isEmpty{
                         self.typeArray.removeAll()
@@ -68,11 +74,11 @@ class EditMenuViewController: UIViewController {
                         let documentChange = type.documentChanges[0]
                         if documentChange.type == .added {
                             self.typeArray = type.documents
-                            self.typeAnimateCollectionView()
+                            self.typeCollectionView.reloadData()
                         }
                         else{
                             self.typeArray = type.documents
-                            self.typeAnimateCollectionView()
+                            self.typeCollectionView.reloadData()
                         }
                     }
                 }
@@ -83,7 +89,7 @@ class EditMenuViewController: UIViewController {
 //        print("-------------")
            print(typeDocumentID)
         if let resID = resID{
-            db.collection("res").document(resID).collection("foodType").document(typeDocumentID).collection("menu").order(by: "foodIndex", descending: false).addSnapshotListener { (food, error) in
+            db.collection("res").document(resID).collection("foodType").document(typeDocumentID).collection("menu").order(by: "foodIndex", descending: false).getDocuments { (food, error) in
                 if let food = food{
                     if food.documents.isEmpty{
                         self.foodArray.removeAll()
@@ -93,11 +99,11 @@ class EditMenuViewController: UIViewController {
                         let documentChange = food.documentChanges[0]
                         if documentChange.type == .added {
                             self.foodArray = food.documents
-                            self.foodAnimateCollectionView()
+                            self.foodCollectionView.reloadData()
                         }
                         else{
                             self.foodArray = food.documents
-                            self.foodAnimateCollectionView()
+                            self.foodCollectionView.reloadData()
                         }
                     }
                 }
@@ -105,22 +111,22 @@ class EditMenuViewController: UIViewController {
         }
     }
     //  顯示特效
-    func typeAnimateCollectionView(){
-        typeCollectionView.reloadData()
-        let animations = [AnimationType.from(direction: .bottom, offset: 30.0)]
-        typeCollectionView.performBatchUpdates({
-            UIView.animate(views: self.typeCollectionView.orderedVisibleCells,
-                           animations: animations, completion: nil)
-        }, completion: nil)
-    }
-    func foodAnimateCollectionView(){
-        foodCollectionView.reloadData()
-        let animations = [AnimationType.from(direction: .bottom, offset: 30.0)]
-        foodCollectionView.performBatchUpdates({
-            UIView.animate(views: self.foodCollectionView.orderedVisibleCells,
-                           animations: animations, completion: nil)
-        }, completion: nil)
-    }
+//    func typeAnimateCollectionView(){
+//        typeCollectionView.reloadData()
+//        let animations = [AnimationType.from(direction: .bottom, offset: 30.0)]
+//        typeCollectionView.performBatchUpdates({
+//            UIView.animate(views: self.typeCollectionView.orderedVisibleCells,
+//                           animations: animations, completion: nil)
+//        }, completion: nil)
+//    }
+//    func foodAnimateCollectionView(){
+//        foodCollectionView.reloadData()
+//        let animations = [AnimationType.from(direction: .bottom, offset: 30.0)]
+//        foodCollectionView.performBatchUpdates({
+//            UIView.animate(views: self.foodCollectionView.orderedVisibleCells,
+//                           animations: animations, completion: nil)
+//        }, completion: nil)
+//    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
@@ -138,7 +144,7 @@ class EditMenuViewController: UIViewController {
     func initTypeImageAlpha(){
         if let selectIndex = selectIndex{
             let cell = typeCollectionView.cellForItem(at: selectIndex) as! EditTypeCollectionViewCell
-            cell.typeImage.alpha = 0.2
+            cell.typeImage.alpha = 0.6
         }
     }
     
@@ -177,6 +183,7 @@ class EditMenuViewController: UIViewController {
         
         let typeVC = storyboard?.instantiateViewController(withIdentifier: "typeVC") as! TypeViewController
         typeVC.index = typeArray.count
+        typeVC.delegate = self
         present(typeVC, animated: true, completion: nil)
         guideLabel.text = ""
         
@@ -195,6 +202,7 @@ class EditMenuViewController: UIViewController {
             menuVC.typeIndex = typeIndex
             menuVC.typeArray = typeArray
             menuVC.foodIndex = foodArray.count
+            menuVC.delegate = self
             present(menuVC, animated: true, completion: nil)
             guideLabel.text = ""
             initTypeImageAlpha()
@@ -454,6 +462,7 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
                     typeVC.typeImage = typeImage
                     typeVC.typeDocumentID = typeDocumentID
                     typeVC.isEdit = true
+                    typeVC.delegate = self
                     present(typeVC, animated: true, completion: nil)
                 }
             }
@@ -486,6 +495,7 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
                     menuVC.isEdit = true
                     menuVC.typeIndex = typeIndex
                     menuVC.typeArray = typeArray
+                    menuVC.delegate = self
                     present(menuVC, animated: true, completion: nil)
                 }
             }
@@ -500,7 +510,7 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if collectionView == typeCollectionView{
             let cell = typeCollectionView.cellForItem(at: indexPath) as! EditTypeCollectionViewCell
-            cell.typeImage.alpha = 0.2
+            cell.typeImage.alpha = 0.6
         }
     }
     
