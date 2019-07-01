@@ -144,7 +144,7 @@ class EditMenuViewController: UIViewController {
     func initTypeImageAlpha(){
         if let selectIndex = selectIndex{
             let cell = typeCollectionView.cellForItem(at: selectIndex) as! EditTypeCollectionViewCell
-            cell.typeImage.alpha = 0.2
+            cell.typeImage.alpha = 0.6
         }
     }
     
@@ -508,7 +508,7 @@ extension EditMenuViewController: UICollectionViewDelegate,UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if collectionView == typeCollectionView{
             let cell = typeCollectionView.cellForItem(at: indexPath) as! EditTypeCollectionViewCell
-            cell.typeImage.alpha = 0.2
+            cell.typeImage.alpha = 0.6
         }
     }
     
