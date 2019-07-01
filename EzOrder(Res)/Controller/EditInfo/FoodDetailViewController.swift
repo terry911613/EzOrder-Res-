@@ -50,7 +50,7 @@ class FoodDetailViewController: UIViewController {
             
             let db = Firestore.firestore()
             print(foodDocumentID)
-            db.collection("res").document(resID).collection("foodType").document(typeDocumentID).collection("menu").document(foodDocumentID).collection("foodComment").order(by: "date", descending: false).getDocuments { (comment, error) in
+            db.collection("res").document(resID).collection("foodType").document(typeDocumentID).collection("menu").document(foodDocumentID).collection("foodComment").order(by: "date", descending: true).getDocuments { (comment, error) in
                 
                 if let comment = comment{
                     if comment.documents.isEmpty{
