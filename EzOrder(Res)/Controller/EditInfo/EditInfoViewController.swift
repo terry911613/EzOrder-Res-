@@ -79,8 +79,12 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
                 if let resData = res?.data(){
                     
                     print("sucker")
-                    if let resImage = resData["resImage"] as? String,
-                        let resName = resData["resName"] as? String,
+                    if let resImage = resData["resImage"] as? String{
+                        self.resImage = resImage
+                        self.resLogoImageView.kf.setImage(with: URL(string: resImage))
+                    }
+                    
+                    if let resName = resData["resName"] as? String,
                         let resTel = resData["resTel"] as? String,
                         let resLocation = resData["resLocation"] as? String,
                         let resBookingLimit = resData["resBookingLimit"] as? Int,
@@ -90,7 +94,7 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
                         
                         print("got it")
                         
-                        self.resImage = resImage
+                        
                         self.resName = resName
                         self.resTel = resTel
                         self.resLocation = resLocation
@@ -99,7 +103,7 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
                         self.resTime = resTime
                         
                         self.isEdit = false
-                        self.resLogoImageView.kf.setImage(with: URL(string: resImage))
+                        
                         self.resNameLabel.text = resName
                         self.resTelLabel.text = resTel
                         self.resLocationLabel.text = resLocation
@@ -359,34 +363,81 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
                 //DocumentReference 指定位置
                 //照片參照
                 SVProgressHUD.show()
-                if isEditImage{
-                    let storageReference = Storage.storage().reference()
-                    let fileReference = storageReference.child(UUID().uuidString + ".jpg")
-                    let size = CGSize(width: 640, height: resImage.size.height * 640 / resImage.size.width)
-                    UIGraphicsBeginImageContext(size)
-                    resImage.draw(in: CGRect(origin: .zero, size: size))
-                    let resizeImage = UIGraphicsGetImageFromCurrentImageContext()
-                    UIGraphicsEndImageContext()
-                    if let data = resizeImage?.jpegData(compressionQuality: 0.8){
-                        fileReference.putData(data,metadata: nil) {(metadate, error) in
-                            guard let _ = metadate, error == nil else {
-                                SVProgressHUD.dismiss()
-                                self.errorAlert()
-                                return
-                            }
-                            fileReference.downloadURL(completion: { (url, error) in
-                                guard let downloadURL = url else {
-                                    SVProgressHUD.dismiss()
-                                    self.errorAlert()
-                                    return
+
+                db.collection("res").document(resID).addSnapshotListener { (res, error) in
+                    if let resData = res?.data(){
+                        if let resImage10 = resData["resImage"] as? String{
+                            if self.isEditImage{
+                                SVProgressHUD.show()
+                                let storageReference = Storage.storage().reference()
+                                let fileReference = storageReference.child(UUID().uuidString + ".jpg")
+                                let size = CGSize(width: 640, height: resImage.size.height * 640 / resImage.size.width)
+                                UIGraphicsBeginImageContext(size)
+                                resImage.draw(in: CGRect(origin: .zero, size: size))
+                                let resizeImage = UIGraphicsGetImageFromCurrentImageContext()
+                                UIGraphicsEndImageContext()
+                                if let data = resizeImage?.jpegData(compressionQuality: 0.8){
+                                    fileReference.putData(data,metadata: nil) {(metadate, error) in
+                                        guard let _ = metadate, error == nil else {
+                                            SVProgressHUD.dismiss()
+                                            self.errorAlert()
+                                            return
+                                        }
+                                        fileReference.downloadURL(completion: { (url, error) in
+                                            guard let downloadURL = url else {
+                                                SVProgressHUD.dismiss()
+                                                self.errorAlert()
+                                                return
+                                            }
+                                            self.db.collection("res").document(resID).updateData(["resImage": downloadURL.absoluteString])
+                                            self.isEditImage = !self.isEditImage
+                                            
+                                            self.uploadAlert()
+                                        })
+                                    }
                                 }
-                                self.db.collection("res").document(resID).updateData(["resImage": downloadURL.absoluteString])
-                                self.isEditImage = !self.isEditImage
-                            })
+                            }
+                        }
+                        else{
+                            if self.isEditImage{
+                                SVProgressHUD.show()
+                                let storageReference = Storage.storage().reference()
+                                let fileReference = storageReference.child(UUID().uuidString + ".jpg")
+                                let size = CGSize(width: 640, height: resImage.size.height * 640 / resImage.size.width)
+                                UIGraphicsBeginImageContext(size)
+                                resImage.draw(in: CGRect(origin: .zero, size: size))
+                                let resizeImage = UIGraphicsGetImageFromCurrentImageContext()
+                                UIGraphicsEndImageContext()
+                                if let data = resizeImage?.jpegData(compressionQuality: 0.8){
+                                    fileReference.putData(data,metadata: nil) {(metadate, error) in
+                                        guard let _ = metadate, error == nil else {
+                                            SVProgressHUD.dismiss()
+                                            self.errorAlert()
+                                            return
+                                        }
+                                        fileReference.downloadURL(completion: { (url, error) in
+                                            guard let downloadURL = url else {
+                                                SVProgressHUD.dismiss()
+                                                self.errorAlert()
+                                                return
+                                            }
+                                            self.db.collection("res").document(resID).updateData(["resImage": downloadURL.absoluteString])
+                                            self.isEditImage = !self.isEditImage
+                                            
+                                            self.uploadAlert()
+                                        })
+                                    }
+                                }
+                            }
+                            else{
+                                let alert = UIAlertController(title: "請新增照片", message: nil, preferredStyle: .alert)
+                                let ok = UIAlertAction(title: "確定", style: .default, handler: nil)
+                                alert.addAction(ok)
+                                self.present(alert, animated: true, completion: nil)
+                            }
                         }
                     }
                 }
-                
                 var resPeriod = ""
                 if isMorning{
                     resPeriod += "1"
@@ -448,6 +499,13 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
         let ok = UIAlertAction(title: "確定", style: .default, handler: nil)
         alert.addAction(ok)
         present(alert, animated: true, completion: nil)
+    }
+    func uploadAlert(){
+        let alert = UIAlertController(title: "上傳完成", message: nil, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "確定", style: .default, handler: nil)
+        alert.addAction(ok)
+        self.present(alert, animated: true, completion: nil)
+        SVProgressHUD.dismiss()
     }
     func setMapAnnotation(_ location: CLLocation) {
         if let text = resLocation {

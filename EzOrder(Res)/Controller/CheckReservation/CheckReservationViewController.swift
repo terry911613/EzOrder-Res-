@@ -16,14 +16,14 @@ class CheckReservationViewController: UIViewController {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var calendarView: JTAppleCalendarView!
     @IBOutlet weak var notifyTableView: UITableView!
-   
+    
     let dateFormatter: DateFormatter = DateFormatter()
     var selectDateText: String?
     var now = Date()
     var eventDic = [String : String]()
     var allBooking = [QueryDocumentSnapshot]()
     var selectDateBooking = [QueryDocumentSnapshot]()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,29 +50,44 @@ class CheckReservationViewController: UIViewController {
                         let documentChange = booking.documentChanges[0]
                         if documentChange.type == .added{
                             self.allBooking.removeAll()
+                            
                             for booking in booking.documents{
                                 if let bookingDateString = booking.data()["documentID"] as? String{
                                     self.eventDic[bookingDateString] = "yes"
-                                    db.collection("res").document(resID).collection("booking").document(bookingDateString).collection("bookDetail").order(by: "date", descending: false).getDocuments{ (bookingDetail, error) in
+                                    db.collection("res").document(resID).collection("booking").document(bookingDateString).collection("bookDetail").getDocuments{ (bookingDetail, error) in
+                                        
+                                        print(1)
+                                        
                                         if let bookingDetail = bookingDetail{
                                             if bookingDetail.documents.isEmpty == false{
-                                                let documentChange = bookingDetail.documentChanges[0]
-                                                if documentChange.type == .added{
+//                                                let documentChange = bookingDetail.documentChanges[0]
+//                                                if documentChange.type == .added{
                                                     for booking in bookingDetail.documents{
                                                         self.allBooking.append(booking)
-                                                        self.notifyTableView.reloadData()
+//                                                        self.notifyTableView.reloadData()
                                                         self.calendarView.reloadData()
                                                         // 讓app一啟動就是今天的日曆
                                                         self.calendarView.scrollToDate(self.now, animateScroll: false)
                                                         
-                                                        
+                                                        self.allBooking.sort(by: { (left, right) -> Bool in
+                                                            if let leftDate = left.data()["date"] as? Date,
+                                                                let rightDate = right.data()["date"] as? Date{
+                                                                
+                                                                return leftDate > rightDate
+                                                            }
+                                                            else{
+                                                                return false
+                                                            }
+                                                        })
+                                                        self.notifyTableView.reloadData()
                                                     }
                                                 }
-                                            }
+//                                            }
                                         }
                                     }
                                 }
                             }
+                            
                         }
                     }
                 }
