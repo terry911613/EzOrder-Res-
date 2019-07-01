@@ -30,6 +30,7 @@ class TableManageViewController: UIViewController {
         tabBarItem.badgeValue = nil
         getOrder()
     }
+    
     func getOrder(){
         let db = Firestore.firestore()
         let resID = Auth.auth().currentUser?.email
