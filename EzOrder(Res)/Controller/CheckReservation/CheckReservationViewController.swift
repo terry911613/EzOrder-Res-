@@ -24,7 +24,11 @@ class CheckReservationViewController: UIViewController {
     var allBooking = [QueryDocumentSnapshot]()
     var selectDateBooking = [QueryDocumentSnapshot]()
 
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarItem.badgeValue = nil
+    }
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         // 讓app一啟動就是今天的日曆
@@ -54,6 +58,9 @@ class CheckReservationViewController: UIViewController {
                                 if let bookingDateString = booking.data()["documentID"] as? String{
                                     self.eventDic[bookingDateString] = "yes"
                                     db.collection("res").document(resID).collection("booking").document(bookingDateString).collection("bookDetail").order(by: "date", descending: false).getDocuments{ (bookingDetail, error) in
+                                        if self.tabBarController?.selectedIndex != 3 {
+                                            self.tabBarItem.badgeValue = "New"
+                                        }
                                         if let bookingDetail = bookingDetail{
                                             if bookingDetail.documents.isEmpty == false{
                                                 let documentChange = bookingDetail.documentChanges[0]
