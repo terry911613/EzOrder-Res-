@@ -93,10 +93,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo改" translatesAutoresizingMaskIntoConstraints="NO" id="FLT-Wb-tUy">
-                                <rect key="frame" x="37.5" y="50" width="300" height="127"/>
+                                <rect key="frame" x="37.5" y="50" width="300" height="16"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lZb-za-NDT">
-                                <rect key="frame" x="0.0" y="177" width="375" height="150"/>
+                                <rect key="frame" x="0.0" y="66" width="375" height="150"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="personal" translatesAutoresizingMaskIntoConstraints="NO" id="nSA-t0-nNx">
                                         <rect key="frame" x="15" y="25" width="40" height="40"/>
@@ -176,7 +176,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="aIZ-GJ-B9p">
-                                <rect key="frame" x="94" y="352" width="187.5" height="92"/>
+                                <rect key="frame" x="94" y="241" width="187.5" height="92"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ut3-sg-Fvf">
                                         <rect key="frame" x="0.0" y="0.0" width="187.5" height="36"/>
@@ -287,7 +287,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7DW-i1-zam">
                                 <rect key="frame" x="0.0" y="177" width="375" height="150"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="0q6-gm-68G">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="personal" translatesAutoresizingMaskIntoConstraints="NO" id="0q6-gm-68G">
                                         <rect key="frame" x="15" y="25" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="0q6-gm-68G" secondAttribute="height" multiplier="1:1" id="hdL-N2-viL"/>
@@ -397,10 +397,9 @@
         <image name="key" width="137.5" height="137.5"/>
         <image name="logo改" width="360" height="127"/>
         <image name="personal" width="128" height="128"/>
-        <image name="profile" width="126" height="126"/>
         <image name="箭頭改" width="68" height="53"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="YV8-4q-PQU"/>
+        <segue reference="Dhz-0j-jZ6"/>
     </inferredMetricsTieBreakers>
 </document>
