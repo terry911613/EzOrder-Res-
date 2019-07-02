@@ -145,6 +145,7 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
                         self.locations.startUpdatingLocation()
                         self.setMapRegion()
                         let text = resLocation
+                        print(resLocation)
                         let geocoder = CLGeocoder()
                         geocoder.geocodeAddressString(text) { (placemarks, error) in
                             if error == nil && placemarks != nil && placemarks!.count > 0 {
@@ -154,8 +155,8 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
                                     self.setMapAnnotation(location)
                                 }
                             } else {
-                                let title = "搜尋失敗"
-                                let message = "目前網路連線不穩定"
+                                let title = "地址有錯"
+                                let message = "手有問題？"
                                 let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
                                 let ok = UIAlertAction(title: "OK", style: .default)
                                 alertController.addAction(ok)
@@ -364,7 +365,7 @@ class EditInfoViewController: UIViewController,CLLocationManagerDelegate{
                 //照片參照
                 SVProgressHUD.show()
 
-                db.collection("res").document(resID).addSnapshotListener { (res, error) in
+                db.collection("res").document(resID).getDocument { (res, error) in
                     if let resData = res?.data(){
                         if let resImage10 = resData["resImage"] as? String{
                             if self.isEditImage{
