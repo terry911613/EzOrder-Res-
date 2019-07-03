@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="新增圖案" translatesAutoresizingMaskIntoConstraints="NO" id="alE-hl-vqU">
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="新增測試測試" translatesAutoresizingMaskIntoConstraints="NO" id="alE-hl-vqU">
                                 <rect key="frame" x="0.0" y="64" width="375" height="300"/>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -158,7 +158,7 @@
     <resources>
         <image name="calendar" width="512" height="512"/>
         <image name="廣告申請" width="36" height="36"/>
-        <image name="新增圖案" width="107" height="93"/>
+        <image name="新增測試測試" width="4795" height="2869"/>
         <image name="组 239" width="5433" height="5433"/>
     </resources>
 </document>
