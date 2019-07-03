@@ -116,7 +116,7 @@ class ApplyForADViewController: UIViewController {
                                 
                                 self.startDatePickerButton.setTitle("請選擇開始時間", for: .normal)
                                 self.endDatePickerButton.setTitle("請選擇結束時間", for: .normal)
-                                self.ADImageView.image = UIImage(named: "新增圖案")
+                                self.ADImageView.image = UIImage(named: "新增測試測試")
                                 self.startDate = nil
                                 self.endDate = nil
                                 
